@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate OP Pro : OP Pro 3.0 Architecture</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="MineOperate-OP-Pro_224018004.html">MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Product-Releases_228590211.html">Product Releases</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="OP-Pro-3.0_231785728.html">OP Pro 3.0</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate OP Pro : OP Pro 3.0 Architecture
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> GEORGE Nathan</span> on feb 16, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" src="attachments/228614264/228614415.png" data-image-src="attachments/228614264/228614415.png" data-unresolved-comment-count="0" data-linked-resource-id="228614415" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="ops_30_architecture.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></p></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<h1 id="OPPro3.0Architecture-TableofContents">Table of Contents</h1><p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1764958723168 {padding: 0px;}
+div.rbtoc1764958723168 ul {margin-left: 0px;}
+div.rbtoc1764958723168 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1764958723168'>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-TableofContents'>Table of Contents</a></li>
+<li><a href='#OPPro3.0Architecture-CentralServer'>Central Server</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-GVOS/JAMSIntegration'>GVOS/JAMS Integration</a></li>
+<li><a href='#OPPro3.0Architecture-SchemaMapping'>Schema Mapping</a></li>
+<li><a href='#OPPro3.0Architecture-GvWeb'>GvWeb</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-Nginx'>Nginx</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-Replicator'>Replicator</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-FieldEquipment'>Field Equipment</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-GVOS'>GVOS</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-JAMSInterface'>JAMS Interface</a></li>
+<li><a href='#OPPro3.0Architecture-SchemaMapping.1'>Schema Mapping</a></li>
+<li><a href='#OPPro3.0Architecture-GvWeb.1'>GvWeb</a></li>
+<li><a href='#OPPro3.0Architecture-GvMQTT'>GvMQTT</a></li>
+<li><a href='#OPPro3.0Architecture-Replicas'>Replicas</a></li>
+<li><a href='#OPPro3.0Architecture-Configurations'>Configurations</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-ConfiguringthedeviceforGVOS/JAMSintegration'>Configuring the device for GVOS/JAMS integration</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-LogFiles'>Log Files</a></li>
+<li><a href='#OPPro3.0Architecture-RelevantGVOSLogs'>Relevant GVOS Logs</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-JAMS'>JAMS</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-JProtoSQL'>JProtoSQL</a></li>
+<li><a href='#OPPro3.0Architecture-SensorInterfaces'>Sensor Interfaces</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-PlatformServices'>Platform Services</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-Shell'>Shell</a></li>
+<li><a href='#OPPro3.0Architecture-RestartingJAMS'>Restarting JAMS</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-Nginx.1'>Nginx</a></li>
+<li><a href='#OPPro3.0Architecture-TimeSynchronization'>Time Synchronization</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-Chrony'>Chrony</a></li>
+<li><a href='#OPPro3.0Architecture-Ntpd'>Ntpd</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-FileSystem'>File System</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-Accessingthepanellog'>Accessing the panel log</a></li>
+<li><a href='#OPPro3.0Architecture-RestartingtheReactpanel'>Restarting the React panel</a></li>
+<li><a href='#OPPro3.0Architecture-Simulating(ForDevelopers)'>Simulating (For Developers)</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-SimulatingGVOS'>Simulating GVOS</a></li>
+<li><a href='#OPPro3.0Architecture-SimulatingJAMS'>Simulating JAMS</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-SimulatingaJAMSclient'>Simulating a JAMS client</a></li>
+<li><a href='#OPPro3.0Architecture-SimulatingaJAMSserver'>Simulating a JAMS server</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-SimulatingaReactpanel'>Simulating a React panel</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-Nginxconfiguration'>Nginx configuration</a></li>
+<li><a href='#OPPro3.0Architecture-Mosquittoconfiguration'>Mosquitto configuration</a></li>
+<li><a href='#OPPro3.0Architecture-Panelconfiguration'>Panel configuration</a></li>
+<li><a href='#OPPro3.0Architecture-ConfiguringDevTools'>Configuring DevTools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-Simulating(Non-Developers)'>Simulating (Non-Developers)</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-SimulatingGVOS.1'>Simulating GVOS</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-Installation'>Installation</a></li>
+<li><a href='#OPPro3.0Architecture-SimulatingaClient'>Simulating a Client</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-SimulatingJAMS.1'>Simulating JAMS</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-Installation.1'>Installation</a></li>
+<li><a href='#OPPro3.0Architecture-StartingJAMS'>Starting JAMS</a></li>
+</ul>
+</li>
+<li><a href='#OPPro3.0Architecture-SimulatingthePanel'>Simulating the Panel</a>
+<ul class='toc-indentation'>
+<li><a href='#OPPro3.0Architecture-Installation.2'>Installation</a></li>
+<li><a href='#OPPro3.0Architecture-Startingthepanel'>Starting the panel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="OPPro3.0Architecture-CentralServer">Central Server</h1><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" alt="Central Server Architecture Diagram" height="669" width="1179" src="attachments/228614264/228614247.png" data-image-src="attachments/228614264/228614247.png" data-unresolved-comment-count="0" data-linked-resource-id="228614247" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="central_server_architecture.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" title="Central Server Architecture Diagram"></span></p><h2 id="OPPro3.0Architecture-GVOS/JAMSIntegration">GVOS/JAMS Integration</h2><p>GVOS and JAMS have been integrated so that they can run alongside each other on an Ubuntu server. Both GVOS and JAMS run as replicator servers where GVOS serves as the replicator for all OAS devices (including the devices that are running the GVOS/JAMS integration for the new React panel) while JAMS serves as the replicator server for all legacy JAMS equipment and OPProManager clients. The GVOS and JAMS servers both connect to the same PostgreSQL database which utilizes the JAMS schema with tables and columns from GVOS that do not exist in JAMS merged in.</p><h2 id="OPPro3.0Architecture-SchemaMapping">Schema Mapping</h2><p>While the schemas for the GVOS and Jigsaw databases have mostly been merged, there are some key differences in some table and column names that require translation between the two systems. You'll notice that the Postgres database on the server uses the Jigsaw database schema with the GVOS schema merged into it so that all of the tables and columns match the schema required by Jigsaw. However, the sqlite database onboard the equipment uses the GVOS database schema with the Jigsaw schema merged into it so that all of the tables and column names match the GVOS schema. For example, on the server the JAMS schema is used for the configurations table (notice that the column names match the names for the Jigsaw schema and that 'override', a gvos column, has been added):</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">cmkc_test=&gt; \d configurations
+Table &quot;public.configurations&quot;
+Column | Type | Modifiers 
+-------------+-----------------------------+-------------------------------------------------------------
+id | integer | not null default nextval(&#39;configurations_id_seq&#39;::regclass)
+updated_at | timestamp without time zone | 
+device_id | integer | 
+module | character varying(256) | 
+attribute | character varying(256) | 
+value | text | 
+application | character varying(40) | 
+override | boolean |</pre>
+</div></div><p>Meanwhile, the configurations table in the onboard sqlite database uses the GVOS schema (notice that module is now called component and attribute is now called property):</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sqlite&gt; .schema configurations
+CREATE TABLE configurations (id integer primary key,updated_at datetime,device_id int(4),component varchar(256),property varchar(256),value text,application varchar(40),override int(1));</pre>
+</div></div><p>The mapping between database schemas is handled by GVOS on the server and onboard by parsing database queries and applying the relevant schema mapping to form the correct query. The mapping for column names is hard coded in the GvModel definition for the model while the mapping for table names is configurable through the jams_schema component table_map property. The default configuration for the table mapping is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">table_map=workers=employees,shift_logins=logins,change_configurations=change_configs,worker_vacations=vacations,worker_qualifications=qualifications,replicas_oas=replicas</pre>
+</div></div><h2 id="OPPro3.0Architecture-GvWeb">GvWeb</h2><p>The GVOS REST API is contained in the GvWeb module. By default, GvWeb listens on port 5000 for incoming HTTP requests. GvWeb can be used to query model schema, query model data, and invoke GVOS methods remotely. Some useful queries are:</p><ul><li><p>To retrieve information about the schema of the model.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/schema/&lt;Model Name&gt;</pre>
+</div></div><p>For example, <span class="nolink"><span class="nolink">http://localhost/gvos/schema/GvEquipment</span></span> will return the schema information for the GvEquipment model.</p></li><li><p>To retrieve all of the records for the model in JSON format so that it includes each column name.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/object/&lt;Model Name&gt; </pre>
+</div></div><p>For example, <span class="nolink">http://localhost/gvos/object/GvEquipment</span> will return all of the equipment records.</p></li><li><p>To retrieve a specific record for the model.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/object/&lt;Model Name&gt;/&lt;id&gt; </pre>
+</div></div><p>For example, <span class="nolink"><span class="nolink">http://localhost/gvos/object/GvEquipment/1</span></span> will return the equipment record that has an id equal to 1.</p></li><li><p>To retrieve the data with only the columns specified in the query.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/object/&lt;Model Name&gt;/&lt;column 1&gt;,&lt;column 2&gt;,...,&lt;column n&gt;</pre>
+</div></div><p>For example, <span class="nolink">http://localhost/gvos/object/GvEquipment/id,type,name</span> will return only the id, type and name fields for each record.</p></li><li><p>To add conditions to the query.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/object/&lt;Model Name&gt;?&lt;condition 1&gt;and&lt;condition 2&gt;</pre>
+</div></div><p>For example, <span class="nolink">http://localhost/gvos/object/GvEquipment?type=truck%20and%20status_id=50</span> will return all records where the type is truck and the status id is 50.</p></li><li><p>All of these can be combined to form more complex queries such as</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/object/&lt;Model Name&gt;/&lt;column 1&gt;,&lt;column 2&gt;,order=&lt;column 1&gt; DESC?&lt;condition 1&gt;and&lt;condition 2&gt;,</pre>
+</div></div><p>For example, <span class="nolink">http://localhost/gvos/object/GvEquipment/id,updated_at,type,name,order=updated_at%20DESC?type=truck%20and%20status_id=50</span> will return the id, updated_at, type, and name columns for all records where type is equal to truck and status_id is equal to 50 using the updated_at column to order in descending order.</p></li><li><p>To execute a GVOS method remotely</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/&lt;Module&gt;/&lt;Method&gt; </pre>
+</div></div><p>For example, <span class="nolink">http://localhost/gvos/GvDevice/this_device</span> returns the result of GvDevice.this_device.</p></li></ul><h3 id="OPPro3.0Architecture-Nginx">Nginx</h3><p>An Nginx server should be configured to listen on port 80 and forward all requests with the '/gvos/' path to GvWeb.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">server {
+  listen 80;
+  server_name localhost;
+  autoindex on;
+  access_log /var/log/nginx/localhost.access.log;
+  error_page 500 502 503 504 /50x.html;
+  location = /50x.html {
+    root share/nginx/html;
+  }
+  location /gvos/ { 
+    include proxy_params; 
+    proxy_pass http://localhost:5000; 
+  }
+}</pre>
+</div></div><h2 id="OPPro3.0Architecture-Replicator">Replicator</h2><p>The GVOS replicator serves updates to clients over HTTP. The clients connect to the server utilizing the REST API on port 80. When running alongside JAMS, the GVOS server uses the replicas_oas table instead of the replicas table to load the replicas configurations. The JAMS schema map is used to map the data from the Postgres database to the GVOS schema and then it is replicated to the equipment. The JAMS schema mapping is also used when equipment upload data to the server to map it from the GVOS schema to the Jigsaw schema before it is stored in the database.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="OPPro3.0Architecture-FieldEquipment">Field Equipment</h1><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" alt="Field Equipment Architecture Diagram" height="736" width="1219" src="attachments/228614264/228614249.png" data-image-src="attachments/228614264/228614249.png" data-unresolved-comment-count="0" data-linked-resource-id="228614249" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="field_equipment_architecture.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" title="Field Equipment Architecture Diagram"></span></p><h2 id="OPPro3.0Architecture-GVOS">GVOS</h2><h3 id="OPPro3.0Architecture-JAMSInterface">JAMS Interface</h3><p>Since GVOS and Jigsaw are both using the same database, GVOS serves as the replicator client for pushing and receiving updates for both Jigsaw and GVOS. This means that the on board Jigsaw server is not running a replicator client. Instead, JAMS and GVOS communicate with each other using the JProtoSQL interface similar to how OPProManager clients communicate with the JAMS server. All of the database operations performed by JAMS are sent through the JProtoSQL interface and executed by GVOS. Because JAMS does not configure its own replicator client, you'll notice that the JAMS config file (found in /etc/config.jams) is different than the config file that you usually find on board the equipment. The JAMS configuration file should only contain one line &quot;[host &lt;equipment name&gt;]&quot;.</p><h3 id="OPPro3.0Architecture-SchemaMapping.1">Schema Mapping</h3><p>See the section above on <a href="#OPPro3.0Architecture-SchemaMapping">schema mapping</a>. The main difference between the field equipment and the central server is that the field equipment use the GVOS database schema while the central server uses the JAMS database schema.</p><h3 id="OPPro3.0Architecture-GvWeb.1">GvWeb</h3><p>See the section above on <a href="#OPPro3.0Architecture-GvWeb">GvWeb</a>. When GvWeb is run on a field equipment with JAMS the following query can be used to execute JAMS methods remotely:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">http://localhost/gvos/jams/command,&lt;jams module&gt;,&lt;method&gt;</pre>
+</div></div><p>For example, http://localhost/gvos/jams/command,action,operator will return the result of calling &quot;action operator&quot; in JAMS. The GvWeb REST API is used by the React panel to load all of the model schemas and data, refresh the cache when it is stale, and execute remote methods in JAMS. If GvWeb is not running then the react panel will not work.</p><h3 id="OPPro3.0Architecture-GvMQTT">GvMQTT</h3><p>The GvMQTT module handles subscribing to notifications for model updates and log messages. In order to enable GVOS to publish updates for a table or log you have to publish a message to one of the following topics using the MQTT protocol:</p><ul><li><p>gvos/&lt;DEVICE&gt;/logs/listen</p><ul><li><p>Post log subject(s) to enable gvos log subjects</p></li></ul></li><li><p>gvos/&lt;DEVICE&gt;/models/listen</p><ul><li><p>Post GvModel class names to enable notifications for database insert/update/delete operations</p></li></ul></li><li><p>gvos/&lt;DEVICE&gt;/sensors/listen</p><ul><li><p>Post GvSensorType name to enable output updates to any sensor</p></li></ul></li><li><p>gvos/&lt;DEVICE&gt;/signals/listen</p><ul><li><p>Post GvSymbol signal name to listen to any gv_signal()</p></li></ul></li></ul><p>Where &lt;DEVICE&gt; is the name of the device that gvos is running as and the body of the message is the name of the log/GvModel/GvSensorType/signal that you want GVOS to publish updates for. For example, to enable GVOS to publish updates for the JsTruck model on a device named T072 you would publish a message over mqtt to the topic 'gvos/T072/models/listen' and the message body would be 'JsTruck'. You can test this in the terminal using the mosquitto_pub tool as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">mosquitto_pub -h localhost -p 1883 -t &#39;gvos/T072/models/listen&#39; -m &#39;JsTruck&#39;</pre>
+</div></div><p>In order to avoid publishing data for topics that are no longer being listened to, GVOS will only publish updates for a topic for 60 seconds after it has received a listen request message for that topic. This means that you need to republish your listen request at least once every 60 seconds to ensure that GVOS continues to send updates for that topic.</p><p>In order to receive the updates that GVOS is publishing you will need to have your MQTT client subscribe to the appropriate topic:</p><ul><li><p>gvos/&lt;DEVICE&gt;/logs/&lt;NAME&gt;</p><ul><li><p>Subscribe to any enabled log subject</p></li></ul></li><li><p>gvos/&lt;DEVICE&gt;/models/&lt;NAME&gt;</p><ul><li><p>Subscribe to any GvModel subclass for database push notifications</p></li></ul></li><li><p>gvos/&lt;DEVICE&gt;/sensors/&lt;NAME&gt;</p><ul><li><p>Subscribe to any sensor by type name</p></li></ul></li><li><p>gvos/&lt;DEVICE&gt;/signals/&lt;NAME&gt;</p><ul><li><p>Subscribe to any signal by symbol name</p></li></ul></li></ul><p>Where &lt;NAME&gt; is the name of the log/GvMode/GvSensorType/signal that GVOS is publishing the message for. For example, if you've sent a listen request to GVOS  for the JsTruck model then GVOS will output notifications for inserts/deletes/updates to the 'gvos/T072/models/JsTruck' topic. You can test this in the terminal using the mosquitto_sub tool as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">mosquitto_sub -h localhost -p 1883 -t &#39;gvos/T072/models/JsTruck&#39;</pre>
+</div></div><h3 id="OPPro3.0Architecture-Replicas">Replicas</h3><p>GVOS and JAMS both use a database table named &quot;replicas&quot; to configure the tables that are uploaded and downloaded between the equipment and the server. However, when GVOS is running alongside JAMS, GVOS uses a table named &quot;replicas_oas&quot; instead. This means that the replica configurations for all equipment that use the GVOS replicator will be found in the replicas_oas table.</p><h3 id="OPPro3.0Architecture-Configurations">Configurations</h3><p>The generic GVOS configurations are stored in JSON files in /opt/osa/configs. At startup GVOS loads all of the device groups for the equipment it is running as and then loads the relevant configurations for the groups from the JSON files. The configuration files are named for the device group that they represent so for example, the app-server.json file will have the configurations for the APP-SERVER device group. The JSON configurations are formatted as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;&lt;DEVICE GROUP&gt;&quot;: {
+    &quot;apps&quot;: {
+      &quot;&lt;component name 1&gt;&quot;: {
+        &quot;&lt;property name 1&gt;&quot;:&quot;&lt;value&gt;&quot;,
+        &quot;&lt;property name 2&gt;&quot;:&quot;&lt;value&gt;&quot;
+      }
+    },
+    &quot;groups&quot;: [&quot;&lt;CHILD DEVICE GROUP 1&quot;, &quot;CHILD DEVICE GROUP 2&quot;]
+  },
+  &quot;&lt;DEVICE GROUP 2&gt;&quot;: { ... }
+}</pre>
+</div></div><p>Where &lt;DEVICE GROUP&gt; is the name of the device group that these configurations apply to, &lt;component name 1&gt; is the name of the component (module) that is being configured, &lt;property name 1&gt; and &lt;property name 2&gt; are the names of the component properties (attributes) that are being configured, &lt;value&gt; is the value(s) for the properties, and groups is the list of device group names that the device will also inherit by including the &lt;DEVICE GROUP&gt; in its group hierarchy. The configuration files will often include configurations for other related device groups so it is sometimes necessary to do a search in the configs directory to find the file(s) that your device group is configured in. Configurations can also be added in the configurations table, however this is usually not necessary as the generic GVOS configurations have everything you need to get a GVOS server and client running without having to add or change configurations in the database.</p><h4 id="OPPro3.0Architecture-ConfiguringthedeviceforGVOS/JAMSintegration">Configuring the device for GVOS/JAMS integration</h4><p>In order to run the GVOS/JAMS clients together, the device must have the APP-JIGSAW group in it's group hierarchy (the groups field in the devices table). The APP-JIGSAW device contains the configurations for loading GvWeb, GvMQTT and GvProtoSql (the GVOS interface to JProtoSql). The react panel will not work unless the device has the APP-JIGSAW group.</p><h3 id="OPPro3.0Architecture-LogFiles">Log Files</h3><p>The GVOS log files are stored in the /opt/oas/logs directory. When JAMS is running alongside GVOS, the JAMS logs are also stored in the /opt/oas/logs directory. Note that /opt/Jigsaw/Logs will still contain the messages log file.</p><h3 id="OPPro3.0Architecture-RelevantGVOSLogs">Relevant GVOS Logs</h3><p>The following logs can be enabled in GVOS and can be useful for debugging issues with the panel:</p><ul><li>mqtt<ul><li>Shows when topics have been subscribed to and shows updates that have been published.</li></ul></li><li>replicator<ul><li>Shows information about which tables have been uploaded/downloaded.</li></ul></li><li>jams<ul><li>Shows the requests that are made to GVOS from JAMS.</li></ul></li><li>web<ul><li>Shows incoming http requests. </li></ul></li></ul><p>To enable these logs, connect to the core box of the equipment that you are debugging and start a telnet session on port 4640 to access the gvos shell (telnet localhost 4640). Once connected to the gvos shell enter</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">listen &lt;logname&gt;</pre>
+</div></div><p>to enable the log message. For example, to listen to the mqtt log enter &quot;listen mqtt&quot;.</p><h2 id="OPPro3.0Architecture-JAMS">JAMS</h2><h3 id="OPPro3.0Architecture-JProtoSQL">JProtoSQL</h3><p>As mentioned in the <a href="#OPPro3.0Architecture-JAMSInterface">JAMS Interface</a> section above, the onboard JAMS client does not run a replicator client or database adapter. Instead, GVOS acts as the replicator client and database adapter through the use of the ProtoSQL interface. GVOS and JAMS both connect to port 1111 on the core box and communicate with each other to send database queries, forward remote JAMS commands, and send database updates. The contents of the JAMS configuration file (located at /etc/config.jams) has changed slightly since we no longer need to instantiate a replicator client. The JAMS configuration file should only contain the host config as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[host &lt;Equipment Name&gt;]</pre>
+</div></div><h3 id="OPPro3.0Architecture-SensorInterfaces">Sensor Interfaces</h3><p>Sensor interfaces, such as GPS, PLM, and VIMS are all handled by JAMS. In order to enabled a sensor interface, add the corresponding groups to the equipment's group hierarchy.</p><h4 id="OPPro3.0Architecture-PlatformServices">Platform Services</h4><p>There are a few daemons that run on the core box that are used to feed data to JAMS over MQTT such as signald, cand, and wifi_signal_strengthd. It is important to note that these daemons need to connect to the MQTT server running on the core box. The core box installer should have the platform services daemons configured to connect to the core box MQTT server, but if they are not configured then by default they will attempt to connect to the MQTT server on the display 9 and JAMS will not be able to receive the data.</p><h3 id="OPPro3.0Architecture-Shell">Shell</h3><p>JAMS starts a debug shell on port 1110 which can be used to listen to log messages, query JAMS objects, and run methods in JAMS. To access the shell simply use telnet to connect to port 1110 on the core box. To listen to log messages enter the following command in the shell:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">enable &lt;log name 1&gt;,&lt;log name 2&gt;</pre>
+</div></div><p>Some logs that are commonly used for debugging are action, error, and sql. Some other useful commands are:</p><ul><li><p>Show all of the modules that are loaded by JAMS:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">objects
+// example
+JAMS&gt; objects
+[ Device location messaging notifiers logger path vims Equipment gps_1 cand_sensorbox mineOPS signalCache JAMS JM2m virtualDB JStatus action GpsManager jamssql virtual seriald_sensorbox sqlite mqtt addNotifiers switch ]</pre>
+</div></div></li><li><p>Show all of the methods for a module:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;module name&gt; methods
+//example
+JAMS&gt; mineOPS methods
+(JAMSStartup, &quot;changeGrade:forLastLoad:andLastHaul:&quot;, &quot;changeMaterial:forLastLoad:andLastHaul:&quot;, &quot;createBucketWithName:forEquipment:length:width:depth:offsetAngle:&quot;, &quot;editLoadForShovel:time:primaryShovel:values:&quot;, &quot;editLoadForShovel:time:values:&quot;, &quot;endShift:&quot;, &quot;exceptionWithValues:&quot;, expireSeconds, &quot;extPosUpdateAt:forDevice:atLat:lon:elev:heading:speed:andGpsQuality:&quot;, &quot;hpgpsForShovel:time:values:&quot;, options, &quot;resetKpisForEquipment:&quot;, &quot;setEndOfChargeCode:time:&quot;, &quot;startChargeCode:forEquipment:atTime:&quot;, superclass, &quot;tipAtLocation:truck:material:grade:spotSecs:dumpSecs:tonnage:&quot;, &quot;travelRoad:equipment:loaded:time:&quot;)</pre>
+</div></div></li><li><p>Show all of the equipment's sensors and their current values:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Sensor sensors
+// example
+JAMS&gt; Sensor sensors
+activity good traveling
+body_lever good 0 deg normal
+body_position good 0 number normal
+dipper good 0
+drill_air_switch none (null) bool
+drill_clamp_switch none (null) bool
+drill_jack good 0 bool normal
+drill_propel_switch good 0 bool normal
+end_of_load_switch none (null) bool
+engine none (null)</pre>
+</div></div></li></ul><h3 id="OPPro3.0Architecture-RestartingJAMS">Restarting JAMS</h3><p>JAMS can be restarted from the JAMS shell or from the terminal. To restart from the JAMS shell, use telnet to connect to port 1110 and enter the following command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">restart</pre>
+</div></div><p>To restart from the terminal, execute the following script:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">sudo /etc/init.d/jams restart</pre>
+</div></div><p><br/></p><p><span style="font-size: 20.0px;">Mosquitto</span></p><p>The core box uses <a class="external-link" href="https://mosquitto.org/" rel="nofollow">mosquitto</a> as the MQTT broker. The mosquitto configuration file is located in /etc/mosquitto/mosquitto.conf and should already have the correct configuration out of the box. However, if you are experiences problems with receiving MQTT messages you should verify that mosquitto is running and is configured to listen on port 1883 and is also configured to start a web sockets listener on port 9001 (the web sockets listener is required for the react panel to communicate with the MQTT server). The default configuration for mosquitto is:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">user daemon
+port 1883
+listener 9001
+protocol websockets</pre>
+</div></div><h2 id="OPPro3.0Architecture-Nginx.1">Nginx</h2><p>The core box uses nginx to set up an HTTP server to serve the react panel page and assets. By default, nginx listens for requests on port 80 and serves files located in /www (which is where the react panel code and assets are located). nginx is configured to proxy all requests to the /gvos/ path to port 5000, which is the port that GvWeb is listening on. The default configuration for nginx is located at /etc/nginx/nginx.conf and additional configurations (such as the GvWeb proxy) are located in /etc/nginx/conf.d/.</p><h2 id="OPPro3.0Architecture-TimeSynchronization">Time Synchronization</h2><p>At the moment, the core/display9 setup uses a rather confusing system for time synchronization where the display9 uses the central server as the ntp source (which has to route through the core box to access the network) and the core box uses the display 9 as it's ntp source. It is important that the time on both devices remain in sync with the server as issues such as todos and messages being deleted have been reported as a result of the system time being off.</p><h3 id="OPPro3.0Architecture-Chrony">Chrony</h3><p>The core box uses <a class="external-link" href="https://en.wikipedia.org/wiki/Chrony" rel="nofollow">Chrony</a> for managing ntp. The configuration for chrony can be found at /etc/chrony.conf. Chrony also comes with a tool called chronyc which can be used to check the status of the time synchronization and ntp servers, among other things.</p><h3 id="OPPro3.0Architecture-Ntpd">Ntpd</h3><p>The display9 uses ntpd for managing ntp. The configuration for ntpd can be found at /etc/ntp.conf.</p><h2 id="OPPro3.0Architecture-FileSystem">File System</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/
+|__opt
+    |___Jigsaw
+    |   |___Tools
+    |   |   |___JSPanel -- Core version of the JSPanel script used to start and stop the panel remotely
+    |   |   |___JAMSRun -- JAMSRun executable used for starting JAMS
+    |   |
+    |   |___Library
+    |   |   |___Bundles
+    |   |   |   |___*.bundle -- All of the JAMS module bundles such as JAction.bundle
+    |   |   |
+    |   |   |___Frameworks
+    |   |   |   |___*.framework -- All of the JAMS framework files such as JAMS.framework
+    |   |   |
+    |   |   |___Libraries
+    |   |       |___*.so -- All of the JAMS framework libraries such as JAMS.so
+    |   |
+    |   |___Logs
+    |   |   |__messages -- The messages log file. JAMS.log is no longer stored in here.
+    |   |
+    |   |___Data -- nothing is stored in here anymore
+    |
+    |___oas
+        |___db
+        |   |___opguard.db -- The sqlite database created and used by GVOS. This directory also contains backup files.
+        |
+        |___bin
+        |   |___gv_main -- Executable for starting GVOS
+        |
+        |___configs
+        |   |___*.json -- All of the generic GVOS configuration files, such as app-jigsaw.json
+        |   |___opguard.db -- The generic GVOS sqlite database.
+        |   |___JAMS
+        |       |___*.json -- Generic JAMS configurations stored in JSON files. These are the same as the XML files that are used in Jigsaw
+        |___dvr
+        |___events
+        |___images
+        |___lib
+        |   |___*.so -- All of the GVOS libraries such as libgv_web.so
+        |
+        |___logs
+        |   |___gvos.log -- The GVOS log file
+        |   |___JAMS.log -- The JAMS log file is stored in here now
+        |   |___*.log -- log files for other guardvant services
+        |
+        |___scripts
+        |   |___scripts used for starting gvos and other services
+        |
+        |___snapshots
+        |___sounds
+        |___styles
+        |___web -- not used anymore </pre>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="OPPro3.0Architecture-Accessingthepanellog">Accessing the panel log</h1><p>The <a class="external-link" href="https://chromedevtools.github.io/devtools-protocol/" rel="nofollow">Chrome DevTools Protocol</a> provides us with a way to remotely access the developer console of the chromium instance running on the display 9. The developer console allows us to view the log messages and errors that are output by the panel, inspect network requests, perform memory profiling, and much more. To access the developer console you will need to tunnel to port 9222 of the display 9 using the following steps:</p><ol><li><p>Use ssh to create a tunnel from a port on your machine to a port on the client's server (in the example I forward my 9222 to the server's 9222 but you can change the ports if you need):</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ssh -L 9222:localhost:9222 client_server</pre>
+</div></div></li><li><p>On the client's server create a tunnel from the port you tunneled above to 9222 of the jigsaw core box:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ssh -L 9222:localhost:9222 equipment_name</pre>
+</div></div></li><li><p>On the jigsaw core box create a tunnel from port 9222 to port 9222 on the display 9:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ssh -L 9222:localhost:9222 master</pre>
+</div></div></li><li>On your machine, open a web browser and enter <span class="nolink">http://localhost:9222/</span> in the address bar (if you used a local port other than 9222 be sure to replace it in the url). Once it loads you will see the following: <br/><br/><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" height="400" src="attachments/228614264/228614421.png" data-image-src="attachments/228614264/228614421.png" data-unresolved-comment-count="0" data-linked-resource-id="228614421" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="chromium_debug_screen_1.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></li><li>Click on the section that says &quot;OpWeb Development&quot; to open the developer console. When the page loads it should look like the following image:<br/><br/><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" height="400" width="711" src="attachments/228614264/228614422.png" data-image-src="attachments/228614264/228614422.png" data-unresolved-comment-count="0" data-linked-resource-id="228614422" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="chromium_debug_console_2.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></li></ol><p>On the right side of the page is the developer console and on the left side is the current state of the page in the web browser (what the operator currently sees). The panel side functions similarly to VNC, so pressing any of the buttons will effect what the operator sees and will actually trigger the effect of the button on the operator's panel. On the top of the right side you'll see various tabs (&quot;Elements&quot;, &quot;Console&quot;, &quot;Sources&quot;, &quot;Network&quot;, etc). The console tab shows all of the log messages and errors that have been generated by the panel. You can save the entire log by clicking anywhere in the console tab and selecting &quot;Save as...&quot;. This will output all of the messages in the console to a text file that is saved in your local downloads folder.</p><p style="text-align: center;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border" draggable="false" height="400" width="711" src="attachments/228614264/228614423.png" data-image-src="attachments/228614264/228614423.png" data-unresolved-comment-count="0" data-linked-resource-id="228614423" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="chromium_debug_console_3.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="OPPro3.0Architecture-RestartingtheReactpanel">Restarting the React panel</h1><p>There are a few different ways that the react panel can be restarted:</p><ul><li>From the remote developer console, press the refresh button at the top of the page (*not the refresh button for your browser*). This will simply refresh the web page forcing the react application to reload.</li><li>By pressing the 'Restart JsPanel' button in one of the equipment views in OPProManager. This will close out of the current instance of chromium and launch a new chromium instance.</li><li>By calling the chromium start up script with the restart argument on the display 9: /opt/etc/init.d/chromium restart. This will kill the current instance of chromium and launch a new chromium instance.</li><li>By executing the JSPanel script with the restart option from the core box: /opt/Jigsaw/Tools/JSPanel restart. This will kill the current instance of chromium and launch a new chromium instance.</li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="OPPro3.0Architecture-Simulating(ForDevelopers)">Simulating (For Developers)</h1><p>To simulate the panel you will need to have the GVOS, Jigsaw and react panel environments installed on your machine. If you can build GVOS and you do not need to run a Jigsaw server at the same time (for dispatch or other events) then you can build Jigsaw using the GVOS toolchain by adding the opguard=yes make option which builds only the files that are necessary to run a Jigsaw client (equipment) instance.</p><h2 id="OPPro3.0Architecture-SimulatingGVOS">Simulating GVOS</h2><p>To simulate the panel you will first need to start a GVOS server and client for the equipment you are simulating. The gv_simulator script can be used to start the GVOS server and client as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/oas/scripts/gv_simulator -d &lt;database name&gt; -U &lt;database user&gt; -p &lt;database password&gt; -fms &lt;Equipment name&gt;</pre>
+</div></div><p>Note that the GVOS server starts GvWeb on port 5000 and the shell interface listens on port 4640 while the GVOS client starts GvWeb on port 5002 and the shell interface on port 4641. On the first run you will see the GVOS client restart once, this is normal and happens because GVOS needs to build the sqlite database for the equipment that you are simulating. You can find the sqlite database in the /tmp directory and it will be named &lt;Equipment name&gt;.db.</p><h2 id="OPPro3.0Architecture-SimulatingJAMS">Simulating JAMS</h2><p>If your JAMS build was not built using the GVOS toolchain then be sure to make the necessary changes to your environment so that JAMS has access to the required libraries (usually need to change links for the /opt/local and /opt/GNUstep directories).</p><h3 id="OPPro3.0Architecture-SimulatingaJAMSclient">Simulating a JAMS client</h3><p>To start a JAMS client you'll need to create a configuration file in /opt/Jigsaw/Services/&lt;equipment name&gt;.jams. Since gv_simulator opens the socket for the JProtoSQL interface on port 1301 you'll need to add some extra configurations to this file (unlike the config file found onboard the actual equipment which only contains the [host &lt;name&gt;] line). The configuration file should be set up as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[host &lt;Equipment Name&gt;]
+[port 1300]
+[jamssql host=localhost;
+              port=1301;
+              database=jmineops;
+              driver=jamssql;
+               is_local=true]</pre>
+</div></div><p>This will ensure that the equipment is started with the JProtoSQL interface connected to port 1301 and the JAMS shell listening on port 1300. To start the JAMS client execute JAMSRun as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/Jigsaw/Tools/JAMSRun -config /opt/Jigsaw/Services/&lt;equipment name&gt;/.jams -log JAMS,error,exception</pre>
+</div></div><h3 id="OPPro3.0Architecture-SimulatingaJAMSserver">Simulating a JAMS server</h3><p>To start a JAMS server you will need to create a configuration file in /opt/Jigsaw/Services/config.jams. The easiest way to do this is to copy /opt/Jigsaw/Services/config.jams.example to config.jams and then edit it. Your config.jams file should look like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[host jamshost/24]
+[virtualDB]
+[replicator server=postgres://localhost/&lt;database name&gt;,user=developer,password=jigsaw;
+                 broadcast=jamsbroadcast:1109;
+                 broadcastCount=8;
+                 broadcastSize=4000;
+                 liveProxyTimeout=0]
+[logger port=1110;enable=action,exception,optimizer,restriction]
+[JAMS domain=jamshost:1109]
+[mineOPS]
+[optimizer assign_by_idle=240;reassign_cost=240]
+[ruby]
+[proxyTCP]</pre>
+</div></div><p>Once you have your configuration file created, you can start the JAMS server by executing the JAMSRouter script:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/Jigsaw/Services/JAMSRouter start</pre>
+</div></div><p>Once the server is started you can use telnet to connected to the JAMS shell on port 1110.</p><h2 id="OPPro3.0Architecture-SimulatingaReactpanel">Simulating a React panel</h2><h3 id="OPPro3.0Architecture-Nginxconfiguration">Nginx configuration</h3><p>To simulate the react panel on your machine you will need to have nginx configured so that it can serve the sites.json file. To do this add the following configuration to your nginx.conf located in /etc/nginx/nginx.conf:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">server {
+    listen localhost:80;
+    server_name localhost;
+    root &lt;path to the web panel root directory&gt;;
+    location / {
+    }
+}</pre>
+</div></div><h3 id="OPPro3.0Architecture-Mosquittoconfiguration">Mosquitto configuration</h3><p>You will need to ensure that your machine has a mosquitto that is built with web sockets support (at the time of this writing the version that comes with Ubuntu does not have web sockets enabled); you can find a mosquitto build with web socket support on neptune. Once you have the proper version of mosquitto installed, edit the configuration file at /etc/mosquitto/mosquitto.conf and add the following lines:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">port 1883
+listener 9001
+protocol websockets</pre>
+</div></div><h3 id="OPPro3.0Architecture-Panelconfiguration">Panel configuration</h3><p>We need to make a small change to one of the panel configuration files because gv_simulator starts GvWeb on port 5002 for the equipment. Open &lt;web panel root&gt;/src/setupProxy.js and change the line that contains '/gvos' so that the port is 5002 instead of 5000:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">const proxy = require(&#39;http-proxy-middleware&#39;);
+module.exports = function (app) {
+  app.use(&#39;/sites.json&#39;, proxy({ target: &#39;http://localhost:80&#39;, changeOrigin: true, toProxy: true }));
+  app.use(&#39;/gvos&#39;, proxy({ target: &#39;http://localhost:5002&#39;, changeOrigin: true, toProxy: true }));
+};</pre>
+</div></div><p><span style="font-size: 16.0px;font-weight: bold;">Starting the panel</span></p><p>Before you start the panel for the first time make sure you run the following from inside the web panel root directory:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">npm install
+npm install atomix-2.3.0.tgz</pre>
+</div></div><p>Once all of the dependencies have been installed you can start the panel by running </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">npm start</pre>
+</div></div><p>This will launch a webpack development server on port 3000 and open a new tab in your browser that connects to <span class="nolink">http://localhost:3000/</span> (this is the address for the panel in development). Make sure that you are using a Chromium browser; if you aren't then download one.</p><h3 id="OPPro3.0Architecture-ConfiguringDevTools">Configuring DevTools</h3><p>Once the page loads you can configure it to run at the same screen size as the display 9 by opening up the DevTools window and setting up a new device profile. To do this right click on the page and press &quot;inspect&quot; on the menu that pops up. This should open up the DevTools window.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" height="400" width="545" src="attachments/228614264/228614426.png" data-image-src="attachments/228614264/228614426.png" data-unresolved-comment-count="0" data-linked-resource-id="228614426" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="dev_tools_Window.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></p><p>Click on the cog icon at top right corner of the DevTools window to open up the settings menu. Next Click the &quot;Devices&quot; tab in the settings menu and then press the &quot;Add custom device...&quot; button.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" height="400" width="547" src="attachments/228614264/228614427.png" data-image-src="attachments/228614264/228614427.png" data-unresolved-comment-count="0" data-linked-resource-id="228614427" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="dev_tools_devices.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></p><p>Enter a device name and set the screen size to 1280 x 768 and the user agent type to &quot;Mobile&quot;. Save the configuration and then exit the settings menu.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" height="400" width="546" src="attachments/228614264/228614428.png" data-image-src="attachments/228614264/228614428.png" data-unresolved-comment-count="0" data-linked-resource-id="228614428" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="dev_tools_add_device.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></p><p>Next, at the top left corner of the DevTools window press the button that looks like a cellphone and a tablet (this is the &quot;Toggle device toolbar&quot; button). This will add a toolbar at the top of your web page that allows you to select the device type to emulate.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" height="400" width="547" src="attachments/228614264/228614429.png" data-image-src="attachments/228614264/228614429.png" data-unresolved-comment-count="0" data-linked-resource-id="228614429" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="dev_tools_toggle.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></p><p>Click on the device menu and select the device you just created from the drop down.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" draggable="false" height="400" src="attachments/228614264/228614430.png" data-image-src="attachments/228614264/228614430.png" data-unresolved-comment-count="0" data-linked-resource-id="228614430" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="dev_tools_device_toolbar.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="228614264" data-linked-resource-container-version="20" alt=""></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="OPPro3.0Architecture-Simulating(Non-Developers)">Simulating (Non-Developers)</h1><p>This guide assumes that the JAMS and GVOS servers are running on a separate machine. See <a href="#OPPro3.0Architecture-Simulating(ForDevelopers)">Simulating (For Developers)</a> if you need to run the JAMS/GVOS clients and servers on the same machine.</p><h2 id="OPPro3.0Architecture-SimulatingGVOS.1">Simulating GVOS</h2><h3 id="OPPro3.0Architecture-Installation">Installation</h3><ol><li>Download the GVOS build tar ball from <a class="external-link" href="http://abrisrvhptc01.lgs-net.com/viewType.html?buildTypeId=Jigsaw_Ops30_Gvos" rel="nofollow">teamcity</a>. The build that we are currently using is 6.2-1.</li><li><p>Extract the tar ball over the root directory: </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">tar -xzf gvos-6.2-1.tar.gz -C /</pre>
+</div></div></li><li><p>Copy the default configuration file to &lt;device name&gt;.conf</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">cp /opt/guardvant/scripts/gvos.conf /opt/guardvant/script/&lt;device name&gt;.conf</pre>
+</div></div></li><li><p>Edit your device configuration file so that the device is the name of the device you are simulating:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">watchdog 4000
+module gv_model
+module gv_replicator
+object replicator_client
+       name=replicator,
+       device=&lt;device name&gt;,
+       database=&quot;sqlite://localhost/opguard,local&quot;,
+       server=&quot;http://gvserver/gvos,user=mobile&quot;</pre>
+</div></div><p>You can edit the database line to create the database somewhere else if you do not want gvos to overwrite the opguard database file in /opt/guardvant/db/. I usually change this line to 'database=&quot;sqlite://localhost//tmp/&lt;equipment name&gt;.db,local&quot;,' so that it creates a new database file in the /tmp directory.</p></li><li>Add gvserver to your hosts file (this should be the address of the server that you are connecting to).</li></ol><h3 id="OPPro3.0Architecture-SimulatingaClient">Simulating a Client</h3><p>To simulate a GVOS client, first make sure that the device that you want to simulate has the APP-JIGSAW group in its device groups. If the device does not have the APP-JIGSAW group then add it to the groups. Next, use the following command to launch GVOS:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/guardvant/bin/gv_main -v -c /opt/guardvant/scripts/&lt;device name&gt;.conf</pre>
+</div></div><p>This will launch the GVOS client with the configuration file that you created for your device. If this is the first run for the equipment, gvos will load the sqlite database and then exit and you will need to start gvos again.</p><h2 id="OPPro3.0Architecture-SimulatingJAMS.1">Simulating JAMS</h2><h3 id="OPPro3.0Architecture-Installation.1">Installation</h3><p>Work in progress</p><h3 id="OPPro3.0Architecture-StartingJAMS">Starting JAMS</h3><ol><li><p>Create a configuration file for your equipment named &lt;equipment name&gt;.jams. The file should only contain the following line:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[host &lt;equipment name&gt;]</pre>
+</div></div></li><li><p>Start JAMS as follows:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/opt/Jigsaw/Tools/JAMSRun -config /opt/Jigsaw/Services/&lt;equipment name&gt;.jams -log JAMS,error,exception</pre>
+</div></div></li><li>JAMS will be started for the equipment. It will listen on port 1111 for the JProtoSQL interface and will listen on port 1110 for the JAMS shell. Note that JAMS will not launch a replicator client since all replication is handled by GVOS.</li></ol><h2 id="OPPro3.0Architecture-SimulatingthePanel">Simulating the Panel</h2><h3 id="OPPro3.0Architecture-Installation.2">Installation</h3><ol><li>Download the webpanels tar ball from <a class="external-link" href="http://abrisrvhptc01.lgs-net.com/viewType.html?buildTypeId=Jigsaw_Ops30_WebPanels" rel="nofollow">teamcity</a>. We are currently using the Release_1.0.1 build.</li><li><p>Extract the tar ball over the root directory. It will create a www directory inside the root directory</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">tar -xzf webpanels-1.0.1.tar.gz -C /</pre>
+</div></div></li><li><p>Add the following to your nginx configuration (usually in /etc/nginx/nginx.conf but can be in a file in /etc/nginx/conf.d/ or /etc/nginx/sites-enabled)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">server {
+        listen 80 default_server;
+        root /www;
+        location / {
+		try_files $uri $uri/ /index.html;
+        }
+        location /gvos/ {
+              	include proxy_params;
+                proxy_buffering off;
+                proxy_request_buffering off;
+                proxy_http_version 1.1;
+                proxy_pass http://127.0.0.1:5000;
+        }
+}
+
+
+</pre>
+</div></div></li><li>Follow the steps in the <a href="#OPPro3.0Architecture-Mosquittoconfiguration">Mosquitto Configuration</a> section to configure mosquitto.</li><li>Add the router alias to 127.0.0.1 in your hosts file.</li><li>Download Chrome or Chromium. These are the only supported browsers. </li><li>Follow the steps in the <a href="#OPPro3.0Architecture-ConfiguringDevTools">Configuring Dev Tools</a> section to configure chrome to properly size the view window.</li></ol><h3 id="OPPro3.0Architecture-Startingthepanel">Starting the panel</h3><ol><li>Start GVOS and JAMS if they aren't already started</li><li>Open your browser and navigate to <a class="external-link" href="http://localhost:80" rel="nofollow">http://localhost:80</a></li><li>Right click in the browser window and press inspect to open the developer console and resize the screen.</li></ol></div>
+</div>
+</div>
+</div></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/231786246/258804224.png">ops_30_architecture.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:18</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

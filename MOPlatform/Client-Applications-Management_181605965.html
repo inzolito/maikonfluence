@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HxGN MineOperate Platform : Client Applications Management</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">HxGN MineOperate Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="HxGN-MineOperate-Platform-Home_181605958.html">HxGN MineOperate Platform Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_181605960.html">Technical Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            HxGN MineOperate Platform : Client Applications Management
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> TEODORO Eduardo</span>, last modified on feb 19, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1764959136031 {padding: 0px;}
+div.rbtoc1764959136031 ul {margin-left: 0px;}
+div.rbtoc1764959136031 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1764959136031'>
+<ul class='toc-indentation'>
+<li><a href='#ClientApplicationsManagement-Workflows'>Workflows</a></li>
+<li><a href='#ClientApplicationsManagement-Structure'>Structure</a>
+<ul class='toc-indentation'>
+<li><a href='#ClientApplicationsManagement-SystemApplicationTypes'>System Application Types</a></li>
+<li><a href='#ClientApplicationsManagement-DataModel'>Data Model</a></li>
+<li><a href='#ClientApplicationsManagement-DataModel(onboard)'>Data Model (onboard)</a></li>
+<li><a href='#ClientApplicationsManagement-UploadingApplicationVersions'>Uploading Application Versions</a></li>
+</ul>
+</li>
+<li><a href='#ClientApplicationsManagement-DesktopApplications'>Desktop Applications</a>
+<ul class='toc-indentation'>
+<li><a href='#ClientApplicationsManagement-FolderStructure'>Folder Structure</a></li>
+</ul>
+</li>
+<li><a href='#ClientApplicationsManagement-On-boardApplications'>On-board Applications</a>
+<ul class='toc-indentation'>
+<li><a href='#ClientApplicationsManagement-VersionTransmission'>Version Transmission</a>
+<ul class='toc-indentation'>
+<li><a href='#ClientApplicationsManagement-Topics'>Topics</a></li>
+</ul>
+</li>
+<li><a href='#ClientApplicationsManagement-Topicscontent'>Topics content</a>
+<ul class='toc-indentation'>
+<li><a href='#ClientApplicationsManagement-register'>register</a></li>
+<li><a href='#ClientApplicationsManagement-commands'>commands</a></li>
+<li><a href='#ClientApplicationsManagement-SupportedCommands:'>Supported Commands:</a>
+<ul class='toc-indentation'>
+<li><a href='#ClientApplicationsManagement-Command:request:version-info'>Command: request:version-info</a></li>
+<li><a href='#ClientApplicationsManagement-Command:response:version-info'>Command: response:version-info</a></li>
+<li><a href='#ClientApplicationsManagement-Command:notify:version-info'>Command: notify:version-info</a></li>
+<li><a href='#ClientApplicationsManagement-Command:request:download-application'>Command: request:download-application</a></li>
+<li><a href='#ClientApplicationsManagement-Command:response:download-application'>Command: response:download-application</a></li>
+<li><a href='#ClientApplicationsManagement-Command:response:version-not-found'>Command: response:version-not-found</a></li>
+<li><a href='#ClientApplicationsManagement-Command:request:prepare-to-download'>Command: request:prepare-to-download</a></li>
+<li><a href='#ClientApplicationsManagement-Command:response:ready-to-download'>Command: response:ready-to-download</a></li>
+<li><a href='#ClientApplicationsManagement-Command:request:cancel-version-update'>Command: request:cancel-version-update</a></li>
+<li><a href='#ClientApplicationsManagement-Command:response:cancel-version-update'>Command: response:cancel-version-update</a></li>
+<li><a href='#ClientApplicationsManagement-Command:notify:version-installation-result'>Command: notify:version-installation-result</a></li>
+<li><a href='#ClientApplicationsManagement-Command:request:equipment-ip'>Command: request:equipment-ip</a></li>
+<li><a href='#ClientApplicationsManagement-Command:response:equipment-ip'>Command: response:equipment-ip</a></li>
+<li><a href='#ClientApplicationsManagement-Command:notify:keep-alive'>Command: notify:keep-alive</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#ClientApplicationsManagement-app/bin'>app/bin</a></li>
+</ul>
+</li>
+</ul>
+</div></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><br/></p><p>System Platform can manage client applications versions and update them automatically when the applications uses the .Net SDK or Android Platform.</p><h1 id="ClientApplicationsManagement-Workflows">Workflows</h1><p>
+
+<map id="gliffy-map-181606132-1015" name="gliffy-map-181606132-1015"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+                                    </caption>
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1137px;" usemap="#gliffy-map-181606132-1015" src="attachments/181605965/181606133.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="ClientApplicationsManagement-Structure"><span>Structure</span></h1><p>Applications are organized by Application Type, depending of platform and if it's a system or custom application.</p><p>System Application Types and Applications are automatically created on server first run.</p><h2 id="ClientApplicationsManagement-SystemApplicationTypes">System Application Types</h2><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Token</th><th class="confluenceTh">Platform</th></tr><tr><td class="confluenceTd"><p>System Windows Applications</p></td><td class="confluenceTd"><p>SYSTEM_WINDOWS_APPS</p></td><td class="confluenceTd">.Net</td></tr><tr><td colspan="1" class="confluenceTd">System Android Applications</td><td colspan="1" class="confluenceTd">SYSTEM_ANDROID_APPS</td><td colspan="1" class="confluenceTd">Android</td></tr><tr><td colspan="1" class="confluenceTd">System Linux Applications</td><td colspan="1" class="confluenceTd">SYSTEM_LINUX_APPS</td><td colspan="1" class="confluenceTd">Linux</td></tr></tbody></table></div><h2 id="ClientApplicationsManagement-DataModel">Data Model</h2><p>
+
+<map id="gliffy-map-181605972-6428" name="gliffy-map-181605972-6428"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+                                    </caption>
+                <tr>
+                    <td>
+                        <img style="border: none; width: 1146px;" usemap="#gliffy-map-181605972-6428" src="attachments/181605965/181605973.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+</p><h2 id="ClientApplicationsManagement-DataModel(onboard)">Data Model (onboard)</h2><p>Based on the data exchanged with the server through the MQTT topics, this model structure was defined in the onboard side:<img class="wysiwyg-unknown-macro" src="plugins/servlet/confluence/placeholder/unknown-macro"/></p><h2 id="ClientApplicationsManagement-UploadingApplicationVersions"><span style="font-size: 24.0px;">Uploading Application Versions</span></h2><p>For Version 1.34 and above, it's possible to upload new application versions using the module SysConfig.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" draggable="false" src="attachments/181605965/181605970.png" data-image-src="attachments/181605965/181605970.png" data-unresolved-comment-count="0" data-linked-resource-id="181605970" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="AppMng01.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="181605965" data-linked-resource-container-version="25" alt=""></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="ClientApplicationsManagement-DesktopApplications"><span>Desktop Applications</span></h1><p>Desktop Applications in .Net just need to provide an Application Signature when instantiating the SDK.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">/// &lt;summary&gt;
+/// Creates an instance of Platform SDK
+/// &lt;/summary&gt;
+public PlatformSDK(string ApplicationSignature)</pre>
+</div></div><p>The signature contains all information required to server validate the application. In case the application do not exists on server, it will be created as disabled. The system administrator should enable it using SysConfig module, Menu &quot;Configurations&quot; item &quot;Application Manager&quot;.</p><h2 id="ClientApplicationsManagement-FolderStructure">Folder Structure</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Hexagon
+  Mining
+    Applications
+      Config
+        ConnectionInfo.json
+      Launcher
+        Launcher.exe
+        etc...
+      Settings
+      Supervisory
+      SysConfig</pre>
+</div></div><p class="auto-cursor-target">ConnectionInfo JSON format</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  serverAddress: string,
+  serverPort: int (default 4514)
+}</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>To disable applications automatic updates (useful during develpment) just create an empty file named &quot;HM.Applications.Updates.Off&quot; on root folder &quot;C:\&quot; or on application folder</p></div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="ClientApplicationsManagement-On-boardApplications"><span style="font-size: 24.0px;">On-board Applications</span></h1><p><br/></p><h2 id="ClientApplicationsManagement-VersionTransmission">Version Transmission</h2><p><br/></p><p>How the version binary and information are transmitted from server to devices</p><p><br/></p><h3 id="ClientApplicationsManagement-Topics">Topics</h3><p><br/></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Topic</th><th class="confluenceTh">Description</th></tr><tr><td colspan="1" class="confluenceTd">hxgn/ops/platform/v1/field/unknown/&lt;serial&gt;/register</td><td colspan="1" class="confluenceTd">Device request registration on server</td></tr><tr><td colspan="1" class="confluenceTd">hxgn/ops/platform/v1/srv/unknown/&lt;serial&gt;/register</td><td colspan="1" class="confluenceTd">Server send registration information to device</td></tr><tr><td colspan="1" class="confluenceTd">hxgn/ops/platform/v1/srv/&lt;equipment&gt;/&lt;deviceId&gt;/commands</td><td colspan="1" class="confluenceTd">Server sends commands to device platform</td></tr><tr><td class="confluenceTd">hxgn/ops/platform/v1/field/&lt;equipment&gt;/&lt;deviceId&gt;/commands</td><td class="confluenceTd">Device platform sends or respond server commands</td></tr><tr><td class="confluenceTd">hxgn/ops/platform/v1/srv/&lt;equipment&gt;/&lt;deviceId&gt;/app/bin</td><td class="confluenceTd">Server sends shards of new version to device platform</td></tr><tr><td colspan="1" class="confluenceTd">hxgn/ops/platform/v1/field/&lt;equipment&gt;/&lt;deviceId&gt;/app/bin</td><td colspan="1" class="confluenceTd">Device platform sends ack of shards to server</td></tr></tbody></table></div><p><br/></p><h2 id="ClientApplicationsManagement-Topicscontent">Topics <strong>content</strong></h2><p><br/></p><h3 id="ClientApplicationsManagement-register">register</h3><p><br/></p><div id="expander-1863987116" class="expand-container"><div role="heading" aria-level="6" id="expander-control-1863987116" class="expand-control"><button type="button" id="expand-button-1863987116" class="aui-button aui-button-link aui-button-link-icon-text" aria-expanded="true" aria-controls="expander-content-1863987116" ><span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down" aria-hidden="true"></span><span class="expand-control-text conf-macro-render">Haz clic aquí para ampliar...</span></button></div><div role="region" id="expander-content-1863987116" class="expand-content" aria-labelledby="expand-button-1863987116"><p class="auto-cursor-target">Device request:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">{
+  deviceType: string, // TODO: Define standard system types e.g.: TRACKER, CONNBOX
+  deviceModel: string, // TODO: Create standard to model names/versions
+  platform: string,  // OS: Linux, Android, Windows
+  variant: string,   // Variant by device model e.g.: x86, x64
+  createIfNotExists: bool,  // Require deviceType and deviceModel
+  includeApplications: bool  // Require platform and variant specified
+}</pre>
+</div></div><p class="auto-cursor-target">Server response:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  deviceId: int?,
+  deviceName: string,
+  equipmentId: int?,
+  equipmentName: string,
+  equipmentModelId: int?,
+  equipmentModelName: string,
+  equipmentTypeId: int?,
+  equipmentTypeName: string,
+  applications: [{key: string, name: string, version: string, package: string}]
+}</pre>
+</div></div></div></div><p><br/></p><h3 id="ClientApplicationsManagement-commands"><strong>commands</strong></h3><p><br/></p><p class="auto-cursor-target">Commands topics are general purpose topic to exchange commands between Server and Field Devices.</p><p>The format is always a generic JSON command in the format:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  command: string,
+  arguments: [
+    {
+      key: string,
+      value: string
+    }
+  ]
+}</pre>
+</div></div><h3 id="ClientApplicationsManagement-SupportedCommands:"><strong>Supported Commands:</strong></h3><h4 id="ClientApplicationsManagement-Command:request:version-info"><strong><strong>Command: <span style="color: rgb(0,128,0);">request:version-info</span></strong></strong></h4><p>Device requests to Server all application information</p><p><strong>Arguments:</strong></p><p>Currently installed versions</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>App 1 Key</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">App 1 Version</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><pre>App 2 Key</pre></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">App 2 Version</p></div></td></tr><tr><td colspan="1" class="confluenceTd">...</td><td colspan="1" class="confluenceTd">...</td></tr><tr><td colspan="1" class="confluenceTd">App n Key</td><td colspan="1" class="confluenceTd">App n Version</td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:response:version-info"><strong><strong><br/>Command: <span style="color: rgb(0,128,0);">response:version-info</span></strong></strong></h4><p>Server respond the device with current application versions</p><p><strong>Arguments:</strong></p><p>Latest application versions</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>App 1 Key</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">App 1 Version</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><pre>App 2 Key</pre></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">App 2 Version</p></div></td></tr><tr><td colspan="1" class="confluenceTd">...</td><td colspan="1" class="confluenceTd">...</td></tr><tr><td colspan="1" class="confluenceTd">App n Key</td><td colspan="1" class="confluenceTd">App n Version</td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:notify:version-info"><strong><strong><br/>Command: <span style="color: rgb(0,128,0);">notify:version-info</span></strong></strong></h4><p>Device sends version information for one or more applications</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>App 1 Key</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">App 1 Version</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><pre>App 2 Key</pre></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">App 2 Version</p></div></td></tr><tr><td colspan="1" class="confluenceTd">...</td><td colspan="1" class="confluenceTd">...</td></tr><tr><td colspan="1" class="confluenceTd">App n Key</td><td colspan="1" class="confluenceTd">App n Version</td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:request:download-application"><strong><br/>Command: <span style="color: rgb(0,128,0);">request:download-application</span></strong></h4><p>Device sends to Server a request to receive an application binary</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>appKey</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Key of the application</p></div></td></tr><tr><td colspan="1" class="confluenceTd">downloadType</td><td colspan="1" class="confluenceTd"><p>Method used to download the app binary: [ MQTT, RSYNC ]. Default is MQTT</p></td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:response:download-application"><strong><br/>Command: <span style="color: rgb(0,128,0);">response:download-application</span></strong></h4><p>Server confirm to device that the version exists and will be uploaded</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>appKey</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Key of the application</p></div></td></tr><tr><td colspan="1" class="confluenceTd">appVersionId</td><td colspan="1" class="confluenceTd"><p>Id of the version</p></td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:response:version-not-found"><strong><br/>Command: <span style="color: rgb(0,128,0);">response:version-not-found</span></strong></h4><p>Server respond to device that the version for its platform/variant was not found</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>appKey</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Key of the application</p></div></td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:request:prepare-to-download"><strong><br/>Command: <span style="color: rgb(0,128,0);">request:prepare-to-download</span></strong></h4><p>Server sends metadata to device about the version that will be sent on app/bin topic</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>appVersionId</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Id of the version</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><pre>appKey</pre></td><td colspan="1" class="confluenceTd">Key of the application</td></tr><tr><td colspan="1" class="confluenceTd"><pre>appName</pre></td><td colspan="1" class="confluenceTd">Name of application</td></tr><tr><td colspan="1" class="confluenceTd"><pre>version</pre></td><td colspan="1" class="confluenceTd">Version</td></tr><tr><td colspan="1" class="confluenceTd"><pre>fragmentCount</pre></td><td colspan="1" class="confluenceTd">Total number of fragments</td></tr><tr><td colspan="1" class="confluenceTd"><pre>size</pre></td><td colspan="1" class="confluenceTd">Total size of the version binary</td></tr><tr><td colspan="1" class="confluenceTd"><pre>isCompressed</pre></td><td colspan="1" class="confluenceTd">Binary is compressed?</td></tr><tr><td colspan="1" class="confluenceTd">appHash</td><td colspan="1" class="confluenceTd">md5 hash base64 encoded</td></tr><tr><td colspan="1" class="confluenceTd">downloadType</td><td colspan="1" class="confluenceTd"><p>Method used to download the app binary: [ MQTT, RSYNC ]. Default is MQTT</p></td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:response:ready-to-download"><strong><br/>Command: <span style="color: rgb(0,128,0);">response:ready-to-download</span></strong></h4><p>Device respond to server that is ready to download new app version</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>appVersionId</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Id of the version</p></div></td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:request:cancel-version-update"><strong><br/>Command: <span style="color: rgb(0,128,0);">request:cancel-version-update</span></strong></h4><p>Server send to device a notification that the version update has been canceled</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>appVersionId</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Id of the version</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><pre>appKey</pre></td><td colspan="1" class="confluenceTd">Key of the application</td></tr><tr><td colspan="1" class="confluenceTd"><pre>appName</pre></td><td colspan="1" class="confluenceTd">Name of application</td></tr><tr><td colspan="1" class="confluenceTd"><pre>version</pre></td><td colspan="1" class="confluenceTd">Version</td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:response:cancel-version-update"><strong><br/>Command: <span style="color: rgb(0,128,0);">response:cancel-version-update</span></strong></h4><p>Device confirms that the version update has been canceled</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>appVersionId</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Id of the version</p></div></td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:notify:version-installation-result"><strong><br/>Command: <span style="color: rgb(0,128,0);">notify:version-installation-result</span></strong></h4><p>Device sends to Server a notification that the application update has been installed or failed</p><p><strong>Arguments:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td colspan="1" class="confluenceTd"><pre>appVersionId</pre></td><td colspan="1" class="confluenceTd">Id of the version</td></tr><tr><td colspan="1" class="confluenceTd">appKey</td><td colspan="1" class="confluenceTd">application key</td></tr><tr><td class="confluenceTd"><pre>version</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">application version</p></div></td></tr><tr><td colspan="1" class="confluenceTd">successful</td><td colspan="1" class="confluenceTd">true if installation was successful</td></tr><tr><td colspan="1" class="confluenceTd">error</td><td colspan="1" class="confluenceTd">Error message in case not successful installation</td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:request:equipment-ip"><strong><strong><br/>Command: <span style="color: rgb(0,128,0);"><strong>request:equipment-ip</strong></span></strong></strong></h4><p>Device ask for server his own IP</p><h4 id="ClientApplicationsManagement-Command:response:equipment-ip"><strong><strong>Command: <span style="color: rgb(0,128,0);"><strong>response:equipment-ip</strong></span></strong></strong></h4><p>Send to device his configured IP</p><p><strong>Response:</strong></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><pre>ip</pre></td><td class="confluenceTd"><div class="content-wrapper"><p class="auto-cursor-target">Ip of the device</p></div></td></tr></tbody></table></div><h4 id="ClientApplicationsManagement-Command:notify:keep-alive"><strong><strong><br/>Command: <span style="color: rgb(0,128,0);">notify:keep-alive</span></strong></strong></h4><p>Notify the server that the device is on-line</p><p><br/></p><h2 id="ClientApplicationsManagement-app/bin"><strong>app/bin</strong></h2><p><br/></p><p><br/></p><p>The content of this topic is <strong>Binary</strong> from server to device (ContentPackage) and <strong>JSON</strong> from device to server (ContentAckPackage)</p><p><br/></p><ul><li>appVersionId and sequence are stored as big-endian (network mode) signed four bytes integers on ContentPackage</li></ul><p><br/></p><p><br/></p><p><br/><img class="wysiwyg-unknown-macro" src="plugins/servlet/confluence/placeholder/unknown-macro"/><span style="font-size: 24.0px;"><br/></span></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181605970.png">AppMng01.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181605971.png">image2017-10-2_12-17-8.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606069">EmbeddedAppUpdateModel</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606070.png">EmbeddedAppUpdateModel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181605974">DeviceApplicationFragment</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181605975.png">DeviceApplicationFragment.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606071">EmbeddedAppUpdateModel</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606072.png">EmbeddedAppUpdateModel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/185239508">EmbeddedAppUpdateModel</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/185239509.png">EmbeddedAppUpdateModel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606137">Application Management Service Activity Diagram</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606138.png">Application Management Service Activity Diagram.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606132">Application Management Service Activity Diagram</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181606133.png">Application Management Service Activity Diagram.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/185244877">EmbeddedAppUpdateModel</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/185244878.png">EmbeddedAppUpdateModel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/202703395">EmbeddedAppUpdateModel</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/202703396.png">EmbeddedAppUpdateModel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/216289312">EmbeddedAppUpdateModel</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/216289313.png">EmbeddedAppUpdateModel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181605972">EmbeddedAppUpdateModel</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/181605965/181605973.png">EmbeddedAppUpdateModel.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-231776390"></a>
+                                    <font class="smallfont"><p>Hi,</p><p>When re-flashing the smart-screen+core using a USB stick, the Asset Health Client binaries, and the versions folder are left on the core without removing them. Is there an already known procedure to make sure that this clean up happens automatically when re-flashing?<br/><br/>The issue here is if the versions are not deleted, app_managerd doesn't re-install the Asset Health Client again. Ideally, when the set-up is re-flashed I am expecting the binaries to be re-installed.</p><p><br/></p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by KSR at ene 26, 2021 23:37
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-231776404"></a>
+                                    <font class="smallfont"><p><a class="confluence-userlink user-mention" data-username="KSR" href="https://confluence.hexagonmining.com/display/~KSR" data-linked-resource-id="168368926" data-linked-resource-version="1" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">Usuario desconocido (ksr)</a>, which platform version are you using eg. 2.25.x or 2.26.x ?</p><p>Here's some background info:</p><ul><li>2.25.x relied on a USB key being inserted into each device (ie. To reflash the Core box, a USB key needed to be plugged into the Core box).</li><li>2.26.x no longer requires a USB key to be inserted into the Core box.  The USB key is inserted into the Display9, and the installer will update both the Display9 and the Core box.<ul><li>I can recall in the 2.26.x installer that we specifically removed existing applications so that they could be re-installed (if configured within the hmcmd.conf file).</li></ul></li></ul><p>If you reflashed the Core box with 2.25.x, I suspect that it just replaces the base-installer*.sqfs and leaves the data partition (which contains the existing applications) alone - which might lead to the situation you've reported.</p><p>The catch (of course) is that we're focusing on 2.26.x (32bit) and a new set of 64bit images, so it's going to be a serious squeeze for us to refactor how the 2.25.x installer behaves.</p><p>Can you please clarify the scenario that you're using (eg. which platform version) and whether you were installing Asset Health via the App Manager server, or via the USB key.</p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by COUS at ene 27, 2021 01:54
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-231776420"></a>
+                                    <font class="smallfont"><p>Thanks <a class="confluence-userlink user-mention" data-username="COUS" href="https://confluence.hexagonmining.com/display/~COUS" data-linked-resource-id="4980805" data-linked-resource-version="3" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">Usuario desconocido (cous)</a> for the update.</p><p>Just now before reading your reply, I have tried inserting the USB key into the core as well after Display9. And it worked as you said. Yes, I am using 2.25.4 and so this case encountered.<br/><br/>I am installing Asset Health via App Manager server. It is clear for me at least now. Thank you again</p><p><br/></p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by KSR at ene 27, 2021 03:22
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:25</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

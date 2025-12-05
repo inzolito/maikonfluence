@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate OP Pro : GVOS/JAMS Server Integration</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="MineOperate-OP-Pro_224018004.html">MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Product-Releases_228590211.html">Product Releases</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="OP-Pro-3.0_231785728.html">OP Pro 3.0</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Debugging-the-ReactJS-Panel_231786248.html">Debugging the ReactJS Panel</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate OP Pro : GVOS/JAMS Server Integration
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> GEORGE Nathan</span> on feb 16, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1764958723312 {padding: 0px;}
+div.rbtoc1764958723312 ul {margin-left: 0px;}
+div.rbtoc1764958723312 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1764958723312'>
+<ul class='toc-indentation'>
+<li><a href='#GVOS/JAMSServerIntegration-Introduction'>Introduction</a></li>
+<li><a href='#GVOS/JAMSServerIntegration-GVOS'>GVOS</a>
+<ul class='toc-indentation'>
+<li><a href='#GVOS/JAMSServerIntegration-SchemaMapping'>Schema Mapping</a></li>
+<li><a href='#GVOS/JAMSServerIntegration-GvWeb'>GvWeb</a>
+<ul class='toc-indentation'>
+<li><a href='#GVOS/JAMSServerIntegration-Nginx'>Nginx</a></li>
+</ul>
+</li>
+<li><a href='#GVOS/JAMSServerIntegration-Replicator'>Replicator</a></li>
+</ul>
+</li>
+</ul>
+</div></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="GVOS/JAMSServerIntegration-Introduction">Introduction</h1><p>GVOS and JAMS have been integrated so that they can run alongside each other on an Ubuntu server. Both GVOS and JAMS run as replicator servers where GVOS serves as the replicator for all OAS devices (including the devices that are running the GVOS/JAMS integration for the new React panel) while JAMS serves as the replicator server for all legacy JAMS equipment and OPProManager clients. The GVOS and JAMS servers both connect to the same PostgreSQL database which utilizes the JAMS schema with tables and columns from GVOS that do not exist in JAMS merged in.</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="GVOS/JAMSServerIntegration-GVOS">GVOS</h1><h2 id="GVOS/JAMSServerIntegration-SchemaMapping">Schema Mapping</h2><p>While the schemas for the GVOS and Jigsaw databases have mostly been merged, there are some key differences in some table and column names that require translation between the two systems. You'll notice that the Postgres database on the server uses the Jigsaw database schema with the GVOS schema merged into it so that all of the tables and columns match the schema required by Jigsaw. However, the sqlite database onboard the equipment uses the GVOS database schema with the Jigsaw schema merged into it so that all of the tables and column names match the GVOS schema. For example, on the server the JAMS schema is used for the configurations table (notice that the column names match the names for the Jigsaw schema and that 'override', a gvos column, has been added):</p><blockquote><p>cmkc_test=&gt; \d configurations<br/>Table &quot;public.configurations&quot;<br/>Column | Type | Modifiers <br/>-------------+-----------------------------+-------------------------------------------------------------<br/>id | integer | not null default nextval('configurations_id_seq'::regclass)<br/>updated_at | timestamp without time zone | <br/>device_id | integer | <br/>module | character varying(256) | <br/>attribute | character varying(256) | <br/>value | text | <br/>application | character varying(40) | <br/>override | boolean |</p></blockquote><p>Meanwhile, the configurations table in the onboard sqlite database uses the GVOS schema (notice that module is now called component and attribute is now called property:</p><blockquote><p>sqlite&gt; .schema configurations<br/>CREATE TABLE configurations (id integer primary key,updated_at datetime,device_id int(4),component varchar(256),property varchar(256),value text,application varchar(40),override int(1));</p></blockquote><p>The mapping between database schemas is handled by GVOS on the server and onboard by parsing database queries and applying the relevant schema mapping to form the correct query. The mapping for column names is hard coded in the GvModel definition for the model while the mapping for table names is configurable through the jams_schema component table_map property. The default configuration for the table mapping is:</p><blockquote><p>table_map=workers=employees,shift_logins=logins,change_configurations=change_configs,worker_vacations=vacations,worker_qualifications=qualifications,replicas_oas=replicas</p></blockquote><h2 id="GVOS/JAMSServerIntegration-GvWeb">GvWeb</h2><p>The GVOS REST API is contained in the GvWeb module. By default, GvWeb listens on port 5000 for incoming HTTP requests. GvWeb can be used to query model schema, query model data, and invoke GVOS methods remotely. Some useful queries are:</p><ul><li>http://localhost<strong>/gvos/schema/&lt;Model Name&gt;</strong> this returns information about the schema of the model. For example, <span class="nolink">http://localhost/gvos/schema/GvEquipment</span> will return the schema information for the GvEquipment model.</li><li>http://localhost<strong>/gvos/object/&lt;Model Name&gt; </strong>this returns all of the records for the model in JSON format so that it includes each column name. For example, http://localhost/gvos/object/GvEquipment will return all of the equipment records.</li><li><span class="nolink">http://localhost</span><strong>/gvos/object/&lt;Model Name&gt;/&lt;id&gt; </strong>this returns a specific record for the model. For example, <span class="nolink">http://localhost/gvos/object/GvEquipment/1</span> will return the equipment record that has an id equal to 1.</li><li>http://localhost<strong>/gvos/object/&lt;Model Name&gt;/&lt;column 1&gt;,&lt;column 2&gt;,...,&lt;column n&gt; </strong>this returns the data with only the columns specified in the query. For example, http://localhost/gvos/object/GvEquipment/id,type,name will return only the id, type and name fields for each record.</li><li>http://localhost<strong>/gvos/object/&lt;Model Name&gt;?&lt;condition 1&gt;and&lt;condition 2&gt; </strong>this can be used to add conditions to the query. For example, http://localhost/gvos/object/GvEquipment?type=truck%20and%20status_id=50 will return all records where the type is truck and the status id is 50.</li><li>All of these can be combined to form more complex queries such as http://localhost<strong>/gvos/object/&lt;Model Name&gt;/&lt;column 1&gt;,&lt;column 2&gt;,order=&lt;column 1&gt; DESC?&lt;condition 1&gt;and&lt;condition 2&gt;</strong>, for example, http://localhost/gvos/object/GvEquipment/id,updated_at,type,name,order=updated_at%20DESC?type=truck%20and%20status_id=50 will return the id, updated_at, type, and name columns for all records where type is equal to truck and status_id is equal to 50 using the updated_at column to order in descending order.</li><li>http://localhost<strong>/gvos/&lt;Module&gt;/&lt;Method&gt;</strong> returns the result of executing the method for the module. For example, http://localhost/gvos/GvDevice/this_device returns the result of GvDevice.this_device.</li></ul><h3 id="GVOS/JAMSServerIntegration-Nginx">Nginx</h3><p>An Nginx server should be configured to listen on port 80 and forward all requests with the '/gvos/' path to GvWeb.</p><blockquote><p>server {<br/>  listen 80;<br/>  server_name localhost;<br/>  autoindex on;<br/>  access_log /var/log/nginx/localhost.access.log;</p><p>  error_page 500 502 503 504 /50x.html;<br/>  location = /50x.html {<br/>    root share/nginx/html;<br/>  }<br/>  location /gvos/ { <br/>    include proxy_params; <br/>    proxy_pass <span class="nolink">http://localhost:5001</span>; <br/>  }</p><p>}</p></blockquote><h2 id="GVOS/JAMSServerIntegration-Replicator">Replicator</h2><p>The GVOS replicator serves updates to clients over HTTP. The clients connect to the server utilizing the REST API on port 80. When running alongside JAMS, the GVOS server uses the replicas_oas table instead of the replicas table to load the replicas configurations. The JAMS schema map is used to map the data from the Postgres database to the GVOS schema and then it is replicated to the equipment. The JAMS schema mapping is also used when equipment upload data to the server to map it from the GVOS schema to the Jigsaw schema before it is stored in the database.</p></div>
+</div>
+</div>
+</div></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:18</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

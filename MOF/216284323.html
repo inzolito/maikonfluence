@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : Get Started (LOADER)</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="TDoc---Loader_216283268.html">TDoc - Loader</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : Get Started (LOADER)
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified on feb 12, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><br/></p><h3 id="GetStarted(LOADER)-Flic:">Flic:</h3><ul><li>Loader allows operators to log Time Allocations by means of a clicker.<ul><li>Specifically Flic (<a class="external-link" href="https://flic.io/shop/flic-1pack" rel="nofollow">https://flic.io/shop/flic-1pack</a>) <ul><li>Unsure if the new Flic-2 buttons are compatible</li></ul></li><li>Loader interacts with the button by means of the Flic SDK (<a class="external-link" href="https://partners.flic.io/partners/developers" rel="nofollow">https://partners.flic.io/partners/developers</a>)<ul><li>Currently Loader uses cordova-plugin-flic (v 0.5.0) to interface with the SDK</li></ul></li><li>Prior to installing Loader, the Flic App needs to be installed on the device (<a class="external-link" href="https://play.google.com/store/apps/details?id=io.flic.app" rel="nofollow">https://play.google.com/store/apps/details?id=io.flic.app</a>)<ul><li>The app will still run without the button, the user can tap on the screen instead of the button.</li><li>But the flic app needs to be installed to get access to the sdk.</li></ul></li></ul></li></ul><p><br/></p><p><br/></p><h3 id="GetStarted(LOADER)-SupportedDataBase:">Supported DataBase:</h3><ul><li>BHP Leinster Underground</li></ul><p><br/></p><p><br/></p><h3 id="GetStarted(LOADER)-ModuleConfigs">Module Configs</h3><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th></tr><tr><td class="confluenceTd">HaulTimeLoadedReasonCodes</td></tr><tr><td class="confluenceTd">HaulTimeDumpedReasonCodes</td></tr><tr><td class="confluenceTd">HaulStartHaulingReasonCodes</td></tr><tr><td class="confluenceTd">HaulQuery</td></tr><tr><td class="confluenceTd">HaulWriteBack</td></tr></tbody></table></div><p>Loader uses similar module config to Haul.</p><p><br/></p><h3 id="GetStarted(LOADER)-DataMapping">DataMapping</h3><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216284323/216284325.png" data-image-src="attachments/216284323/216284325.png" data-unresolved-comment-count="0" data-linked-resource-id="216284325" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-2-6_13-54-17.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216284323" data-linked-resource-container-version="5" alt=""></span></p><ul><li>The Ready States are retrieved on the basis of the Reason Codes configured in the database for the selected equipment Type.</li></ul><p><br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216284323/216284326.png" data-image-src="attachments/216284323/216284326.png" data-unresolved-comment-count="0" data-linked-resource-id="216284326" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-2-6_13-56-7.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216284323" data-linked-resource-container-version="5" alt=""></span></p><ul><li>The form (1) is a dynamic form, configured using the writeback query specified in HaulWriteBack module config.<ul><li>it is entered into the Haul Table in the database</li></ul></li><li>2 is a summary of how many buckets have been added by this equipment in the current shift.<br/><ul><li>It increments every time the operator clicks the Flic button or taps the screen</li></ul></li></ul><p><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216284323/216284328.png" data-image-src="attachments/216284323/216284328.png" data-unresolved-comment-count="0" data-linked-resource-id="216284328" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-2-6_14-0-15.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216284323" data-linked-resource-container-version="5" alt=""></span></p><ul><li>The TimeBar at the bottom is configured based on the reason codes available for the given equipment type.<ul><li>Configured from Siliver Light</li></ul></li></ul><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216284323/216284331.png" data-image-src="attachments/216284323/216284331.png" data-unresolved-comment-count="0" data-linked-resource-id="216284331" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-2-6_14-1-14.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216284323" data-linked-resource-container-version="5" alt=""></span></p><ul><li>The form seen is configured using the StagingStateWriteback module config in MiTime.</li></ul>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216284323/216284325.png">image2020-2-6_13-54-17.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216284323/216284326.png">image2020-2-6_13-56-7.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216284323/216284328.png">image2020-2-6_14-0-15.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216284323/216284331.png">image2020-2-6_14-1-14.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate OP Pro : How to read raw data of OEM PLM</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="MineOperate-OP-Pro_224018004.html">MineOperate OP Pro</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate OP Pro : How to read raw data of OEM PLM
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> SOUGY Alfian</span>, last modified on oct 16, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Objective: If you try to find how to read raw data of PLM when you are troubleshooting from the physical layer/interface stage, this page will be your starting point, as it will breakdown the PLM raw data based on PLM II Documents<br/><br/>Link to the parent page: <a href="https://confluence.hexagonmining.com/pages/viewpage.action?pageId=50992821" rel="nofollow">PlmII/PlmIII - Jigsaw OEM Interfaces - Hexagon's Mining division Confluence (hexagonmining.com)</a><br/><br/>PLM is Using Serial RS232 to communicate with others, then we will need setup like this below</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><th scope="col" class="confluenceTh">Serial</th><th scope="col" class="confluenceTh">Hardware flow control</th><th scope="col" class="confluenceTh">Parity</th><th scope="col" class="confluenceTh">Baud rate</th><th scope="col" class="confluenceTh">Stop Bit</th></tr><tr><td class="confluenceTd">RS232</td><td class="confluenceTd">No</td><td class="confluenceTd">No</td><td class="confluenceTd">9600</td><td class="confluenceTd">1 stop bit</td></tr></tbody></table></div><p><br/></p><p>To be successful in receiving and requesting the data, the communication should be like this below<br/><br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/317035391/317035362.png" data-image-src="attachments/317035391/317035362.png" data-unresolved-comment-count="0" data-linked-resource-id="317035362" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2023-10-16_13-20-33.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="317035391" data-linked-resource-container-version="2" alt=""></span></p><p>To get to know the raw data in PLM will have consist of STX,DATA,ETX,BCC</p><ol><li>Leica is requesting data to PLM controller with Real Time Message 'M' '2' command in hex : 0x024d32037e<br/>- STX(message start) = 0x02 (1 byte)<br/>- M2 (in ASCII) = 0x4d32 (2 bytes)<br/>- ETX(message end) = 0x03 (1 byte)<br/>- BCC(checksum) = 0x7e (1 byte unsigned)<br/>The BCC/checksum is the XOR of all bytes from 02 to 03, BCC = 02 ^ 4d then BCC ^= 32 then BCC ^= 03<br/><br/></li><li>PLM will send the ACK but the time it sends is typically at the same time the data is send to Leica, then the data will look like this hex string below<br/>0x02060307<span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj">024d3210020000821002db10028a051800fe0100100300001003035d</span></span><br/>The ACK is = 0x02060307<br/>- STX = 0x02<br/>- Message successfully send = 0x06<br/>- ETX = 0x03<br/>- BCC = 07<br/>The hex string consists of data after ACK 0x<span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj">024d3210020000821002db10028a051800fe0100100300001003035d</span></span><br/>- STX = 0x02<br/>- M2 = 0x4d32<br/>- Data in hex = 0x<span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj">10020000821002db10028a051800fe0100100300001003</span></span><br/>- ETX = 0x03<br/>- BCC/Checksum = 0x5d<br/>We will need to clean the raw data in hex that we got as there should be only 18 bytes long or 20 bytes long with M2 and from the origin example we got 23 bytes<br/>The rule in PLM:<br/>STX=0x02; DLE=0x10; ETX=0x03<br/>If there are STX,DLE or ETX byte in raw data it will be appended with DLE before that byte, example if in data 0x0203 it will be like 0x10021003<br/>Then with data we have there should be like this after cleaning up additional DLE<br/>Final data in hex = 0x<span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj">0200008202db028a051800fe010003000003<br/><br/></span></span></li><li><span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj">After we cleaned up the raw data we can point which data in the raw data based on the bytes position as shown below <br/>for not making confusion i will add M2 to match the table to be have 20 bytes long<br/>Final PLM Raw = 0x4d320200008202db028a051800fe010003000003<br/><br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/317035391/317035383.png" data-image-src="attachments/317035391/317035383.png" data-unresolved-comment-count="0" data-linked-resource-id="317035383" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2023-10-16_13-58-36.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="317035391" data-linked-resource-container-version="2" alt=""></span><br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/317035391/317035384.png" data-image-src="attachments/317035391/317035384.png" data-unresolved-comment-count="0" data-linked-resource-id="317035384" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2023-10-16_13-58-58.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="317035391" data-linked-resource-container-version="2" alt=""></span><br/><br/>As we can see above the byte position in this raw data is matter, it should be easy to point which data you want to extract based on the table above, and it's pretty easy as PLM like the data which has 2 bytes is stored as little endianness then we need to swap the bytes before we convert it to decimal, ok for example the payload is at byte order 13 and 14, the byte at 13 is 0xfe and 14 is 0x01 so it will be 0x01fe in decimal is 510, and also we need to check the truck size at byte 2nd is 0x02, in document is metric ton <em> </em>10 but it should be metric ton 0.1 so the payload is 51.0 ton<br/><br/></span></span></li><li><span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj">Ok we have done elaborating the PLM raw data, After we got the data, leica need to send ACK &amp; quit message in hex to PLM<br/>ACK = 0x02060307, 0x06 means successfully read, or NACK = 0x02150314, 0x15 means not successfully read<br/><br/>Quit message = 0x0251320362<br/>STX = 0x02<br/>Quit message = 0x5132<br/>ETX = 0x03<br/>BCC = 0x62 <br/><br/></span></span></li><li><span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj">After PLM got the quit message from Leica, PLM will send ACK back to leica<br/>ACK = 0x02060307</span></span></li></ol><p><span><span class="ui-provider ef brp bic ckd ckf ckg ckh cki ckj ckk ckl ckm ckn cko ckp ckq ckr cks ckt cku ckv ckw ckx cky ckz cla clb clc cld cle clf clg clh cli clj"><br/>And it will be repeated over the time, based on what i check if the PLM respond M2 request the next request from leica will be every 2 seconds and if not will be every 5 seconds </span></span></p><p><br/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/317035391/317035362.png">image-2023-10-16_13-20-33.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/317035391/317035378.png">image-2023-10-16_13-55-59.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/317035391/317035380.png">image-2023-10-16_13-56-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/317035391/317035383.png">image-2023-10-16_13-58-36.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/317035391/317035384.png">image-2023-10-16_13-58-58.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:19</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

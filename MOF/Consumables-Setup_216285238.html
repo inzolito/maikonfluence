@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : Consumables Setup</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="TDoc---Drill_216270658.html">TDoc - Drill</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : Consumables Setup
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> LEADER Alan</span>, last modified by <span class='editor'> Usuario desconocido (kins)</span> on mar 18, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Documenting what is needed to get consumables running on a new setup</p><p>Consumables are somewhat specialized for drill...</p><h2 id="ConsumablesSetup-RequiredModuleConfiguration">Required Module Configuration</h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Module</th><th class="confluenceTh">Key</th><th class="confluenceTh">Value</th><th colspan="1" class="confluenceTh">Notes</th></tr><tr><td class="confluenceTd">MiDrill</td><td class="confluenceTd">EnableConsumables</td><td class="confluenceTd">True</td><td colspan="1" class="confluenceTd">The word True, case-sensitive, title case is required. Do <span style="color: rgb(255,0,0);"><strong>not</strong> </span>use Yes or 1.</td></tr><tr><td colspan="1" class="confluenceTd">DrillAndBlast</td><td colspan="1" class="confluenceTd">MaximumDrillConsumableValuesAge</td><td colspan="1" class="confluenceTd">5</td><td colspan="1" class="confluenceTd">The maximum number of Consumables to display at a time</td></tr></tbody></table></div><h2 id="ConsumablesSetup-DataRequirements">Data Requirements</h2><p>Complete the Fleet Configuration and Time Allocation for Drill prior to adding the required Consumables data.</p><div class="table-wrap"><table class="wrapped fixed-table confluenceTable"><colgroup><col style="width: 285.0px;"/><col style="width: 213.0px;"/><col style="width: 394.0px;"/></colgroup><tbody><tr><th class="confluenceTh">ME Data Management Query</th><th class="confluenceTh">SQL Tables</th><th class="confluenceTh">Notes</th></tr><tr><td class="confluenceTd"><p>ConTyp - Consumable Type</p></td><td class="confluenceTd">dbo.ConsumableType</td><td class="confluenceTd"><p>Groups parts and materials</p><p>Examples: Fuel, Water, Drill Bit, Hammer, Explosive</p></td></tr><tr><td class="confluenceTd"><span>ConGro - Consumable Group</span></td><td class="confluenceTd">dbo.ConsumableGroup</td><td class="confluenceTd"><p>Groups the parts and materials to match the Operator's role</p><p>Examples: Drill, Blast, General</p></td></tr><tr><td class="confluenceTd"><span>Consumable - Consumable</span></td><td class="confluenceTd"><p><span>dbo.Consumable</span></p><ul><li><span>dbo.ConsumableGroup</span></li><li><span>dbo.ConsumableType</span></li></ul></td><td class="confluenceTd"><p>The details of the parts and materials</p><p>Never delete an item, instead set Active to No. Deleting data prevents data from appearing in report.</p></td></tr><tr><td colspan="1" class="confluenceTd">ReaEquTyp - Reason Equipment Type</td><td colspan="1" class="confluenceTd"><p>dbo.ReasonEquipmentType</p><ul><li>dbo.Reason</li><li>dbo.Equipment</li><li>dbo.Consumable</li></ul></td><td colspan="1" class="confluenceTd"><p>What the Operator is doing to trigger the Consumables options. Matches the Operator's Equipment Type to the Consumables.</p><p>Examples:</p><p>Delay - Refuel offers Consumable - Fuel <br/>(General to all Groups)</p><p>Delay - Bit Change offers Consumables with Bits (specific to the Equipment Type)</p></td></tr></tbody></table></div><h2 id="ConsumablesSetup-DeveloperNotes">Developer Notes</h2><p>EquipmentTypeReason joined with consumable where equipmentType.code is in equipment codes AND consumable exists AND consumable is active AND equipment type reason AND equipment Reason Data entry style</p><p>Drill Change Outs</p><p>Drill Change out reasons</p><p>Data Entry Style ( current options ): Standard, Consumption, ChangeOut, NULL?</p><p>I think only consumption and changeout apply here, others are for other functionality.</p><p><br/></p><p><br/></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

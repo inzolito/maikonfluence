@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QueryCommandItem Service="" Product="MiiNT" Table="HolSta" Qmode="Summary" debug="false" resolve="true">
+  <Filters top="0" topPerc="false" distinct="false" xmlns="Query">
+    <FilterItem code="/Active" op="Equal" name="Active" type="None" xmlns="Query.Filter">
+      <Filter val="Y" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+  </Filters>
+  <Outputs xmlns="Query">
+    <OutputItem code="/Code" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="Code" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/Visible" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="Visible" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/Active" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="Active" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+  </Outputs>
+</QueryCommandItem>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate OP Pro : Truck cycling</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="MineOperate-OP-Pro_224018004.html">MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Product-Information_224018007.html">Product Information</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Onboard-Equipment-Panels_298713434.html">Onboard Equipment Panels</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Truck_280987119.html">Truck</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate OP Pro : Truck cycling
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> HOLDEN Anthony</span> on oct 11, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                        
+    
+
+ 
+<div class="sp-macro-verticalNav" >
+		<div class="aui-page-panel-nav sp-macro-verticalNav-items-panel">
+	    <nav class="aui-navgroup aui-navgroup-vertical sp-verticalnav-header blue">
+	        <div class="aui-navgroup-inner">
+	         	<ul class="aui-nav blue  ">
+	         					    				    	 					    	 	<li  class="  active-tab aui-nav-selected   blue">
+				    	 		<a class="sp-nav-tabs-link selected-fip-icon-block" href="#1216219555">
+								 	<span class="sp-nav-tabs-icon-container">
+									 	<i class="custom-spectrum-button fip-icon-block"></i>
+									</span>
+									Configurations
+								</a>
+				    	 	</li>
+				    	 				    	 				        			    	 					    	 	<li  class="   blue">
+				    	 		<a class="sp-nav-tabs-link selected-fip-icon-block" href="#1023047616">
+								 	<span class="sp-nav-tabs-icon-container">
+									 	<i class="custom-spectrum-button fip-icon-block"></i>
+									</span>
+									Auto Haul Matrix
+								</a>
+				    	 	</li>
+				    	 				    	 				        	            </ul>
+	        </div>
+	    </nav>
+
+	</div>
+ 
+    <section class="aui-page-panel-content sp-verticalNav-content   blue">
+        <div class="aui-nav-selected sp-nav-item" data-title="spvnav280987129Configurations" id="1216219555">
+	
+		
+	<div data-title="Configurationslinull" icon = "fip-icon-block" data-header ="null" id="1216219555">
+		<p><a href="https://confluence.hexagonmining.com/display/MINH/Automatic+Haul+Cycle+Configurations">Automatic Haul Cycle Configurations</a></p><p>Automatic Haul Cycle Configurations<p><strong>See <a href="https://confluence.hexagonmining.com/display/MINH/Auto+Haul+Matrix">Auto Haul Matrix</a> for specific sensor values</strong></p><p><strong>Intro</strong><br/>The purpose of this page is to outline how OEM interfaces are used to automatically change the activity of trucks during their haul cycle.<br/>It has been noted that regional offices use different methods to do this that may not be optimal as the standard setups have been designed to be used out of the box.</p><p><br/></p><p><strong>Overview</strong> <br/>OP Pro uses sensor types to designate sensors that will be used for integration purposes, whether that is a functional action or simply a data store.<br/>In case of Asset Health being integrated with OP Pro, there are base sensor types also called &quot;known sensors&quot; that share information to OP Pro by the same rules above.<br/>In OP Pro there is capability to use only GPS for all activity changes. This will work; however, it is not as accurate as the OEM interface. In OP Pro both methods can be enabled. It will use the OEM interface first and if that does not trigger the activity it will use GPS.</p><p><br/>There is also a configuration to set GPS distance to 0 for activities in order to force activity changes from the OEM sensor by itself. This however does not seem to be used as the redundancy of the two options together makes for a smoother transition. If the interface needs maintenance and is acting up the machine should still reliably cycle by GPS.</p><p><br/></p><p><strong>Note on gear mapping</strong><br/>It is worth noting that there is a configuration in OP Pro for VIMS called &quot;dynamic_gear_numbers&quot; which can be used to override the default values map for gear_position sensor for the interface. <br/>A values map is the raw value we receive from the interface vs the actual gear value. A default values map is already built into the interface configuration. If issues are seen with it, you can have an operator cycle gears in a specified order, read the sensor value, and correct the mapping or have site contact the OEM dealer for an updated values map for the machines running and add the configuration to the interface device in OP Pro.</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">module</span></p></td><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">application</span></p></td><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">attribute</span></p></td><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">value</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">vims</span></p></td><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">JAMS</span></p></td><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">dynamic_gear_numbers</span></p></td><td class="confluenceTd"><p><span style="color: rgb(36,36,36);">33=R;64=N;129=1;145=1;146=2;147=3;148=4;149=5;150=6;255=R;</span><span style="color: rgb(36,36,36);">8192=N;16385=1;16386=2;16387=3;16388=4;16389=5;</span> <span style="color: rgb(36,36,36);">16390=D;16391=D;16895=1;16896=2;16897=3;16898=4;</span> <span style="color: rgb(36,36,36);">16899=5;16900=6;16901=D;16902=D;16903=D</span></p></td></tr></tbody></table></div><p><br/></p><p><strong>Activity Changes</strong><br/>From the User Reference Manual, we see the following matrix:<br/><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" width="600" src="attachments/274412886/274413001.png" data-image-src="attachments/274412886/274413001.png" data-unresolved-comment-count="0" data-linked-resource-id="274413001" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2022-8-26_14-16-21.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="274412886" data-linked-resource-container-version="18" alt=""></span></p><p><br/></p><p>The primary Activities are shown above:<br/><strong>Traveling &gt; Waiting at Shovel &gt; Spotting &gt; Loading &gt; Hauling &gt; Queuing at Dump &gt; Backing &gt; Tipping</strong><br/>Several of the Activities can be triggered by OEM interfaces or other input, outlined below the sensor type being used for activity transitions, by each interface.</p><p><br/></p><p><strong>Caterpillar Trucks - VIMS Std | VIMS3G</strong></p><ul><li>payload_status<ul><li>Traveling, Loading, Hauling, Tipping</li></ul></li><li>gear_position<ul><li>Spotting, Backing</li></ul></li><li>GPS<ul><li>Waiting at Shovel, Queuing at Dump</li></ul></li></ul><p>The VIMS interface uses a sensor called Payload Status/OHT Payload Status which offers different values for the haul state. We are using four of the payload state values to change the activity onboard. The gear sensor is also used for two activity changes of the main activity changes. Finally, the last two activities use GPS to determine when to change the activity.</p><p><br/></p><p><strong>Komatsu Trucks - (PLM2/3 | PLMIV) + VHMS (Komtrax Plus)</strong></p><ul><li>payload_status<ul><li>(Traveling, Loading, Hauling, Tipping)<strong>(PLMIV) | </strong> (Loading, Tipping) <strong>(PLM2/3)</strong></li></ul></li><li>gear_position <strong>(VHMS - not implemented for activity changes)</strong><ul><li>Spotting, Backing</li></ul></li><li>Tray Down <strong>(PLM2/3)</strong><ul><li>Traveling</li></ul></li><li>Final Payload <strong>(PLM2/3)</strong><ul><li>Hauling</li></ul></li><li> GPS<ul><li>Waiting at Shovel, Queuing at Dump</li></ul></li></ul><p>The PLMIV interface we are able to utilize Payload Status for four of the main activities. There isn't access to the gear position sensor in PLM, but it's counterpart VHMS (Komtrax Plus) includes it for potential use in Spotting and Backing activities, code has not been written to handle this.  In OP Pro PLM2/3 we use vehicle_status instead of payload_status in the code for the sensor type.  PLM2/3 use different sensors for Traveling and Hauling as shown above.</p><p><br/></p><p><strong>Hitachi Trucks - Hitachi5 | Hitachi7 (Note:  In recent tests of Hitachi trucks payload_status data received is not consistent and is removed in default config sheets for AH)</strong></p><ul><li>payload_status<ul><li>Traveling, Loading, Hauling, Tipping</li></ul></li><li>gear_position<ul><li>Spotting, Backing</li></ul></li><li>GPS<ul><li>Waiting at Shovel, Queuing at Dump</li></ul></li></ul><p>Hitachi interfaces have payload_status and gear_position sensors as well. There was some work done recently for Hitachi5 for HTM trucks that needs to be updated. Hitachi7 there is a known issue with gear sensor being sent as a string when deployed in Asset Health.</p><p><br/></p><p><strong>Liebherr Trucks - LiebherrCan/LiebherrPayload</strong></p><ul><li>LiebherrPayload sends events that trigger auto activity changes <strong>(Not confirmed to be used/working yet)</strong><ul><li>Traveling, Loading, Hauling, Tipping (does not use sensor_type/known_sensor)</li><li>GPS for Spotting, Backing, Waiting at Shovel, Queuing at Dump</li></ul></li></ul><p><br/></p><p><strong>Belaz Trucks</strong> <strong>- Belaz</strong></p><ul><li>gear_position<ul><li>Spotting, Backing</li></ul></li><li>dipper<ul><li>Loading</li></ul></li><li>body_lever<ul><li>Tipping</li></ul></li><li>GPS<ul><li>Traveling, Waiting, Hauling, Queued</li></ul></li></ul><p>Belaz interface does not provide a payload sensor to trigger hauling. Once hauling is detected through GPS, the last dipper value is set as payload.</p></p>
+	</div>
+</div>
+<div class="sp-nav-item" data-title="spvnav280987129Auto--Haul--Matrix" id="1023047616">
+	
+		
+	<div data-title="Auto--Haul--Matrixlinull" icon = "fip-icon-block" data-header ="null" id="1023047616">
+		<p><a href="https://confluence.hexagonmining.com/display/MINH/Auto+Haul+Matrix">Auto Haul Matrix</a></p><p>Note GPS activity distances listed are a starting point, but may differ from site to site for optimal setting.  LiebherrPayload interface not verified to be used as the code suggests.  VHMS has gear_position functionality not implemented currently.<p>For gear_position sensor type, there can be different raw integer values that correspond to R (reverse) in a values map.  Gear position values used to activity changes are hardcoded in JInterface files for associated interfaces.</p><p><br/></p><p>Note that when using JHealthIntegration conversions are made for payload_status to general values:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><td class="confluenceTd">JHealthIntegration payload_status sensor</td><td class="confluenceTd">Value</td></tr><tr><td class="confluenceTd">PayloadStatus_Traveling </td><td class="confluenceTd">1</td></tr><tr><td class="confluenceTd">PayloadStatus_Loading</td><td class="confluenceTd">2</td></tr><tr><td class="confluenceTd">PayloadStatus_Hauling</td><td class="confluenceTd">3</td></tr><tr><td class="confluenceTd">PayloadStatus_Tipping</td><td class="confluenceTd">4</td></tr></tbody></table></div><p>Example:  VIMS interface sends payload_status = 6 for Traveling activity, this would show as payload_status=1 for units loaded with Asset Health.  Functionally the business logic is the same.</p><p><br/></p><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 93.6957%;"><colgroup><col style="width: 7.60392%;"/><col style="width: 23.9734%;"/><col style="width: 8.18431%;"/><col style="width: 8.41646%;"/><col style="width: 7.60392%;"/><col style="width: 7.60392%;"/><col style="width: 7.13962%;"/><col style="width: 7.60392%;"/><col style="width: 7.72%;"/><col style="width: 6.95009%;"/><col style="width: 7.20038%;"/></colgroup><tbody><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd">Caterpillar</td><td colspan="3" class="confluenceTd">Komatsu</td><td colspan="2" class="confluenceTd">Hitachi <strong>(note:  payload_status is currently not consistent coming from Hitachi trucks, only enable to test)</strong></td><td class="confluenceTd">Liebherr</td><td class="confluenceTd">Belaz</td></tr><tr><td class="confluenceTd">Activity</td><td class="confluenceTd">Description</td><td class="confluenceTd"><br/></td><td class="confluenceTd">VIMS Std + VIMS3G</td><td class="confluenceTd">PLMII PLMIII</td><td class="confluenceTd">PLMIV</td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">VHMS</td><td class="confluenceTd">Hitachi5</td><td class="confluenceTd">Hitachi7</td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">LiebherrPayload</td><td class="confluenceTd">Belaz</td></tr><tr><td colspan="2" class="confluenceTd">OP Pro Technical Reference</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/JOI/Vims#Vims-Installation" rel="nofollow">Vims</a></td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/pages/viewpage.action?pageId=50992821" rel="nofollow">PLMII PLMIII</a></td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/JOI/PLMIV" rel="nofollow">PLM IV</a></td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%"><a href="https://confluence.hexagonmining.com/display/JOI/Vhms" rel="nofollow" title="">VHMS</a></td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/JOI/Hitachi+J1939" rel="nofollow">Hitachi5</a></td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/JOI/Hitachi+J1939" rel="nofollow">Hitachi7</a></td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%"><a href="https://confluence.hexagonmining.com/display/JOI/Liebherr+Payload" rel="nofollow" title="">LiebherrPayload</a></td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/JOI/Belaz" rel="nofollow">Belaz</a></td></tr><tr><td rowspan="2" class="confluenceTd">Travelling</td><td rowspan="2" class="confluenceTd">Truck is moving empty after dumping.</td><td rowspan="2" class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Travelling" rel="nofollow">Travelling</a></td><td class="confluenceTd">payload_status=6</td><td class="confluenceTd">Tray Down (if trayup_tipping config enabled</td><td class="confluenceTd">payload_status=8</td><td class="confluenceTd"><br/></td><td class="confluenceTd">payload_status=7</td><td class="confluenceTd">payload_status=E</td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">LME_EMPTY?</td><td class="confluenceTd"><br/></td></tr><tr><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. moves departure_distance ~ 50</td></tr><tr><td class="confluenceTd">Waiting at shovel</td><td class="confluenceTd">Truck is waiting to be loaded near the shovel.</td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Waiting" rel="nofollow">Waiting</a></td><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. Stopped within waiting_distance ~ 100</td></tr><tr><td rowspan="2" class="confluenceTd">Spotting</td><td rowspan="2" class="confluenceTd">Truck is positioning under the shovel.</td><td rowspan="2" class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Spotting" rel="nofollow">Spotting</a></td><td class="confluenceTd">gear_position=R</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">gear_position=R?</td><td class="confluenceTd">gear_position=R</td><td class="confluenceTd">gear_position=R</td><td class="confluenceTd"><br/></td><td class="confluenceTd">gear_position=R</td></tr><tr><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. Heading -120 and within spotting_distance ~ 40</td></tr><tr><td rowspan="2" class="confluenceTd">Loading</td><td rowspan="2" class="confluenceTd">Truck is being loaded by the shovel.</td><td rowspan="2" class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Loading" rel="nofollow">Loading</a></td><td class="confluenceTd">payload_status=9</td><td class="confluenceTd">vehicle_status/payload_status=3</td><td class="confluenceTd">payload_status=1</td><td class="confluenceTd"><br/></td><td class="confluenceTd">payload_status=1</td><td class="confluenceTd">payload_status=B</td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">LME_DIPPER?</td><td class="confluenceTd">dipper</td></tr><tr><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. loading_distance ~ 20</td></tr><tr><td rowspan="2" class="confluenceTd">Hauling</td><td rowspan="2" class="confluenceTd">Truck is travelling loaded after being assigned to a dump.</td><td rowspan="2" class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Hauling" rel="nofollow">Hauling</a></td><td class="confluenceTd">payload_status=8</td><td class="confluenceTd">Final Payload</td><td class="confluenceTd">payload_status=9</td><td class="confluenceTd"><br/></td><td class="confluenceTd">payload_status=4</td><td class="confluenceTd">payload_status=L</td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">LME_TONS?</td><td class="confluenceTd"><br/></td></tr><tr><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. departure_distance ~ 50</td></tr><tr><td class="confluenceTd">Queuing at dump</td><td class="confluenceTd">Truck is queued and waiting to tip at the dump.</td><td class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Queued+at+Dump" rel="nofollow">Queued+at+Dump</a></td><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. stopped within dump boundary</td></tr><tr><td rowspan="2" class="confluenceTd">Backing</td><td rowspan="2" class="confluenceTd">Truck is positioning ready to dump.</td><td rowspan="2" class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Backing" rel="nofollow">Backing</a></td><td class="confluenceTd">gear_position=R</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">gear_position=R?</td><td class="confluenceTd">gear_position=R</td><td class="confluenceTd">gear_position=R</td><td class="confluenceTd"><br/></td><td class="confluenceTd">gear_position=R</td></tr><tr><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. Heading -120 </td></tr><tr><td rowspan="2" class="confluenceTd">Tipping</td><td rowspan="2" class="confluenceTd">Truck is emptying its load.</td><td rowspan="2" class="confluenceTd"><a href="https://confluence.hexagonmining.com/display/CEA/Tipping" rel="nofollow">Tipping</a></td><td class="confluenceTd">payload_status=4</td><td class="confluenceTd">Tray Up (if trayup_tipping config enabled) or vehicle_status/payload_status=6</td><td class="confluenceTd">payload_status=7</td><td class="confluenceTd"><br/></td><td class="confluenceTd">payload_status=5</td><td class="confluenceTd">payload_status=D</td><td class="highlight-#ff7452 confluenceTd" data-highlight-colour="#ff7452" title="Background color : Medium red 85%">LME_DUMP?</td><td class="confluenceTd">body_lever</td></tr><tr><td colspan="8" style="text-align: center;" class="confluenceTd">GPS. Stopped within tipping_distance ~ 50</td></tr></tbody></table></div></p>
+	</div>
+</div>
+
+    </section>
+</div>
+<p><br/></p><p><br/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/280987129/377556936.png">image-2025-1-31_9-24-0.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/280987129/377556937.png">image-2025-1-31_9-28-9.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/280987129/377556938.xlsx">truck_cycle_matrix.xlsx</a> (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-377556939"></a>
+                                    <font class="smallfont"><p>RU version</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" height="150" src="attachments/280987129/377556937.png" data-image-src="attachments/280987129/377556937.png" data-unresolved-comment-count="0" data-linked-resource-id="377556937" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2025-1-31_9-28-9.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="280987129" data-linked-resource-container-version="1" alt=""></span></p><p><a href="attachments/280987129/377556938.xlsx" data-linked-resource-id="377556938" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="truck_cycle_matrix.xlsx" data-nice-type="Excel Spreadsheet" data-linked-resource-content-type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" data-linked-resource-container-id="280987129" data-linked-resource-container-version="1">truck_cycle_matrix.xlsx</a></p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by kyar at ene 30, 2025 21:28
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:18</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

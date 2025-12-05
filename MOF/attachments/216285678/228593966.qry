@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QueryCommandItem Service="002" Product="MiiNT" Table="HolDet" Qmode="Summary" debug="false" resolve="true">
+  <Filters top="0" topPerc="false" distinct="false" xmlns="Query">
+    <FilterItem code="/Code" op="All" name="LocationCode" type="None" xmlns="Query.Filter">
+      <Filter val="" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/HolPar/HolTyp" op="NotEqual" name="HolTyp" type="None" xmlns="Query.Filter">
+      <Filter val="REDRILL" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="[_PickList_N:_]" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/HolPo/CooSys" op="Between" name="HolCooSys" type="None" xmlns="Query.Filter">
+      <Filter val="WGS84" />
+      <Filter val="WGS84" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/DriPro/DriDep" op="Greater" name="DriDriDep" type="None" xmlns="Query.Filter">
+      <Filter val="0" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/HolPo/DesColX" op="NotEqual" name="HolDesColX" type="None" xmlns="Query.Filter">
+      <Filter val="0" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/HolPo/DesColY" op="NotEqual" name="HolDesColY" type="None" xmlns="Query.Filter">
+      <Filter val="0" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+  </Filters>
+  <Outputs xmlns="Query">
+    <OutputItem code="/Id" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/Location/Code" dataType="None" func="None" showTotal="Auto" hidden="false" sort="1" name="" xmlns="Query.Output">
+      <attr cap="Location Code" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolNum" dataType="None" func="None" showTotal="Auto" hidden="false" sort="2" name="" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/HolCreDatTim" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Hole Created Date Time" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/HolSta/Visible" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="HoleVisible" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/HolStaCod" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Hole Status" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/GroCla" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Ground Classification" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="E2937" dataType="String" func="Expression" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="StyleCode" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+      <expression>
+        <buffer xmlns="Query.EvalExpress">iif({%HolNeeRed}=TRUE,"REDRILL",iif({/DriPro/DriDep:Max}&gt;0,"DRILLED",{/HolPar/HolTyp}))</buffer>
+      </expression>
+    </OutputItem>
+    <OutputItem code="E2826" dataType="String" func="Expression" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Label" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+      <expression>
+        <buffer xmlns="Query.EvalExpress">{/HolNum} + ", " + {/HolPar/DesDep} + "m"</buffer>
+      </expression>
+    </OutputItem>
+    <OutputItem code="/HolPar/HolTyp" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Hole Type" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/DesDep" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Depth" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/DipDep" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Actual Depth" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/DesBur" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Burden" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/DesSpa" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Spacing" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/DesDia" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Diameter" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/ActDia" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Actual Diameter" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/DesSub" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Subdrill" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPo/DesColX" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Collar X" hdr="" scale="0" nulls="false" filterLink="" calc="" format="decP=8|decS=.|thoS=," other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPo/DesColY" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Collar Y" hdr="" scale="0" nulls="false" filterLink="" calc="" format="decP=8|decS=.|thoS=," other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPo/DesColZ" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Collar Z" hdr="" scale="0" nulls="false" filterLink="" calc="" format="decP=8|decS=.|thoS=," other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPo/DesAzi" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Heading" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPo/DesDip" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Design Angle" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/DriPro/Date" dataType="None" func="Maximum" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Drilled Shift Date" hdr="" scale="0" nulls="false" filterLink="DriDriDep" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/DriPro/DriDatTim" dataType="None" func="Maximum" showTotal="Auto" hidden="false" sort="0" name="DriDat" xmlns="Query.Output">
+      <attr cap="Drilled Date" hdr="" scale="0" nulls="false" filterLink="DriDriDep" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/DriPro/DriDep" dataType="None" func="Maximum" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Drilled Depth" hdr="" scale="0" nulls="false" filterLink="DriDriDep" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPar/ParHolPar/Id" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="Parent Hole Id" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/HolPo/CooSys" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="" xmlns="Query.Output">
+      <attr cap="CoordinatesSystem" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+  </Outputs>
+</QueryCommandItem>

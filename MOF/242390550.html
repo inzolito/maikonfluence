@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : Key Concepts:  Foundation Apps</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : Key Concepts:  Foundation Apps
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified on jul 05, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="confluence-information-macro confluence-information-macro-information"><p class="title conf-macro-render">WIP - Still under construction</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This page is still under construction</p></div></div><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Description</th><td class="confluenceTd">Basic description of the architecture and key concepts for the Foundation Apps</td></tr><tr><th colspan="1" class="confluenceTh">Reviewer</th><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p><a class="confluence-userlink user-mention" data-username="CRSA" href="https://confluence.hexagonmining.com/display/~CRSA" data-linked-resource-id="152869493" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">Usuario desconocido (crsa)</a></p></div></td></tr></tbody></table></div><p><br/></p><p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1764959163557 {padding: 0px;}
+div.rbtoc1764959163557 ul {margin-left: 0px;}
+div.rbtoc1764959163557 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1764959163557'>
+<ul class='toc-indentation'>
+<li><a href='#KeyConcepts:FoundationApps-Overview'>Overview</a></li>
+<li><a href='#KeyConcepts:FoundationApps-Initialisation'>Initialisation</a></li>
+<li><a href='#KeyConcepts:FoundationApps-References'>References</a></li>
+</ul>
+</div></p><h1 id="KeyConcepts:FoundationApps-Overview">Overview</h1><p>All the Foundation Apps use <a class="external-link" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules" rel="nofollow">git submodules</a> to manage the code base. In general all apps comprise of two main submodules , i.e <a class="external-link" href="https://bitbucket.org/miplandev/miapp/src/develop/" rel="nofollow">MiApp</a> and <a class="external-link" href="https://bitbucket.org/miplandev/mitime/src/develop/" rel="nofollow">MiTime</a>. Each of these modules serve as a library and provide a mechanism to consume functionality that is shared across all the apps.</p><ul><li>MiApp: Core of all the foundation apps<ul><li>Provides common views and JQuery widgets used across the apps.</li><li>Provides utilities and services that allow the apps to variety of stuff, for example , make network requests, persist data to a local Sqlite storage, authenticate etc.</li></ul></li><li>MiTime: Is an app by itself and also serves as a library to other Foundation Apps.<ul><li>Provides UI Widgets , utilities and services that aid in Fleet Management.</li></ul></li></ul><p>All the views in the Apps follow an <a class="external-link" href="https://medium.com/mindorks/introduction-to-mvvm-836b1f3b7f61" rel="nofollow">MVVM</a> pattern and are built using  <a class="external-link" href="https://www.telerik.com/support/kendo-ui" rel="nofollow">KendoUI</a>. To build the application for an android device, <a class="external-link" href="https://cordova.apache.org/docs/en/9.x/" rel="nofollow">Cordova</a> is used. Latest versions of the apps use Cordova 9, which allows the apps to work in Android 7,8,9 and 10.</p><p><br/></p><p><br/></p><h1 id="KeyConcepts:FoundationApps-Initialisation">Initialisation</h1><p>When one of the apps is installed for the first time on any tablet, it defaults to a settings view, which allows the administrator to enter key information required by the app to do its first initialisation successfully.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242390550/242390549.png" data-image-src="attachments/242390550/242390549.png" data-unresolved-comment-count="0" data-linked-resource-id="242390549" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-7-1_14-31-34.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242390550" data-linked-resource-container-version="5" alt=""></span></p><p>It requires two key pieces of information, namely the URL pointing to the location where MineEnterprise has been installed and a set of credentials it can use to login successfully. Once connected successfully it downloads three types of configuration.</p><ul><li><strong>Module Configs</strong>: These are configuration, that can be used to enable/disable certain functionality for the apps.<ul><li>Each configuration is scoped. </li></ul></li><li><strong>WritebackQueries</strong>: These queries provide enough metadata to the apps to enable it dynamically build UI's for collecting data.</li><li><strong>Report Queries: </strong>These provide data to the apps to power features such as autocomplete, lookups etc.</li></ul><p>Once it has done this initial download of the data, the apps persist it locally to a Sqlite database. This enables the apps to boot up offline , without a network connection</p><p><br/></p><h1 id="KeyConcepts:FoundationApps-References">References</h1><ul><li><a class="external-link" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules" rel="nofollow">https://git-scm.com/book/en/v2/Git-Tools-Submodules</a></li><li><a class="external-link" href="https://medium.com/mindorks/introduction-to-mvvm-836b1f3b7f61" rel="nofollow">https://medium.com/mindorks/introduction-to-mvvm-836b1f3b7f61</a></li><li><a class="external-link" href="https://www.telerik.com/support/kendo-ui" rel="nofollow">https://www.telerik.com/support/kendo-ui</a></li></ul>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242390550/242390549.png">image2021-7-1_14-31-34.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

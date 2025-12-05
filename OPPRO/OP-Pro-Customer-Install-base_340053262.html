@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate OP Pro : OP Pro Customer Install base</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="MineOperate-OP-Pro_224018004.html">MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Product-Information_224018007.html">Product Information</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate OP Pro : OP Pro Customer Install base
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> GEORGE Nathan</span> on may 16, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>    
+    
+
+ 
+<div class="sp-macro-tabs">
+<div class="aui-tabs vertical-tabs">
+	    	    <ul class="tabs-menu">
+				 		        	<li class="menu-item  blue  active-tab ">
+	           	 		<!-- selected-fip-icon-block -->
+						<a class="sp-nav-tabs-link selected-fip-icon-block" href="#1769382200" title= "CCT stuff">
+					    						<span class="sp-nav-tabs-icon-container"><i class="custom-spectrum-button fip-icon-block"></i></span>
+	           	 		<strong>CCT stuff</strong>
+	           	 	</a>
+	       	 	</li>
+	        		        	        	<li class="menu-item  blue ">
+	           	 		<!-- selected-fip-icon-block -->
+						<a class="sp-nav-tabs-link selected-fip-icon-block" href="#1152581526" title= "Sculptors Page">
+					    						<span class="sp-nav-tabs-icon-container"><i class="custom-spectrum-button fip-icon-block"></i></span>
+	           	 		<strong>Sculptors Page</strong>
+	           	 	</a>
+	       	 	</li>
+	        		        	        	<li class="menu-item  blue ">
+	           	 		<!-- selected-fip-icon-block -->
+						<a class="sp-nav-tabs-link selected-fip-icon-block" href="#1539820533" title= "Related">
+					    						<span class="sp-nav-tabs-icon-container"><i class="custom-spectrum-button fip-icon-block"></i></span>
+	           	 		<strong>Related</strong>
+	           	 	</a>
+	       	 	</li>
+	        		        	    </ul>
+	        
+<div class="active-pane tabs-pane" id="1769382200" title="CCT stuff"  icon= "fip-icon-block">
+   <div class='plugin-tabmeta-details'><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Description</th><td class="confluenceTd">Generic comparison database</td></tr><tr><th class="confluenceTh">Version</th><td class="confluenceTd">All</td></tr><tr><th class="confluenceTh">Notes</th><td class="confluenceTd"><div class="content-wrapper"><p>Managed by the OP Pro Product Management team: <a class="confluence-userlink user-mention" data-username="GENA" href="https://confluence.hexagonmining.com/display/~GENA" data-linked-resource-id="202706461" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">GEORGE Nathan</a> , <a class="confluence-userlink user-mention" data-username="SOEY" href="https://confluence.hexagonmining.com/display/~SOEY" data-linked-resource-id="50988285" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">SHE KHUN Oey</a> , <a class="confluence-userlink user-mention" data-username="JNEL" href="https://confluence.hexagonmining.com/display/~JNEL" data-linked-resource-id="208241380" data-linked-resource-version="1" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">JUNIOR Nelson</a> </p></div></td></tr></tbody></table></div></div><p>The Generic Comparison Database is the database in our corporate network that has the configurations of different customer sites in it. It is handy as you can easily see how a specific feature or a view is configured on the other sites.</p><h2 id="OPProCustomerInstallbase-Step-by-stepguide">Step-by-step guide</h2><p>The old database is hosted in Brisbane. The connection string is</p><pre>psql  -h 10.76.9.233 -U developer generic_site_comparisons</pre><p>The database is still available but is not updated anymore. </p><p><br/></p><p>The new database is hosted in Tuscon and managed by PD. The connection string is</p><pre>psql  -h 10.40.176.138 -U developer generic_site_comparisons</pre><p>It was created as a copy of Brisbane's DB and now it updates itself automatically on a weekly basis. To let the script to automatically update the DB, the correct connection details and credentials need to be present in the <em>metadata.site_info</em> table.  </p><p>To add a site you just need to insert values into that table. The example is below. The fields are pretty self-explanatory, except for 'attend' I do not know what is it. </p><p><br/></p><pre>generic_site_comparisons=# start transaction;<br/>START TRANSACTION<br/>generic_site_comparisons=# insert into metadata.site_info (site,region,customer,owner,material,attended,rock_type,host,port,username,password,database) </pre><pre>values('kal','APAC','Aktogay','kazminerals','copper',true,'hard','10.76.8.220',23022,'jigsaw','gTgs00k@l','jmineops_kal');<br/>INSERT 0 1<br/>generic_site_comparisons=# select * from metadata.site_info where owner='kazminerals';<br/> id  | site | region | customer | owner | material | attended | rock_type | last_update_date | host | port | username | password | database <br/>-----+------+--------+-----------+-------------+----------+----------+-----------+---------------------+-------------+-------+----------+-----------+--------------<br/> 52  | kbl | APAC | Bozshakol | kazminerals | copper | t | hard | 2020-04-02 04:42:40 | 10.76.8.220 | 65022 | jigsaw | jigsaw    | jmineops_kbl<br/> 175 | kal | APAC | Aktogay   | kazminerals | copper | t | hard |                     | 10.76.8.220 | 23022 | jigsaw | gTgs00k@l | jmineops_kal<br/>(2 rows)</pre><pre>generic_site_comparisons=# commit;<br/>COMMIT<br/>generic_site_comparisons=#</pre><p><br/></p><p><s>There is a known issue that sometimes for some sites the data in the database does not get updated. Supposedly due to the version difference of pg_dump and pg_restore.  PD is working on that</s></p><p>Fixed by PD, now the automated script can get 9.6 Postgres data. </p><p>See <a href="https://confluence.hexagonmining.com/display/Sculptors/Generic+Comparison+Database">Generic Comparison Database</a></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"></div></div><p><br/></p>
+</div>
+    
+<div class="tabs-pane" id="1152581526" title="Sculptors Page"  icon= "fip-icon-block">
+   <p><a href="https://confluence.hexagonmining.com/display/Sculptors/Generic+Comparison+Database">Sculptors: Generic Comparison Database</a></p><p><span style="color: rgb(255,0,0);">Generic database is now being managed by the OP Pro Product Management team.  Please contact <a class="confluence-userlink user-mention" data-username="GENA" href="https://confluence.hexagonmining.com/display/~GENA" data-linked-resource-id="202706461" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">GEORGE Nathan</a> , <a class="confluence-userlink user-mention" data-username="SOEY" href="https://confluence.hexagonmining.com/display/~SOEY" data-linked-resource-id="50988285" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">SHE KHUN Oey</a> , <a class="confluence-userlink user-mention" data-username="JNEL" href="https://confluence.hexagonmining.com/display/~JNEL" data-linked-resource-id="208241380" data-linked-resource-version="1" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">JUNIOR Nelson</a> for assistance with updating the database.</span><h1 id="OPProCustomerInstallbase-/*&lt;![CDATA[*/div.rbtoc1764958717230{padding:0px;}div.rbtoc1764958717230ul{margin-left:0px;}div.rbtoc1764958717230li{margin-left:0px;padding-left:0px;}/*]]&gt;*/ConnectionDetails#OPProCustomerInstallbase-ConnectionDetailsDatabaseinfor"><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1764958717230 {padding: 0px;}
+div.rbtoc1764958717230 ul {margin-left: 0px;}
+div.rbtoc1764958717230 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1764958717230'>
+<ul class='toc-indentation'>
+<li><a href='#OPProCustomerInstallbase-ConnectionDetails'>Connection Details</a>
+<ul class='toc-indentation'>
+<li><a href='#OPProCustomerInstallbase-Databaseinformation'>Database information</a></li>
+<li><a href='#OPProCustomerInstallbase-Systeminformation'>System information</a></li>
+</ul>
+</li>
+<li><a href='#OPProCustomerInstallbase-Howtoadd/updateacustomerdatabaseintoGeneric'>How to add/update a customer database into Generic</a></li>
+<li><a href='#OPProCustomerInstallbase-InformationcontainedintheGenericdatabase'>Information contained in the Generic database</a></li>
+<li><a href='#OPProCustomerInstallbase-UsingtheGenerictool'>Using the Generic tool</a>
+<ul class='toc-indentation'>
+<li><a href='#OPProCustomerInstallbase-Detailstorunthetool'>Details to run the tool</a>
+<ul class='toc-indentation'>
+<li><a href='#OPProCustomerInstallbase-Connectionpage'>Connection page</a></li>
+</ul>
+</li>
+<li><a href='#OPProCustomerInstallbase-Playingwiththetool'>Playing with the tool</a>
+<ul class='toc-indentation'>
+<li><a href='#OPProCustomerInstallbase-Customermetadata'>Customer metadata</a></li>
+<li><a href='#OPProCustomerInstallbase-Equipmentreport'>Equipment report</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></h1><h1 id="OPProCustomerInstallbase-ConnectionDetails">Connection Details</h1><h2 id="OPProCustomerInstallbase-Databaseinformation">Database information</h2><p><a rel="nofollow">postgres://10.40.176.138/generic_site_comparisons,username=developer,password=&lt;<strong>Password</strong>&gt;</a></p><p><strong>Password </strong>is available in <a class="external-link" href="https://start.1password.com/open/i?a=RMNMUKP2LVEVHHYPJTXEONNR3A&amp;v=3omeou5emk76vmwryjqulqjtla&amp;i=3s45umkcsqukzxo3xcvhp52uum&amp;h=team-hexagon.1password.com" rel="nofollow">1password</a></p><div class="confluence-information-macro confluence-information-macro-warning"><p class="title conf-macro-render">Warning</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This database is hosted on PostgreSQL 10.10 and you might not be able to connect from certain versions of pgAdmin3. If you see errors during connection, upgrade to pgAdmin4 to connect to this database. The steps to install are provided here - <a class="external-link" href="https://wiki.postgresql.org/wiki/Apt" rel="nofollow">https://wiki.postgresql.org/wiki/Apt</a></p></div></div><h2 id="OPProCustomerInstallbase-Systeminformation">System information</h2><p>To <em>ssh </em>to the system where the generic database is hosted, use the connection details below -</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><td class="confluenceTd">Host</td><td class="confluenceTd">10.40.176.138</td></tr><tr><td colspan="1" class="confluenceTd">Username</td><td colspan="1" class="confluenceTd">oppro</td></tr><tr><td class="confluenceTd">Password</td><td class="confluenceTd"><a class="external-link" href="https://start.1password.com/open/i?a=RMNMUKP2LVEVHHYPJTXEONNR3A&amp;v=3omeou5emk76vmwryjqulqjtla&amp;i=3s45umkcsqukzxo3xcvhp52uum&amp;h=team-hexagon.1password.com" rel="nofollow">1password</a></td></tr></tbody></table></div><h1 id="OPProCustomerInstallbase-Howtoadd/updateacustomerdatabaseintoGeneric"><br/>How to add/update a customer database into Generic</h1><p><br/></p><ol><li><p>To include a new customer's data or simply update data of an existing customer, the first step is to connect to site and get a dump of the customer's database. Although there are multiple ways to dump a database, for the purpose of the generic database, the <em>pg_dump</em> coomand/tool is used. Below is an example of the command to be executed at site-</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">$ pg_dump -U developer -a -t configurations -t devices -t device_components -t display_selectors -t display_styles -t enum_attributes -t enum_categories -t enum_tables -t equipment -t languages -t moving_averages -t phrases -t projects -t projection_specs -t replicas -t rotations -t rpcs -t schema_info -t sensor_alarms -t sensor_configs -t sensor_groups -t sensor_sets -t sensor_units -t snapshots -t summaries -t todos -t users -d &lt;database_name&gt; &gt; xxx_yyyymmdd.sql</pre>
+</div></div><p>The <em>&lt;database_name&gt;</em> should be replaced with the actual name of the database at site. The <em>xxx </em>denotes the short name of the customer and <em>yyyymmdd </em>is the suggested date format to be used when generating the dump file. It is important to name the dump files this way as the the script to upload the dump to the generic database requires it this information to identify the customer as well as record the date when the dump was created.<br/><br/></p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><a href="attachments/216280383/258824660" data-linked-resource-id="258824660" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="dumpScript" data-linked-resource-content-type="application/octet-stream" data-linked-resource-container-id="216280383" data-linked-resource-container-version="21">dumpScript</a> attached to make this process easier:</p><ul><li>copy to site server and run, providing site short name as argument: &quot;-s &lt;site&gt;&quot;</li><li>the dump file will be created in the directory the script is run</li><li>tar.gz archive of the dump is also created</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">jigsaw@oppro-server-1:~/tony/db_dumps$ ./dumpScript -s bbr
+bbr_20220401.sql
+jigsaw@oppro-server-1:~/tony/db_dumps$ ll
+total 12964
+drwxrwxr-x 2 jigsaw jigsaw    4096 Apr  1 13:09 ./
+drwxrwxr-x 4 jigsaw jigsaw    4096 Mar  7 16:36 ../
+-rwxrw-r-- 1 jigsaw jigsaw 5527082 Mar  7 16:44 bbr_20220307.sql*
+-rw-rw-r-- 1 jigsaw jigsaw  953384 Mar  7 16:45 bbr_20220307.sql.tar.gz
+-rw-rw-r-- 1 jigsaw jigsaw 5778904 Apr  1 13:09 bbr_20220401.sql
+-rw-rw-r-- 1 jigsaw jigsaw  998706 Apr  1 13:09 bbr_20220401.sql.tar.gz
+-rwxrw-r-- 1 jigsaw jigsaw    1075 Apr  1 13:09 dumpScript*</pre>
+</div></div></div></div></li><li>Once the dump file is generated, it has to be copied to the <em>/home/oppro/generic/</em> directory on the generic server machine. When copying a new dump file, if an existing dump file for that customer already exists, move it to the sub-directory named <em>db_archive</em>. The <em>db_archive </em>directory already contains a few directories each named after the sites' shortnames. If such a directory for a customer's dump you're copying does not exist, do create it and archive the existing dump to that directory before copying the new dump to the <em>generic </em>directory. This is an important step because the importer will simply load all dumps from one customer if we do not archive old dumps.<br/><br/></li></ol><p>The steps below no longer need to be completed manually - it all happens automatically.</p><ol><li><p><s>After the dump file(s) have been copied, execute the following python script. This script scans through all the the dumps in the <em>generic </em>directory and fixes all known database compatibility issues so that the dump files can be sucessfully imported without errors. Make sure to cd to the scripts directory first.</s></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">$ cd generic/scripts
+$ python3 fixup_dump_files.py</pre>
+</div></div></li><li><p><s>Execute the following command if new tables are to be imported which haven't previously been imported in this database. This command generates the necessary schema required to create the new table(s) that are being imported. Note that it is important that the output of this script be written to a file named <em>schema.sql</em> since that file is used by the following script to update the schema of the database before importing data. The <em>jmineops_cmkc</em> database has intentionally been chosen as the source for now as it contains a specific column named <em>van_id</em> that some NAFTA sites contain in the equipment table. If you need to choose a different database, drop a note to PD explaining the reason.</s></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">$ db=jmineops_cmkc ./gen_schema.sh &gt; schema.sql</pre>
+</div></div></li><li><p><s>Once this is done, the final step is to actually import the collected data. Execute the following command-</s></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">$ ./run.sh</pre>
+</div></div></li></ol><p><s>The below below demonstrates the import procedure. Also available on <a class="external-link" href="https://web.microsoftstream.com/video/9c38037c-3d66-4423-ad78-b9a90e6dbaee?list=studio" rel="nofollow">Microsoft Streams</a>.</s></p><p><span class="confluence-embedded-file-wrapper"><a class="confluence-embedded-file" href="/download/attachments/216280383/Importing%20data%20into%20the%20OP%20Pro%20Generic%20database.webm?version=1&amp;modificationDate=1625664830625&amp;api=v2" data-nice-type="null" data-file-src="/download/attachments/216280383/Importing%20data%20into%20the%20OP%20Pro%20Generic%20database.webm?version=1&amp;modificationDate=1625664830625&amp;api=v2" data-linked-resource-id="242393432" data-linked-resource-type="attachment" data-linked-resource-container-id="216280383" data-linked-resource-default-alias="Importing data into the OP Pro Generic database.webm" data-mime-type="video/webm" data-has-thumbnail="false" data-linked-resource-version="1" data-can-edit="false" aria-label="Importing data into the OP Pro Generic database.webm" draggable="false"><img src="download/resources/com.atlassian.confluence.plugins.confluence-view-file-macro:view-file-macro-resources/images/placeholder-medium-file.png" height="250" alt="" draggable="false"/><span class="title">Importing data into the OP Pro Generic database.webm</span></a></span></p><h1 id="OPProCustomerInstallbase-InformationcontainedintheGenericdatabase">Information contained in the Generic database</h1><p>The following table lists each of the database tables that are dumped from the site and a brief explanation as to why it's required.</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Table</th><th class="confluenceTh">Reason</th></tr><tr><td class="confluenceTd"><p>configurations</p></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd"><p>devices</p></td><td class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">device_components</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd"><span>display_selectors</span></td><td class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>display_styles</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>enum_attributes</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>enum_categories</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>enum_tables </span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>equipment</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>languages</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>moving_averages</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>phrases</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">projects</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">projection_specs</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">replicas</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">rotations</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">rpcs</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">schema_info</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">sensor_alarms</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">sensor_configs</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">sensor_groups</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">sensor_sets</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">sensor_units</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">snapshots</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">summaries</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">todos</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">users</td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><p>See <a class="confluence-userlink user-mention" data-username="murr" href="https://confluence.hexagonmining.com/display/~murr" data-linked-resource-id="247773409" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">Paul Murray (Backup)</a>  if you need a new table added to the config</p><p>T<s>he dump command specified in #1 in the section above contains each of these tables using the -t argument. If you would like to include an additional table in the generic database, follow the procedure specified below - </s></p><ol><li><s>Add the name of the new table along with a brief reason for requiring it in the table above.</s></li><li><s>Update the <em>pg_dump </em>command in the section above to include the new table so anyone using the command is able to dump the newly added table(s) too.</s></li><li><s>On the generic server machine, edit the <em>table_list.txt </em>file to include the new table. The file is located at - <em>/home/oppro/generic/scripts/table_list.txt</em></s></li></ol><p><s><strong>Note- </strong>When adding a new table, please ensure that the table name is entered in alphabetical order in all 3 places, the table and command above and the <em>table_list.txt</em> file on the server. Although the order of table names does not impact the import itself, it makes it easy to search for a table in the list.</s></p><h1 id="OPProCustomerInstallbase-UsingtheGenerictool">Using the Generic tool</h1><p>The Generic tool is a light-weight utility tool that can be used to add/update customer metadata, perform analysis about the most commonly used configs, enums etc. across customers and view reports like the count of LP/HP equipment at sites and the version each equipment is on. The tool is still pretty much in infancy right now but there are plans to add features to it going forward. </p><p>Download the tool from here - <a href="attachments/216280383/238567957.zip" data-linked-resource-id="238567957" data-linked-resource-version="3" data-linked-resource-type="attachment" data-linked-resource-default-alias="Generic_v1.1.zip" data-nice-type="Zip Archive" data-linked-resource-content-type="application/zip" data-linked-resource-container-id="216280383" data-linked-resource-container-version="21">Generic_v1.1.zip</a></p><h2 id="OPProCustomerInstallbase-Detailstorunthetool">Details to run the tool</h2><p>To start off, extract the zip file onto a folder on your Windows machine. Once extracted, run the Generic.exe to start the app. Note that you should be connected to the office network (VPN if you're outside office) in ordre to connect to the databases.</p><h3 id="OPProCustomerInstallbase-Connectionpage">Connection page</h3><p>When the app opens, it should look something like this. The details of the generic site comparison database are already filled in along with details of a generic OP Pro database that will hopefully one day be used as an OOTB template database for installations at new sites. You're not required to change anything on this page. Simply click <strong>Submit </strong>and you'll be connected. The option to provide these details is only present in case you have a local copy of the comparison database and want to use it instead of the standard database maintained by PD.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" height="250" src="attachments/216280383/219840358.png" data-image-src="attachments/216280383/219840358.png" data-unresolved-comment-count="0" data-linked-resource-id="219840358" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="generic_connection.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216280383" data-linked-resource-container-version="21" alt=""></span></p><h2 id="OPProCustomerInstallbase-Playingwiththetool">Playing with the tool</h2><h3 id="OPProCustomerInstallbase-Customermetadata">Customer metadata</h3><p>The customer metadata tab on the tool (see image below) contains a data grid with information about quite a few customers of OP Pro. The table contains some one column of special significance named <em>last_update_date. </em>This date indicates the last date on which a customer database dump was imported in the generic comparison database. This date is automatically updated when a database is imported and should NOT be manually altered. Also, you'll notice a few columns to provide connection details to connect to the customer's server machine through the tunneling mechanism. If you see such information missing, please do add it.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216280383/219840366.png" data-image-src="attachments/216280383/219840366.png" data-unresolved-comment-count="0" data-linked-resource-id="219840366" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="generic_customer_metadata.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216280383" data-linked-resource-container-version="21" alt=""></span></p><h3 id="OPProCustomerInstallbase-Equipmentreport">Equipment report</h3><p>An interesting feature of the tool is the equipment report. This report is like a pivot table in Excel and displays the number of LP and HP equipment at each site and also breaks it down to counts for each equipment type and further based on version. The report can also be instantly filtered using the search box at the top.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" height="250" src="attachments/216280383/219840370.png" data-image-src="attachments/216280383/219840370.png" data-unresolved-comment-count="0" data-linked-resource-id="219840370" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="generic_equipment_report.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216280383" data-linked-resource-container-version="21" alt=""></span></p><div class="confluence-information-macro confluence-information-macro-information"><p class="title conf-macro-render">Note</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If you're curious to know how the data was retrieved, the SQL query used is available at <a href="https://confluence.hexagonmining.com/display/SGS/Jigsaw+Site+Hardware+Audit">Jigsaw Site Hardware Audit</a>.</p></div></div><div class="confluence-information-macro confluence-information-macro-warning"><p class="title conf-macro-render">Caution</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Note that this tool is only for internal consumption within Hexagon Mining and should not be distributed to customers.</p></div></div></p>
+</div>
+<p><br/></p>    
+<div class="tabs-pane" id="1539820533" title="Related"  icon= "fip-icon-block">
+   <h2 id="OPProCustomerInstallbase-Relatedarticles">Related articles</h2><p>
+
+
+
+
+
+
+
+
+
+
+
+<ul class="content-by-label">
+        <li>
+        <div>
+                <span class="icon aui-icon content-type-page" title="Página">Página:</span>        </div>
+
+        <div class="details">
+                        <a href="/pages/viewpage.action?pageId=253203062">2021/2022 Install Base Project</a>
+                
+                        
+                    </div>
+    </li>
+        <li>
+        <div>
+                <span class="icon aui-icon content-type-page" title="Página">Página:</span>        </div>
+
+        <div class="details">
+                        <a href="/display/Sculptors/Generic+Comparison+Database">Generic Comparison Database</a>
+                
+                        
+                    </div>
+    </li>
+        <li>
+        <div>
+                <span class="icon aui-icon content-type-page" title="Página">Página:</span>        </div>
+
+        <div class="details">
+                        <a href="/display/Sculptors/Generic+Comparison+Database+Update+Proposal">Generic Comparison Database Update Proposal</a>
+                
+                        
+                    </div>
+    </li>
+        <li>
+        <div>
+                <span class="icon aui-icon content-type-page" title="Página">Página:</span>        </div>
+
+        <div class="details">
+                        <a href="/display/JHC/Proposal+-+Mapping+of+Enum%3A%3AEquipmentType+to+normalised+Equipment+Models">Proposal - Mapping of Enum::EquipmentType to normalised Equipment Models</a>
+                
+                        
+                    </div>
+    </li>
+    </ul>
+</p>
+</div>
+<p><br/></p>
+	</div>	
+</div>
+<p><br/></p><pre><br/></pre></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:18</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

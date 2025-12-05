@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : Investigation - Using a Private or Public Google Play Store for deploying Foundation Apps</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Investigations_238570275.html">Investigations</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : Investigation - Using a Private or Public Google Play Store for deploying Foundation Apps
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified on jun 02, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><br/></p><p>
+<span class="jira-issue lock-jira-issue ESUP-366"
+      data-jira-key="ESUP-366" >
+        <a class=issue-link" href="https://jira.hexagonmining.com/browse/ESUP-366?src=confmacro">ESUP-366</a>
+        <span class="oauth-msg"> -
+            <a class="static-oauth-init" href="https://confluence.hexagonmining.com/plugins/servlet/applinks/oauth/login-dance/authorize?applicationLinkID=ab53f6db-1037-3a9d-bb3c-d8ebd242d4b5">Autenticar</a> para ver datos del tique
+        </span>
+    </span>
+</p><p><br/></p><p><br/></p><h2 id="InvestigationUsingaPrivateorPublicGooglePlayStorefordeployingFoundationApps-Introduction">Introduction</h2><p>FMG and SLN have been trying to upload Foundation Apps (Drill, Time, Dig and Haul ) to their MDM solution by uploading the Apps to Google PlayStore.</p><p>In both instances, they are having issues.</p><p><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" draggable="false" alt="FMG_MiDrillAppError.PNG" height="250" src="https://jira.hexagonmining.com/secure/attachment/154041/FMG_MiDrillAppError.PNG" data-image-src="https://jira.hexagonmining.com/secure/attachment/154041/FMG_MiDrillAppError.PNG"></span></p><p><br/></p><p><br/></p><p>Need to investigate if we can release the Foundation Apps to a private or the public Playstore and allow customers to point their MDM to this playStore</p><p><br/></p><p><br/></p><h3 id="InvestigationUsingaPrivateorPublicGooglePlayStorefordeployingFoundationApps-Requirements">Requirements</h3><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Requirement</th><th colspan="1" class="confluenceTh">Additional Information</th><th colspan="1" class="confluenceTh">Comments</th></tr><tr><td colspan="1" class="confluenceTd">Ability to select what apps clients are able to access in the store</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">Ability to for clients to choose what version of the apps to use </td><td colspan="1" class="confluenceTd"><ul><li>Upload latest version<ul><li>Previous versions may be uploaded based on client request<ul><li>FMG requested 2.7</li></ul></li></ul></li></ul></td><td colspan="1" class="confluenceTd">Need to investigate if Play Store (public or private allows uploading different versions of the same App)</td></tr><tr><td colspan="1" class="confluenceTd">Ability for clients to update different versions of the apps, without it being a fresh install</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">HXGN should be able to upload patch releases of the Apps</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">All uploads will be generic releases, no customer specific builds</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><p><br/></p><p>This <a class="external-link" href="https://arsenb.wordpress.com/2020/07/01/how-to-publish-an-app-to-customers-managed-play-store-with-android-enterprise/" rel="nofollow">article</a> here gives a pretty good summary of the mechanism for Third Party Developers , to upload their apps to google Play console(<a class="external-link" href="https://play.google.com/console/about/" rel="nofollow">https://play.google.com/console/about/</a>) and then allow different clients access to upload the apps to their self managed play store instance.</p><h3 id="InvestigationUsingaPrivateorPublicGooglePlayStorefordeployingFoundationApps-UseCases(Requirements)">Use Cases (Requirements)</h3><p>1)  <strong>Allow Clients access to specific apps</strong></p><p>We can potentially use the google play console to allow specific customers access to specific apps. We upload the specific apps to Play console, and customers like FMG and SLN need to provide their Organisation ID credentials which we can use to release each apps to their managed play store.</p><p>One potential issue (although not one of immediate concern), it seems there is a limit to how many Organisations can get access to an App from the play console (current limit is 1000).</p><blockquote><p>For each organization that you want to publish the app to, enter the Organization ID and a description (or name) and click<span> </span><strong>Add</strong>. You can enter up to 1000 organizations per app.</p></blockquote><p>2) <strong>Ability for clients to choose what version of apps to use</strong></p><p>We can potentially upload different versions of the same app and release each version to the client. Although, there is good chance this will not work.</p><p><br/></p><p>3) <strong>Ability for clients to update different versions of the apps</strong></p><p><br/></p><p>4) <strong>Release updates of the apps.</strong></p><p><strong> </strong></p><blockquote><p>Every APK has a versionCode in the manifest file that's incremented with each update of your app.</p><p>To upload your app to Play Console, the greatest possible value for versionCode is 2100000000. If the versionCode of your APK exceeds this value, Play Console will prevent you from submitting a new APK.</p><p>When selecting the versionCode for your APK, keep in mind that you'll need to increase the versionCode for every update and still stay below the maximum.</p><p>Note: For more information on versioning your APK, go to the Android Developers site. Keep in mind the Android MAXINT differs from Play Console upload requirements.</p></blockquote><p><strong>    - <a class="external-link" href="https://support.google.com/googleplay/android-developer/answer/9859152#zippy=%2Capk-version-requirements-for-play-console" rel="nofollow">Google Play Console Docs</a>   </strong></p><h4 id="InvestigationUsingaPrivateorPublicGooglePlayStorefordeployingFoundationApps-">      </h4><h3 id="InvestigationUsingaPrivateorPublicGooglePlayStorefordeployingFoundationApps-NextSteps">Next Steps</h3><p>We already have access to a Google Play Console, using the developer account (<a class="external-link" href="mailto:hxgn.mining.apps@gmail.com" rel="nofollow">hxgn.mining.apps@gmail.com</a>). Will need to see, if we can create a sandbox HXGN Managed Playstore, and deploy the apps to the playstore via the console.</p><h2 id="InvestigationUsingaPrivateorPublicGooglePlayStorefordeployingFoundationApps-References">References</h2><ul><li><a class="external-link" href="https://developers.google.com/android/work/play/custom-app-api" rel="nofollow">https://developers.google.com/android/work/play/custom-app-api</a></li><li><a class="external-link" href="https://developer.android.com/distribute/google-play/work?authuser=1" rel="nofollow">https://developer.android.com/distribute/google-play/work?authuser=1</a></li><li><a class="external-link" href="https://arsenb.wordpress.com/2020/07/01/how-to-publish-an-app-to-customers-managed-play-store-with-android-enterprise/" rel="nofollow">https://arsenb.wordpress.com/2020/07/01/how-to-publish-an-app-to-customers-managed-play-store-with-android-enterprise/</a></li><li><a class="external-link" href="https://support.google.com/googleplay/android-developer/answer/9859152#zippy=%2Capk-version-requirements-for-play-console" rel="nofollow">https://support.google.com/googleplay/android-developer/answer/9859152#zippy=%2Capk-version-requirements-for-play-console</a></li></ul><p><br/></p><p><br/></p>
+                    </div>
+
+                                        
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-238570680"></a>
+                                    <font class="smallfont"><p>Requirements, from the teams chat</p><ol><li>Ability to select what apps client are able to access using googles private play store functionality<ol><li>If this is not possible, then revert to using the public play store</li></ol></li><li>Ability for client to select what version of the apps they use (eg 2.7, 3.0, 3.1 etc)<ol><li>We will upload only the latest version of the apps now, with older versions being on request by clients<ol><li>v2.7 has been requested by FMG</li></ol></li></ol></li><li>Ability to be able to update between the different versions without it being a &quot;new install&quot; that requires the configuration of each app to be set again<ol><li>Requirement 2 will most likely break this, meaning we will probably need to choose between this requirement or requirement 2</li><li>Eg. if the customer wants to upgrade from 3.0 to 3.1, then the 3.1 version should use the configuration already provided in version 3.0</li></ol></li><li>Ability for the apps to replace ones already installed that used the apk directly, specifically using any configuration that has already been set for the existing installed app</li><li>Ability to provide bug fix releases for the different release versions (eg 3.0.1, 3.0.2, 3.0.3 for the 3.0 version of the apps)</li><li>No customer-specific builds, these will be generic app releases</li></ol></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by CRSA at jun 01, 2021 19:37
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-238571237"></a>
+                                    <font class="smallfont"><p>Hey Rahul,</p><blockquote><p>We can potentially use the google play console to allow specific customers access to specific apps. ... provide their Organisation ID credentials which we can use to release each apps to their managed play store.</p></blockquote><p>This is good news!</p><p>The document seems a bit thin on the other details though, which I think is important as there are going to be tradeoffs</p><ol><li>The numbers in the use cases section, are they relating to the items in the grid, or the list from my comment above?<ol><li>If referring to the grid, might be worth adding in a numbers column <img class="emoticon emoticon-laugh" src="images/icons/emoticons/biggrin.svg" data-emoticon-name="laugh" alt="(gran sonrisa)" data-emoji-short-name=":laugh:"/></li></ol></li><li>I think item 4 from the list in the comment (upgrading already installed apps that were installed by an apk) is missing from the list in the grid</li><li>How can we achieve the ability for clients to use different versions?<ol><li>Does each version branch need to have a different app id? Effectively treated as completely different apps?</li><li>Can this be achieved with a single app (ie the same app id) but we specify what version is available to the Organisation ID?</li><li>What impacts would this have on app updates? Especially if each version branch needs to have a different app id<ol><li>Specifically referring to major.minor updates, not patch releases. Eg 3.0 → 3.1</li></ol></li></ol></li><li>If existing clients have already uploaded versions of our apps to their private stores, are we going to have conflicts with application id's?<ol><li>Do we need to do a new release that uses new app id's?</li></ol></li></ol><p><br/></p><p>I think it's worth noting that anytime we change the application id then this is considered a completely new app by Android, meaning it breaks upgrades.<br/><a class="external-link" href="https://developer.android.com/studio/build/application-id" rel="nofollow">https://developer.android.com/studio/build/application-id</a></p><blockquote><p>If you want to upload a new version of your app, the application ID (and the <a class="external-link" href="https://developer.android.com/studio/publish/app-signing" rel="nofollow">certificate you sign it with</a>) must be the same as the original APK—if you change the application ID, Google Play Store treats the APK as a completely different app. So once you publish your app, <strong>you should never change the application ID</strong>.</p></blockquote><p>Something that might be worth looking at if we do need to have different application id's for different versions of the apps, then maybe something like Product Flavours could help with this configuration - <a class="external-link" href="https://developer.android.com/studio/build/build-variants#product-flavors" rel="nofollow">https://developer.android.com/studio/build/build-variants#product-flavors</a></p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by CRSA at jun 02, 2021 19:40
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-238571286"></a>
+                                    <font class="smallfont"><p>The main concern I have here is the dependency of a Foundation app release on a ME release.  So in the case where an app has a dependency on a minimum version of ME what is the process we are recommending</p><ol><li>Create an app version with a new Application ID.  Any minor releases will essentially be a new version published on the app store.  Customer will be able to upgrade to new app without the need for a ME upgrade so impact very minimal.</li><li>If a new app version is released with a dependency on a new ME release then the app is created with a new Application ID.  Impact to the customer is ME upgrade is a prerequisite so app release needs to be managed in a controlled manner.</li></ol></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by GENA at jun 02, 2021 20:54
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

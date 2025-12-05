@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HxGN MineOperate Platform : Technical Roadmap for Application Manager</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">HxGN MineOperate Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="HxGN-MineOperate-Platform-Home_181605958.html">HxGN MineOperate Platform Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Designs-in-Progress_185238330.html">Designs in Progress</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            HxGN MineOperate Platform : Technical Roadmap for Application Manager
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> TEODORO Eduardo</span>, last modified on mar 03, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="TechnicalRoadmapforApplicationManager-Introduction">Introduction</h1><p>Application manager is a back-end module developed in .Net framework 4.62 that offers agnostic application version management. It is service oriented and can provide binary transfer for applications versions in different ways.</p><p>The module can be separated in three different parts:</p><h2 id="TechnicalRoadmapforApplicationManager-Binarystorage">Binary storage</h2><p>This part is agnostic of any other product. It uses Postgres to store data and can store binaries for multiple versions of each application.</p><p>The basic organization is: ApplicationType (Name, Platform) contains Applications (Name, Key) that contains ApplicationVersions (Version, Variant, Binary)</p><h2 id="TechnicalRoadmapforApplicationManager-VersionAssignment">Version Assignment</h2><p>This part depends on a list of equipment and devices, today it get these lists from UG Pro, it uses Equipment (Id, Name), Equipment Type (Id, Name), Device (Id, Name, Status), Device Model (Id, Name, Platform, Variant)</p><p>Desktop apps do not use this component, client apps just assume that the latest version on server must be installed for all users, which is not desirable for on-board applications.</p><h2 id="TechnicalRoadmapforApplicationManager-VersionTransmission">Version Transmission</h2><p>Current implementation offers three ways to transfer version binary: MQTT, REST and .Net Library. The client should start the workflow to transfer the binary.</p><p>To enable MQTT transfer it requires an MQTT broker, in that case, the version will be fragmented (configurable size) and is possible to follow up the download progress as well as cancel the transmission.</p><p>The MQTT transmission also implements a load balancer mechanism to prevent taking too much network and affecting operation data.</p><p>Once downloaded and installed, the client should inform the success of the installation.</p><p>Other transmission methods can be implemented, it can be configured by &quot;Application&quot;.</p><p>Desktop applications also don't use this component, they just use standard protocols (WCF and REST) without any optimization to download and install new versions, which is fine for an office network.</p><h1 id="TechnicalRoadmapforApplicationManager-Challenges">Challenges</h1><p>Current version is Windows only (.Net Framework)</p><p>The current client tool is a .Net Desktop tool</p><p>The module depends on UG Pro Equipment/Device list</p><h1 id="TechnicalRoadmapforApplicationManager-ProposedRoadmaptosolvetheseissues">Proposed Roadmap to solve these issues</h1><p>
+
+<map id="gliffy-map-216289341-958" name="gliffy-map-216289341-958"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+                                    </caption>
+                <tr>
+                    <td>
+                        <img style="border: none; width: 785px;" usemap="#gliffy-map-216289341-958" src="attachments/216289326/216289342.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+</p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216289326/216291907">Application Manager Roadmap</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216289326/216291908.png">Application Manager Roadmap.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216289326/216295168">Application Manager Roadmap</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216289326/216295169.png">Application Manager Roadmap.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216289326/216289341">Application Manager Roadmap</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216289326/216289342.png">Application Manager Roadmap.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-216294931"></a>
+                                    <font class="smallfont"><p><a class="confluence-userlink user-mention" data-username="TEDU" href="https://confluence.hexagonmining.com/display/~TEDU" data-linked-resource-id="42042253" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">TEODORO Eduardo</a>, have we ever investigated if there are any commercial versions of this sort of thing ?</p><p>The Foundation team rely on sites having some MDM software (Mobile Device Management) to control which applications are installed on their tablets.  A quick google search reveals that there are a number of options available that support IOS, Android and Windows which appear to cover more than just 'what software should I put on each device'.</p><ul><li><a class="external-link" href="https://www.manageengine.com/mobile-device-management/" rel="nofollow">https://www.manageengine.com/mobile-device-management/</a></li><li><a class="external-link" href="https://www.techradar.com/best/best-mdm-solutions" rel="nofollow">https://www.techradar.com/best/best-mdm-solutions</a></li></ul><p>I haven't stumbled on any commercial versions that look after Linux devices, but in saying that, there was an opensource project called <a class="external-link" href="https://github.com/quantopian/PenguinDome" rel="nofollow">PenguinDome</a> that might be worthwhile taking a look at.</p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by COUS at mar 03, 2020 00:12
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-216295096"></a>
+                                    <font class="smallfont"><p>No, I have never evaluated any of this commercial options, I think it worth to evaluate, but to be sincere, I'm very skeptical about the chances of any of this meet what we really need in production.</p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by TEDU at mar 03, 2020 12:06
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:25</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

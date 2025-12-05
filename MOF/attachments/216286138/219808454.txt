@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-16"?>
+<QueryCommandItem Service="" Product="MiiNT" Table="Mine" Qmode="Summary" debug="false" resolve="true">
+  <Filters top="0" topPerc="false" distinct="false" xmlns="Query">
+    <FilterItem code="/LocCoo/Id" op="Greater" name="LocId" type="None" xmlns="Query.Filter">
+      <Filter val="0" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="[_PickList_N:_]" behav="None" having="Count" />
+    </FilterItem>
+    <FilterItem code="/LocCoo/Easting" op="NotEqual" name="LocEas" type="None" xmlns="Query.Filter">
+      <Filter val="0" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/LocCoo/Northing" op="NotEqual" name="LocNor" type="None" xmlns="Query.Filter">
+      <Filter val="0" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/LocCoo/CooSys" op="Between" name="LocCooSys" type="None" xmlns="Query.Filter">
+      <Filter val="WGS84" />
+      <Filter val="WGS84" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+    <FilterItem code="/Code" op="All" name="LocationCode" type="None" xmlns="Query.Filter">
+      <Filter val="" />
+      <attr logic="None" bro="0" brc="0" ignorCase="false" calc="" descr="" options="" behav="None" having="None" />
+    </FilterItem>
+  </Filters>
+  <Outputs xmlns="Query">
+    <OutputItem code="/LocCoo/Id" dataType="None" func="None" showTotal="Auto" hidden="false" sort="3" name="Id" xmlns="Query.Output">
+      <attr cap="Id" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/Code" dataType="None" func="None" showTotal="Auto" hidden="false" sort="1" name="GroupBy" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/Mat" dataType="None" func="None" showTotal="Auto" hidden="true" sort="0" name="" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="StyleCode" dataType="String" func="Expression" showTotal="Auto" hidden="false" sort="0" name="StyleCode" xmlns="Query.Output">
+      <attr cap="StyleCode" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+      <expression>
+        <buffer xmlns="Query.EvalExpress">{/Mat}</buffer>
+      </expression>
+    </OutputItem>
+    <OutputItem code="/LocCoo/PoiAtt" dataType="None" func="None" showTotal="Auto" hidden="false" sort="2" name="PointAttribute" xmlns="Query.Output">
+      <attr cap="Point Attribute" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/LocCoo/Easting" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="Easting" xmlns="Query.Output">
+      <attr cap="Easting" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/LocCoo/Northing" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="Northing" xmlns="Query.Output">
+      <attr cap="Northing" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/LocCoo/Elevation" dataType="None" func="None" showTotal="Auto" hidden="false" sort="0" name="Elevation" xmlns="Query.Output">
+      <attr cap="Elevation" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="/S6" dataType="None" func="None" showTotal="Auto" hidden="true" sort="0" name="Block" xmlns="Query.Output">
+      <attr cap="" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+    </OutputItem>
+    <OutputItem code="Label" dataType="String" func="Expression" showTotal="Auto" hidden="false" sort="0" name="Label" xmlns="Query.Output">
+      <attr cap="Label" hdr="" scale="0" nulls="false" filterLink="" calc="" format="" other="" group="" />
+      <expression>
+        <buffer xmlns="Query.EvalExpress">{%Block}</buffer>
+      </expression>
+    </OutputItem>
+  </Outputs>
+</QueryCommandItem>

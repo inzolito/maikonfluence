@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : TDoc - Coordinate Conversion</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : TDoc - Coordinate Conversion
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified by <span class='editor'> Usuario desconocido (crsa)</span> on abr 15, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Based on the config provided, the app connects to the MiiNT database and converts the coordinates from one system to another.</p><p><br/></p><h3 id="TDocCoordinateConversion-Config">Config</h3><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Config</th><th class="confluenceTh">Description</th><th class="confluenceTh">Default Value</th></tr><tr><td class="confluenceTd">DatabaseConnection</td><td class="confluenceTd">Information used to connect to the MiiNT database</td><td class="confluenceTd">Data Source=localhost;Initial Catalog=MiiNT;Integrated Security=True</td></tr><tr><td class="confluenceTd">FromProjectionArguments</td><td class="confluenceTd">The Current system for the coordinates</td><td class="confluenceTd">+proj=utm +zone=50 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</td></tr><tr><td class="confluenceTd">ToProjectionArguments</td><td class="confluenceTd">The System to convert the coordinates to</td><td class="confluenceTd">+proj=latlon +ellps=WGS84 +datum=WGS84</td></tr><tr><td class="confluenceTd">SelectSQLCommand</td><td class="confluenceTd">The SQL statement used to identify which coordinates need to be converted</td><td class="confluenceTd"><p>-- Define some variables<br/>DECLARE @CoodSysFromId int, @CoodSysToId int, @LastRun datetime, @Module nvarchar(50), @Key nvarchar(50)<br/>SET @Module = 'CoordinateConversion'<br/>SET @Key = 'LastRun'<br/>SET @CoodSysFromId = (SELECT Id FROM CoordinatesSystem WHERE CoordinatesSystem = 'MGA')<br/>SET @CoodSysToId = (SELECT Id FROM CoordinatesSystem WHERE CoordinatesSystem = 'WGS84')<br/>SET @LastRun = (SELECT DateValue FROM ModuleConfigs WHERE Module = @Module AND [Key] = @Key)</p><p>-- Ensure that a date value is set<br/>IF @LastRun IS NULL<br/>BEGIN<br/> SET @LastRun = (SELECT MIN(ModifiedDateTime) - 1 FROM HolePositions)</p><p>IF EXISTS (SELECT 1 FROM ModuleConfigs WHERE Module = @Module AND [Key] = @Key)<br/> UPDATE ModuleConfigs<br/> SET DateValue = @LastRun<br/> ,ModifiedBy = @Module<br/> ,ModifiedDateTime = GETDATE()<br/> WHERE Module = @Module<br/> AND [Key] = @Key<br/> ELSE<br/> INSERT INTO ModuleConfigs (Module, [Key], DateValue, CreatedBy, CreatedDateTime, ModifiedBy, ModifiedDateTime)<br/> SELECT @Module, @Key, @LastRun, @Module, GETDATE(), @Module, GETDATE()<br/>END</p><p><br/></p><p>SELECT [Id]<br/> ,[DesignCollarX]<br/> ,[DesignCollarY]<br/> ,[DesignCollarZ]<br/> ,[CreatedBy]<br/> ,[CreatedDateTime]<br/> ,[ModifiedBy]<br/> ,[ModifiedDateTime]<br/> ,[HoleParameters_Id]<br/> ,[CoordinateSystem_Id]<br/>FROM [dbo].[HolePositions]<br/>WHERE [CoordinateSystem_Id] = @CoodSysFromId<br/>AND ModifiedDateTime &gt; @LastRun<br/>AND HoleParameters_Id NOT IN (<br/> -- Exclude items that have been updated since the last run<br/> SELECT HoleParameters_Id<br/> FROM HolePositions<br/> WHERE CoordinateSystem_Id = @CoodSysToId<br/> AND ModifiedDateTime &gt; @LastRun<br/>)</p></td></tr><tr><td colspan="1" class="confluenceTd">FieldX</td><td style="text-align: center;" rowspan="3" class="confluenceTd">These three fields are used to identify the Latitude, Longitude and Altitude fields from the Select Statement<br/><br/><br/></td><td colspan="1" class="confluenceTd">DesignCollarX</td></tr><tr><td colspan="1" class="confluenceTd">FieldY</td><td colspan="1" class="confluenceTd">DesignCollarY</td></tr><tr><td colspan="1" class="confluenceTd">FieldZ</td><td colspan="1" class="confluenceTd">DesignCollarZ</td></tr><tr><td class="confluenceTd">UpdateSQLCommand</td><td class="confluenceTd">The SQL Command to update the database</td><td class="confluenceTd"><p>DECLARE @CooSysId int, @Module nvarchar(50), @Key nvarchar(50)<br/>SET @Module = 'CoordinateConversion'<br/>SET @Key = 'LastRun'<br/>SET @CooSysId = (SELECT Id FROM CoordinatesSystem WHERE CoordinatesSystem = 'WGS84')</p><p><br/>UPDATE HolePositions<br/> SET DesignCollarX = @DesignCollarY,<br/> DesignCollarY = @DesignCollarX,<br/> DesignCollarZ = @DesignCollarZ,<br/> ModifiedBy = @ModifiedBy,<br/> ModifiedDateTime = @ModifiedDateTime<br/> WHERE HoleParameters_Id = @HoleParameters_Id<br/> AND CoordinateSystem_Id = @CooSysId<br/>IF @@ROWCOUNT = 0 <br/> INSERT INTO HolePositions (<br/> CoordinateSystem_Id,<br/> HoleParameters_Id,<br/> DesignCollarX,<br/> DesignCollarY,<br/> DesignCollarZ,<br/> CreatedBy,<br/> CreatedDateTime,<br/> ModifiedBy,<br/> ModifiedDateTime<br/> )<br/> VALUES (<br/> @CooSysId,<br/> @HoleParameters_Id,<br/> @DesignCollarY,<br/> @DesignCollarX,<br/> @DesignCollarZ,<br/> @CreatedBy,<br/> @CreatedDateTime,<br/> @ModifiedBy,<br/> @ModifiedDateTime<br/> )</p><p>-- Check if we need to update ModuleConfigs<br/>IF @ModifiedDateTime &gt; (SELECT DateValue FROM ModuleConfigs WHERE Module = @Module AND [Key] = @Key)<br/> UPDATE ModuleConfigs<br/> SET DateValue = @ModifiedDateTime<br/> WHERE Module = @Module<br/> AND [Key] = @Key</p></td></tr><tr><td class="confluenceTd">ReadCommandTimeOut</td><td class="confluenceTd">How long the Application should wait for the Select command to return results</td><td class="confluenceTd">30</td></tr><tr><td class="confluenceTd">UpdateCommandTimeOut</td><td class="confluenceTd">Timeout for the update commands</td><td class="confluenceTd">30</td></tr><tr><td class="confluenceTd">Datums</td><td class="confluenceTd"><p>As of Proj6, which has support for GDA2020, the coordinate system information are not part of the Proj library.</p><p>Similar to MineEnterprise the Application requires information to where the files are located.</p><p><br/></p><p>By default, the application assumes it is going to be running on the same server as MineEnterprise and hence will look at the MineEnterprise folder (C:/Hexagon/datums) for the files.</p><p>If the files are not stored there, or the application is running on a different server, this path needs to be updated.</p></td><td class="confluenceTd">C:\Hexagon\Datums</td></tr></tbody></table></div><p><span class="confluence-embedded-file-wrapper"><a class="confluence-embedded-file" href="/download/attachments/219817589/CoordinateConversion02042020.zip?version=1&amp;modificationDate=1585804639803&amp;api=v2" data-nice-type="Zip Archive" data-file-src="/download/attachments/219817589/CoordinateConversion02042020.zip?version=1&amp;modificationDate=1585804639803&amp;api=v2" data-linked-resource-id="219817596" data-linked-resource-type="attachment" data-linked-resource-container-id="219817589" data-linked-resource-default-alias="CoordinateConversion02042020.zip" data-mime-type="application/zip" data-has-thumbnail="false" data-linked-resource-version="1" data-can-edit="false" aria-label="CoordinateConversion02042020.zip" draggable="false"><img src="download/resources/com.atlassian.confluence.plugins.confluence-view-file-macro:view-file-macro-resources/images/placeholder-medium-zip.png" height="250" alt="" draggable="false"/><span class="title">CoordinateConversion02042020.zip</span></a></span></p><p><br/></p><p>The coordinate transformation files can be found  <a class="external-link" href="https://proj.org/download.html" rel="nofollow">https://proj.org/download.html</a> all the links under &quot;Current Releases&quot; that contain datum grid in the name.</p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/219817589/219817596.zip">CoordinateConversion02042020.zip</a> (application/zip)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

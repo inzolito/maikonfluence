@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : SilverLight Configs</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="TDoc---Dig_216270651.html">TDoc - Dig</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : SilverLight Configs
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified on ene 13, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span style="color: rgb(255,0,0);"><strong>These config values are specific to Dig only. They do not overwrite any default configs set by either Time or MiApp</strong></span></p><p><strong><br/></strong></p><p><strong>Dig Specific:</strong></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Key</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-anchor-link" id="SilverLightConfigs-LoaderLocationsQuery"></span> LoaderLocationsQuery</p></div></td><td class="confluenceTd">Report Query</td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-anchor-link" id="SilverLightConfigs-LoaderQuery"></span> LoaderQuery</p></div></td><td class="confluenceTd">Report Query</td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-anchor-link" id="SilverLightConfigs-LocationCoordinatesQuery"></span> LocationCoordinatesQuery</p></div></td><td class="confluenceTd">Report Query</td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-anchor-link" id="SilverLightConfigs-EquipmentTypeFilter"></span> EquipmentTypeFilter</p></div></td><td class="confluenceTd"><div class="content-wrapper"><p><span style="color: rgb(84,84,84);">PersonCategory</span><br/><span style="color: rgb(0,0,0);">Dig</span><span style="color: rgb(84,84,84);"><span style="color: rgb(0,0,0);"> </span>Specific: Filters which operators are authorised to use miDig</span></p><p><span style="color: rgb(84,84,84);">OverWrites the Time one</span></p><p>Example Config Value:
+
+
+<div class="panel" style="border-color: olivedrab;border-style: solid;border-width: 10px;"><div class="panelContent">
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: csharp; gutter: false; theme: Confluence" data-theme="Confluence">&lt;in&gt;:Excavator,Wheel Loader,Dozer</pre>
+</div></div>
+</div></div></p></div></td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-anchor-link" id="SilverLightConfigs-LoaderStartDiggingReasonCodes"></span> LoaderStartDiggingReasonCodes</p></div></td><td class="confluenceTd"><div class="content-wrapper"><p>Dig Specific</p><p>Informs the app, which state is the Ready State,</p><p>Used to show the activity wheel. It doesnot seem to depend on any database configuration.</p><p>Defaults to &quot; <span style="color: rgb(0,0,0);">Ready:Working:Digging </span>&quot; if an inavalid parameter is passed or no value is passed.</p><p>Example Config Value:
+
+
+<div class="panel" style="border-color: olivedrab;border-style: solid;border-width: 10px;"><div class="panelContent">
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: csharp; gutter: false; theme: Confluence" data-theme="Confluence">Ready: Production Waste: Loading</pre>
+</div></div>
+</div></div><br/></p><p><br/></p></div></td></tr><tr><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-anchor-link" id="SilverLightConfigs-StartSessionReasonCodes"></span> StartSessionReasonCodes</p></div></td><td colspan="1" class="confluenceTd"><p><span style="color: rgb(84,84,84);">  </span><strong><span style="color: rgb(0,0,0);">config</span></strong><span style="color: rgb(84,84,84);">: StartSessionReasonCodes</span><br/><span style="color: rgb(84,84,84);">     Should be of format StatusCode(ReasonCategory.Code) : ReasonCode : ActivityCode?</span><br/><span style="color: rgb(84,84,84);">     </span><strong><span style="color: rgb(0,0,0);">config</span></strong><span style="color: rgb(84,84,84);"><strong><span style="color: rgb(0,0,0);"> </span></strong>Value Activity Code is optional </span><br/><span style="color: rgb(84,84,84);">     It needs to match the A ReasonCode and or activity code for that <span style="color: rgb(0,0,0);">equipment </span>Type in the database</span><br/> Dig defaults to the Ready state, if there is only <strong>one</strong> set of StatusCode:ReasonCode for a given equipmentType.</p><p><span style="color: rgb(84,84,84);">If there are multiple reason Codes for the Equipment Type, the user is prompted to choose from the ready state</span></p>There is no default Value , it needs to be provided from silverlight.</td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-anchor-link" id="SilverLightConfigs-FilterSourceLocationWithCurrentGPSProximityMeters"></span> FilterSourceLocationWithCurrentGPSProximityMeters</p></div></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><p><strong><br/></strong></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

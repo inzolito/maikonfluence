@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : DRILL QA 11/02/2020</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="QA_216285567.html">QA</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Drill_216285569.html">Drill</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="OFDRILL--1_216285571.html">OFDRILL- 1</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : DRILL QA 11/02/2020
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified on feb 10, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><td class="confluenceTd">Database</td><td class="confluenceTd"><strong>Werris Feb 2017 backup</strong></td></tr><tr><td class="confluenceTd">Datamodel</td><td class="confluenceTd">1eb0f01</td></tr><tr><td class="confluenceTd">WebUI</td><td class="confluenceTd">N/A</td></tr></tbody></table></div><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Drill Version</th><th class="confluenceTh">Android Version</th></tr><tr><td class="confluenceTd">3.0.0</td><td class="confluenceTd">7.0.0</td></tr><tr><td class="confluenceTd">Bamboo Build #8</td><td class="confluenceTd">9.0.0</td></tr></tbody></table></div><p><strong><br/></strong></p><p><strong>QA test cases defined at  <a href="216283265.html">Drill-QA(04/02/2020</a>)</strong></p><p>QA was done using</p><ul><li>Drill version 3.0 running on android 7 as control</li><li>Drill build (#8) running on android 9 as current build.</li></ul><p><br/></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Description</th><th class="confluenceTh">Steps</th><th class="confluenceTh">Passed</th><th class="confluenceTh">Comment</th></tr><tr><td colspan="1" class="confluenceTd">App Compatibility on Android 7, 8, 9</td><td colspan="1" class="confluenceTd"><p>Install apk on Android 7, Android 8, Android 9.</p><p>App should load, without any issues</p></td><td style="text-align: center;" colspan="1" class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td colspan="1" class="confluenceTd"><p>Drill does not work in offline mode</p><p>It always needs a connection to the server</p></td></tr><tr><td class="confluenceTd">Testing OFAPP-11</td><td class="confluenceTd"><p>Install Drill,</p><p>After launch, enter the IP for the server (provide incorrect IP), and submit</p><p>The &quot;Start not defined&quot; error should not appear</p></td><td class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td class="confluenceTd">The app is loading without issue, so assuming the error has been fixed</td></tr><tr><td colspan="1" class="confluenceTd">Testing OFAPP-12</td><td colspan="1" class="confluenceTd"><p>Install Drill,</p><p>After launch, enter the IP for the server (provide incorrect IP), and submit</p><p>The &quot;Model not found&quot; error should not appear</p></td><td colspan="1" class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td colspan="1" class="confluenceTd">The app is loading without issue, so assuming the error has been fixed</td></tr><tr><td colspan="1" class="confluenceTd">OFFAPP-13</td><td colspan="1" class="confluenceTd"><p>From the WebUI, upload a large site map</p><p>Change the module config so that default site map, is the uploaded one</p><p>Install Drill, add start it</p><p><span style="color: rgb(23,43,77);">&quot;undefined.undefined error&quot; should not appear</span></p></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd">didn't get that error on the build APK, but it did get thrown yesterday when I was running it in debug mode</td></tr><tr><td colspan="1" class="confluenceTd"><p>Login Workflow:</p><p>On the Start Session page, the dynamic form should be pre-populated</p></td><td colspan="1" class="confluenceTd"><p>Launch Drill,</p><p>The Start Session page, should allow selection of</p><p>1) Operator</p><p>2) Equipment,</p><p>3) Shift: Should be pre-populated with the value provided by the DefaultShiftCode module config</p></td><td colspan="1" class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><p>Drilling -</p><p>1) Download a new location from the download page</p></td><td colspan="1" class="confluenceTd"><p>1) On first install, the App should prompt to download a location.</p><p>2) Navigate to download page, and select a location</p><p>i) The check box should toggle the location selected</p><p>ii) Download a location</p><p>3) The App should then redirect to site map, and any drill holes already created should be visible</p></td><td colspan="1" class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><p>Drilling -</p><p>Select a drill hole from the secondary drawer</p></td><td colspan="1" class="confluenceTd"><p>On the main View, select the secondary drawer</p><p>i) The secondary drawer should show a list of drill holes (if Any)</p><p>ii) Selecting any one of the drill holes, should navigate the map to that drill hole</p></td><td colspan="1" class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td colspan="1" class="confluenceTd"><p>The search functionality of the Secondary drawer is not automatic.</p><p>User has to manually hit the search button to trigger the search</p></td></tr><tr><td colspan="1" class="confluenceTd"><p>Drilling -</p><p>Create a new Drill Hole</p></td><td colspan="1" class="confluenceTd"><p>On the map , click and hold the map</p><p>A pop up should allow to create a new Drill hole</p></td><td colspan="1" class="confluenceTd"><img class="emoticon emoticon-cross" src="images/icons/emoticons/error.svg" data-emoticon-name="cross" alt="(error)" data-emoji-short-name=":cross:"/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>Creating a new Drill worked on android 7,</p><p>Failed on Android 9</p><p><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216285566/216285578.jpg" data-image-src="attachments/216285566/216285578.jpg" data-unresolved-comment-count="0" data-linked-resource-id="216285578" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screenshot_20200211-094500_Drill[1].jpg" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="216285566" data-linked-resource-container-version="3" alt=""></span><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216285566/216285577.jpg" data-image-src="attachments/216285566/216285577.jpg" data-unresolved-comment-count="0" data-linked-resource-id="216285577" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screenshot_20200211-094315_Drill[1].jpg" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="216285566" data-linked-resource-container-version="3" alt=""></span></p><p><br/></p></div></td></tr><tr><td colspan="1" class="confluenceTd"><p>Drilling -</p><p>Modifying the Drill Metadata</p></td><td colspan="1" class="confluenceTd"><p>Create a new Drill,</p><p>1) Change the information on the drill ( Diameter, Design Heading, etc.)</p><p>2) The data should be uploaded to database and a new entry should be added to Drill production Table</p></td><td colspan="1" class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>Drill Intervals not being entered into the HoleIntervals Table is an issue with older versions of the App,</p><p>
+<span class="jira-issue lock-jira-issue OFDRILL-7"
+      data-jira-key="OFDRILL-7" >
+        <a class=issue-link" href="https://jira.hexagonmining.com/browse/OFDRILL-7?src=confmacro">OFDRILL-7</a>
+        <span class="oauth-msg"> -
+            <a class="static-oauth-init" href="https://confluence.hexagonmining.com/plugins/servlet/applinks/oauth/login-dance/authorize?applicationLinkID=ab53f6db-1037-3a9d-bb3c-d8ebd242d4b5">Autenticar</a> para ver datos del tique
+        </span>
+    </span>
+</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><p>Drilling -</p><p>Delay, StandBy, Down State</p></td><td colspan="1" class="confluenceTd"><p>Select a reason code from the Delay, StandBy, Down.</p><p>Complete the form</p><p>A new entry should be in the staging Time Allocation Table</p></td><td colspan="1" class="confluenceTd"><p><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></p><p><br/></p></td><td colspan="1" class="confluenceTd"><p><br/></p></td></tr><tr><td colspan="1" class="confluenceTd"><p>QAQC</p><p>Add a new Location</p></td><td colspan="1" class="confluenceTd"><p>1) Navigate to download page, and select a location</p><p>i) The checkbox should toggle the location selected</p><p>ii) Download a location (preferably the same one downloaded for Drilling)</p><p>2) The App should then redirect to site map, and any drill holes already created should be visible</p></td><td colspan="1" class="confluenceTd"><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><p>QAQC -</p><p>validate a drill hole</p></td><td colspan="1" class="confluenceTd"><p>Once a location is downloaded.</p><p>Select a drill,</p><p>complete the form.</p><p>Upload the data</p><p>a new entry should be added to the HoleParameters Table</p></td><td colspan="1" class="confluenceTd"><p><img class="emoticon emoticon-tick" src="images/icons/emoticons/check.svg" data-emoticon-name="tick" alt="(tic)" data-emoji-short-name=":tick:"/></p><p><br/></p></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><h3 id="DRILLQA11/02/2020-Issues">Issues</h3><p>These are issues that are present in previous versions of Drill, that need to be fixed</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Description</th><th colspan="1" class="confluenceTh">JIRA Ticket</th></tr><tr><td class="confluenceTd"><br/><span style="color: rgb(23,43,77);">The hole deck graphic on the drill intervals screen seems to be intended to have some tap functionality however it is not working correctly. this is the case in  2.06, 2.07 and the current release.</span></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>
+<span class="jira-issue lock-jira-issue OFDRILL-6"
+      data-jira-key="OFDRILL-6" >
+        <a class=issue-link" href="https://jira.hexagonmining.com/browse/OFDRILL-6?src=confmacro">OFDRILL-6</a>
+        <span class="oauth-msg"> -
+            <a class="static-oauth-init" href="https://confluence.hexagonmining.com/plugins/servlet/applinks/oauth/login-dance/authorize?applicationLinkID=ab53f6db-1037-3a9d-bb3c-d8ebd242d4b5">Autenticar</a> para ver datos del tique
+        </span>
+    </span>
+</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><span style="color: rgb(23,43,77);">When modifying a holes intervals, not all the information created is being uploaded correctly. It's also unclear at what point the information is flagged for upload.</span></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>
+<span class="jira-issue lock-jira-issue OFDRILL-7"
+      data-jira-key="OFDRILL-7" >
+        <a class=issue-link" href="https://jira.hexagonmining.com/browse/OFDRILL-7?src=confmacro">OFDRILL-7</a>
+        <span class="oauth-msg"> -
+            <a class="static-oauth-init" href="https://confluence.hexagonmining.com/plugins/servlet/applinks/oauth/login-dance/authorize?applicationLinkID=ab53f6db-1037-3a9d-bb3c-d8ebd242d4b5">Autenticar</a> para ver datos del tique
+        </span>
+    </span>
+</p></div></td></tr><tr><td colspan="1" class="confluenceTd"><span style="color: rgb(23,43,77);">The information shown in MiDrill sometimes does not fit with the width of the smaller tablets.</span></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>
+<span class="jira-issue lock-jira-issue OFDRILL-13"
+      data-jira-key="OFDRILL-13" >
+        <a class=issue-link" href="https://jira.hexagonmining.com/browse/OFDRILL-13?src=confmacro">OFDRILL-13</a>
+        <span class="oauth-msg"> -
+            <a class="static-oauth-init" href="https://confluence.hexagonmining.com/plugins/servlet/applinks/oauth/login-dance/authorize?applicationLinkID=ab53f6db-1037-3a9d-bb3c-d8ebd242d4b5">Autenticar</a> para ver datos del tique
+        </span>
+    </span>
+</p></div></td></tr></tbody></table></div><p><br/></p><p><br/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216285566/216285577.jpg">Screenshot_20200211-094315_Drill[1].jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216285566/216285578.jpg">Screenshot_20200211-094500_Drill[1].jpg</a> (image/jpeg)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

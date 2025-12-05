@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : Android Device Recognition Library Architecture</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="TDoc---BeaconScan_231279427.html">TDoc - BeaconScan</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : Android Device Recognition Library Architecture
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (crsa)</span>, last modified on nov 17, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="confluence-information-macro confluence-information-macro-warning"><p class="title conf-macro-render">Work in Progress</p><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This document is a work in progress and should not be taken as the final definition</p></div></div><h1 id="AndroidDeviceRecognitionLibraryArchitecture-Overview">Overview</h1><p>This document is to provide a high-level overview of the architecture for an android library to be able to recognise devices and match then to physical things such as locations and equipment.</p><h1 id="AndroidDeviceRecognitionLibraryArchitecture-Design">Design</h1><h2 id="AndroidDeviceRecognitionLibraryArchitecture-High-LevelArchitecture">High-Level Architecture</h2><p>The below diagram illustrates the high level architecture of the various libraries and responsibilities of the different parts of the product. The key elements of the below diagram are:</p><ul><li>The libraries will all be native android java libraries so they can be re-used across different products</li><li>Each of the Monitor libraries will implement the same interfaces regardless of technology being monitored<ul><li>These interfaces are defined in the Monitor API</li></ul></li><li><p>The app consuming the library is responsible for all configuration, initialisation, data storage, and transmission to server.</p></li></ul><p>
+
+<map id="gliffy-map-250359281-5347" name="gliffy-map-250359281-5347"></map>
+<table width="100%" class="gliffy-macro-table">
+    <tr>
+        <td >
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+                                    </caption>
+                <tr>
+                    <td>
+                        <img style="border: none; width: 901px;" usemap="#gliffy-map-250359281-5347" src="attachments/250359278/250359282.png" alt="" class="gliffy-macro-image"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+</p><h2 id="AndroidDeviceRecognitionLibraryArchitecture-MonitorAPI">Monitor API</h2><p>This section defines the generic interfaces and base classes that are implemented in each of the Monitoring libraries</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: RDark" data-theme="RDark">/**
+ * The interface that all nearby device monitor should implement
+ * e.g Bluetooth, WIFI
+ */
+public interface Monitor {
+    /**
+     * The constructor of the monitor
+     * On init, if the discovery can start (dependencies are met), then start.
+     *
+     * @param context  the application context
+     * @param config   the monitor config
+     * @param observer the observer callback to notify nearby-device-monitor of changes
+     * @throws Exception the exception
+     */
+    void init(@NonNull final Context context, @NonNull MonitorConfig config, @NonNull MonitorObserver observer) throws Exception;
+
+
+    /**
+     * Set the monitor config.
+     * On set, the monitor is expected to use the new config provided
+     *
+     * @param config the monitor config
+     * @throws Exception the exception
+     */
+    void setConfig(MonitorConfig config) throws Exception;
+
+    /**
+     * Determine if the monitor can run
+     * e.g dependencies are met like location permission, bluetooth enabled..
+     *
+     * @return true if ok
+     */
+    boolean isAvailable();
+
+    /**
+     * Find the visible item from the active monitors
+     *
+     * @param id the item id to find
+     * @return the item if found or null
+     */
+    Item getItem(@NonNull String id);
+
+    /**
+     * Get all the visible items from the active monitors
+     *
+     * @return the collection of active items
+     */
+    List&lt;Item&gt; getItems();
+}
+
+/**
+ * The configuration that the monitor uses
+ */
+public class MonitorConfig {
+    /**
+     * The configuration for categorising signal strength buckets
+     */
+    public List&lt;SignalStrengthBand&gt; signalStrengthBands;
+
+
+    /**
+     * Scan report delay in ms
+     * See &lt;a href=&quot;https://developer.android.com/reference/android/bluetooth/le/ScanFilter.Builder.html#setDeviceAddress(java.lang.String)&quot;&gt;&lt;/a&gt;
+     */
+    public List&lt;String&gt; filterDeviceAddresses;
+
+    /**
+     * Scan report delay in ms
+     * See &lt;a href=&quot;https://developer.android.com/reference/android/bluetooth/le/ScanSettings.html#getReportDelayMillis()&quot;&gt;&lt;/a&gt;
+     */
+    public int pollingRate;
+}
+
+/**
+ * Container class to hold the signal strength band configuration
+ */
+class SignalStrengthBand {
+    int id;
+    String name;
+    int minValue;
+    int maxValue;
+}
+
+/**
+ * The monitor callback for observable to notify observer of updates
+ */
+public interface MonitorObserver {
+    /**
+     * Monitor found an item and notify
+     *
+     * @param item the item found
+     */
+    void itemFound(Item item);
+
+
+    /**
+     * Monitor previously found item is now lost and notify
+     *
+     * @param item the item now lost
+     */
+    void itemLost(Item item);
+
+    /**
+     * Monitor item state has changed and notify
+     *
+     * @param item          the item with updated state
+     * @param previousState the item old state
+     */
+    void itemStateChange(Item item, ItemState previousState);
+}
+
+/**
+ * Generic item class found by the monitor
+ */
+public class Item {
+    /**
+     * The monitor interface name
+     */
+    private final String interfaceName;
+
+    String id;
+
+    private String name;
+
+    ItemState state;
+}
+
+/**
+ * The item state
+ * Holds the item current state representation
+ */
+public class ItemState {
+    private boolean isVisible;
+
+    private int signalStrength;
+
+    private Date timeStamp;
+
+    private SignalStrengthBand signalStrengthBand;
+}</pre>
+</div></div><h3 id="AndroidDeviceRecognitionLibraryArchitecture-SequenceDiagramforBluetoothScanning">Sequence Diagram for Bluetooth Scanning</h3><p>The below sequence diagram is to illustrate the various events that occur at the different layers of the library. Monitors like BluetoothMonitor publish events based on what it can see, whereas the NearbyDeviceMonitor passes through the raw monitor events as well as have device specific events.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class="code-title">Sequence Diagram Source</b><span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Ampliar origen</span></span><span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar">
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: yml; gutter: false; theme: RDark; collapse: true" data-theme="RDark">title Bluetooth Monitoring Scan Handling
+
+participant App
+participant NearbyDeviceMonitor
+participant BluetoothMonitor
+
+opt init
+    App-&gt;NearbyDeviceMonitor: init
+    note over NearbyDeviceMonitor: DeviceMap [B,X], [E,Y]
+    NearbyDeviceMonitor-&gt;BluetoothMonitor: init
+end
+
+opt Scan 1
+    BluetoothMonitor-&gt;BluetoothMonitor: Scan [A, B, C]
+    note right of BluetoothMonitor: items [A, B, C]
+    BluetoothMonitor-&gt;NearbyDeviceMonitor: Event: Found A
+    note over NearbyDeviceMonitor: Check Device map for A =&gt; none\nNearby Devices none
+    NearbyDeviceMonitor-&gt;App: Event ItemFound A
+    BluetoothMonitor-&gt;NearbyDeviceMonitor: Event: Found B
+    note over NearbyDeviceMonitor: Check Device map for B =&gt; X\nNearby Devices [X]
+    NearbyDeviceMonitor-&gt;App: Event ItemFound B
+    NearbyDeviceMonitor-&gt;App: Event DeviceFound X
+    BluetoothMonitor-&gt;NearbyDeviceMonitor: Event: Found C
+    note over NearbyDeviceMonitor: Check Device map for C =&gt; none\nNearby Devices [X]
+    NearbyDeviceMonitor-&gt;App: Event ItemFound C
+end
+
+opt Scan 2
+    BluetoothMonitor-&gt;BluetoothMonitor: Scan [A, B, E]
+    note right of BluetoothMonitor: items [A, B, E]
+    BluetoothMonitor-&gt;NearbyDeviceMonitor: Event: Lost C
+    note over NearbyDeviceMonitor: Check Device map for C =&gt; none\nNearby Devices [X]
+    NearbyDeviceMonitor-&gt;App: Event ItemLost C
+    BluetoothMonitor-&gt;NearbyDeviceMonitor: Event: Found E
+    note over NearbyDeviceMonitor: Check Device map for E =&gt; Y\nNearby Devices [X,Y]
+    NearbyDeviceMonitor-&gt;App: Event ItemFound E
+    NearbyDeviceMonitor-&gt;App: Event DeviceFound Y
+end
+
+opt Scan 3
+    BluetoothMonitor-&gt;BluetoothMonitor: Scan [A, E]
+    note right of BluetoothMonitor: items [A, E]
+    BluetoothMonitor-&gt;NearbyDeviceMonitor: Event: Lost B
+    note over NearbyDeviceMonitor: Check Device map for B =&gt; X\nNearby Devices [Y]
+    NearbyDeviceMonitor-&gt;App: Event ItemLost B
+    NearbyDeviceMonitor-&gt;App: Event DeviceLost X
+end
+
+opt Scan 4
+    BluetoothMonitor-&gt;BluetoothMonitor: Scan [A, E]
+    note right of BluetoothMonitor: items [A, E]
+    BluetoothMonitor-&gt;NearbyDeviceMonitor: Event: StateChanged E
+    note over NearbyDeviceMonitor: Check Device map for E =&gt; Y\nNearby Devices [Y]
+    NearbyDeviceMonitor-&gt;App: Event ItemStateChanged E
+    NearbyDeviceMonitor-&gt;App: Event DeviceStateChanged Y
+end</pre>
+ </div>
+</div><p><br class="atl-forced-newline"/><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" draggable="false" src="https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgQmx1ZXRvb3RoIE1vbml0b3JpbmcgU2NhbiBIYW5kbGluZwoKcGFydGljaXBhbnQgQXBwAAMNTmVhcmJ5RGV2aWNlADsHACMNAFcJABUICm9wdCBpbml0CiAgICBBcHAtPgAxEzoAGQpub3RlIG92ZXIAWBQ6IAB0B2FwIFtCLFhdLCBbRSxZXQBYBQCBCRMtPgCBARAAYwdlbmQAgRUGAIF3BTEAgRgFAIEsEAApFACCJgVbQSwgQiwgQwBxBgCBLAVyaWdodCBvZgCBcBE6IGl0ZW1zACUPAFkSAIIAFUV2ZW50OiBGb3VuZCBBAIF7JENoZWNrAIIeByBtYXAgZm9yIEEgPT4gbm9uZVxuAIM6BgCCPwdzABAFAIIiGkFwcAB9ByBJdGVtAHsMAIENNEIAgQg5QiA9PiBYAIEtEVtYAINeGwCBKBUAfQYAgU0gAIVZBgCCcAZYAIJ3OUMAgnc5QwCDFxkAgUAyQwCFXA8yAIU2NUUAhTgzAC0HAIU9Lkxvc3QAgTmBAQB6CwCGdTRFAIZwOUUgPT4gWQCFVRMAiUYdAIcSFQCAfwYAhT4sWQCKBg8zAIljMgCDdjEAg2o6AId7UgCCOCsAdwsAiCYmAIVSBVgAjGcPNACBSYEYU3RhdGVDaGFuZ2UAhHpUAIUhKwB3EwCLFyYAgTYNAIVVBQ&amp;s=default" data-image-src="https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgQmx1ZXRvb3RoIE1vbml0b3JpbmcgU2NhbiBIYW5kbGluZwoKcGFydGljaXBhbnQgQXBwAAMNTmVhcmJ5RGV2aWNlADsHACMNAFcJABUICm9wdCBpbml0CiAgICBBcHAtPgAxEzoAGQpub3RlIG92ZXIAWBQ6IAB0B2FwIFtCLFhdLCBbRSxZXQBYBQCBCRMtPgCBARAAYwdlbmQAgRUGAIF3BTEAgRgFAIEsEAApFACCJgVbQSwgQiwgQwBxBgCBLAVyaWdodCBvZgCBcBE6IGl0ZW1zACUPAFkSAIIAFUV2ZW50OiBGb3VuZCBBAIF7JENoZWNrAIIeByBtYXAgZm9yIEEgPT4gbm9uZVxuAIM6BgCCPwdzABAFAIIiGkFwcAB9ByBJdGVtAHsMAIENNEIAgQg5QiA9PiBYAIEtEVtYAINeGwCBKBUAfQYAgU0gAIVZBgCCcAZYAIJ3OUMAgnc5QwCDFxkAgUAyQwCFXA8yAIU2NUUAhTgzAC0HAIU9Lkxvc3QAgTmBAQB6CwCGdTRFAIZwOUUgPT4gWQCFVRMAiUYdAIcSFQCAfwYAhT4sWQCKBg8zAIljMgCDdjEAg2o6AId7UgCCOCsAdwsAiCYmAIVSBVgAjGcPNACBSYEYU3RhdGVDaGFuZ2UAhHpUAIUhKwB3EwCLFyYAgTYNAIVVBQ&amp;s=default"></span><br class="atl-forced-newline"/><br class="atl-forced-newline"/></p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><td class="confluenceTd"><p><strong>Jira Issue</strong></p></td><td class="confluenceTd"><p><strong>Description/ Acceptance Criteria</strong></p></td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p>Endpoints in Mine Enterprise [ <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="16" width="16" src="attachments/250359278/250359279.png" data-image-src="attachments/250359278/250359279.png" data-unresolved-comment-count="0" data-linked-resource-id="250359279" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="worddav2af46e8b37120a74f35b0d06ee6a5aeb.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="250359278" data-linked-resource-container-version="2" alt=""></span> <span style="color: rgb(0,0,238);"><span style="text-decoration: underline;">MAF-7385</span></span></p></div></td><td class="confluenceTd"><p>http://projects.miint.com.au/browse/MIAPP-63?src=confmacro] Done</p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p>MiApp - Sync data and config to server [ <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="16" width="16" src="attachments/250359278/250359279.png" data-image-src="attachments/250359278/250359279.png" data-unresolved-comment-count="0" data-linked-resource-id="250359279" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="worddav2af46e8b37120a74f35b0d06ee6a5aeb.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="250359278" data-linked-resource-container-version="2" alt=""></span> <span style="color: rgb(0,0,238);"><span style="text-decoration: underline;">MIBEAC-11</span></span></p></div></td><td class="confluenceTd"><p>http://projects.miint.com.au/browse/MIAPP-64?src=confmacro] Done</p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p>MiApp - Consume MiFi library and implement utility to initialize and interact with library [ <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="16" width="16" src="attachments/250359278/250359279.png" data-image-src="attachments/250359278/250359279.png" data-unresolved-comment-count="0" data-linked-resource-id="250359279" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="worddav2af46e8b37120a74f35b0d06ee6a5aeb.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="250359278" data-linked-resource-container-version="2" alt=""></span> <span style="color: rgb(0,0,238);"><span style="text-decoration: underline;">MIAPP-65</span></span></p></div></td><td class="confluenceTd"><p>http://projects.miint.com.au/browse/MIAPP-65] Done</p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p>Implement Cordova wrapper over library [ <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="16" width="16" src="attachments/250359278/250359279.png" data-image-src="attachments/250359278/250359279.png" data-unresolved-comment-count="0" data-linked-resource-id="250359279" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="worddav2af46e8b37120a74f35b0d06ee6a5aeb.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="250359278" data-linked-resource-container-version="2" alt=""></span> <span style="color: rgb(0,0,238);"><span style="text-decoration: underline;">NDM-3</span></span></p></div></td><td class="confluenceTd"><p>http://projects.miint.com.au/browse/MIAPP-66?src=confmacro] Done</p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p>Implement Device Recognition Library [ <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="16" width="16" src="attachments/250359278/250359279.png" data-image-src="attachments/250359278/250359279.png" data-unresolved-comment-count="0" data-linked-resource-id="250359279" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="worddav2af46e8b37120a74f35b0d06ee6a5aeb.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="250359278" data-linked-resource-container-version="2" alt=""></span> <span style="color: rgb(0,0,238);"><span style="text-decoration: underline;">NDM-2</span></span></p></div></td><td class="confluenceTd"><p>http://projects.miint.com.au/browse/MIAPP-67?src=confmacro] Done</p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><div class="content-wrapper"><p>Implement Bluetooth Monitoring Library [ <span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="16" width="16" src="attachments/250359278/250359279.png" data-image-src="attachments/250359278/250359279.png" data-unresolved-comment-count="0" data-linked-resource-id="250359279" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="worddav2af46e8b37120a74f35b0d06ee6a5aeb.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="250359278" data-linked-resource-container-version="2" alt=""></span> <span style="color: rgb(0,0,238);"><span style="text-decoration: underline;">NDM-1</span></span></p></div></td><td class="confluenceTd"><p>http://projects.miint.com.au/browse/MIAPP-68?src=confmacro] Done</p></td><td class="confluenceTd"><p><br/></p></td></tr></tbody></table></div><p><br class="atl-forced-newline"/><br class="atl-forced-newline"/><br class="atl-forced-newline"/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/250359278/250359277.png">worddavaf485e25f57cd86bb5b0fc63f3f1b1cc.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/250359278/250359279.png">worddav2af46e8b37120a74f35b0d06ee6a5aeb.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/250359278/250359281">android_device_recognition_high_level_architecture</a> (application/gliffy+json)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/250359278/250359282.png">android_device_recognition_high_level_architecture.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

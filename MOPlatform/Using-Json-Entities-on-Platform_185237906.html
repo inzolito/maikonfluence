@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HxGN MineOperate Platform : Using Json Entities on Platform</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">HxGN MineOperate Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="HxGN-MineOperate-Platform-Home_181605958.html">HxGN MineOperate Platform Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_181605960.html">Technical Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            HxGN MineOperate Platform : Using Json Entities on Platform
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> TEODORO Eduardo</span>, last modified on oct 23, 2018
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="UsingJsonEntitiesonPlatform-Introduction">Introduction</h1><p>One of the greatest benefits of NoSQL databases, the use of unstructured data, can also be achieved using Postgres.</p><p>Postgres offers a native support to Json columns and it's possible to query over Json properties and values using SQL queries. This provides great value, allowing to get the benefits of using regular scalar columns and json objects.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Attention: It is not recommended to map entities purely as Json, the good standard is to use one Json column on a regular table, to store extra generic values, or a list of detailed items of the entity or some unstructured data.</p><p>Data that is heavily used on queries or in business logic should be mapped as regular columns. Json objects usually are data used for analysis or on a &quot;Details&quot; view.</p></div></div><h1 id="UsingJsonEntitiesonPlatform-howtomapaJsonpropertyonPlatform">how to map a Json property on Platform</h1><p>There is a specific type on platform to intermediate Json columns with the database. The type is: <strong>JsonEntity</strong></p><p>To map a Json property just use the regular platform mapping and declare the Json property as JsonEntity. e.g.:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">    [Table(&quot;HM_TEST&quot;,&quot;JSON_COLUMN_TEST&quot;)]
+    public class JsonTestEntity : clBaseEntity
+    {
+        [Column]
+        public int RegularProperty { get; set; }
+
+        [Column]
+        public JsonEntity ExtraValues { get; set; }
+    }</pre>
+</div></div><p class="auto-cursor-target">You can see a practical example of use on Platform unit tests. Just look for <strong>public void TestJsonEntity() </strong>on test class<strong> PersistenceTests</strong>.</p><p>To use the Json property on C# code use the method GetValue&lt;T&gt;() where T is the C# type corresponding to the stored JSON.</p><p>The deserialization will occurs on first use of the GetValue, after that the value will be cached.</p><p>The corresponding Json is available on property Json, when this property is set the internal cache is reset.</p><p>When a instance is set using SetValue(object Value) method, the object is immediately serialized and the result will reflect on Json property.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">   var entity = new JsonTestEntity();
+   entity.ExtraValues = new JsonEntity();
+   entity.ExtraValues.SetValue(new TimeseriesEntity { Date = DateTime.Now, SensorID = 1, Value = 10 });
+
+   Persistence.Insert(entity);
+
+   var result = Persistence.Select&lt;JsonTestEntity&gt;(null, null).FirstOrDefault();
+   Console.WriteLine(result.ExtraValues.GetValue&lt;TimeseriesEntity&gt;().Date);
+   Console.WriteLine(result.ExtraValues.GetValue&lt;TimeseriesEntity&gt;().Value);</pre>
+</div></div><h1 id="UsingJsonEntitiesonPlatform-HowtoqueryJsoncolumnsusingSQL">How to query Json columns using SQL</h1><p>The basic operator to access properties of Json entites, are &quot;-&gt;&quot; and &quot;-&gt;&gt;&quot;. The difference between them, it that the first returns a Json element (you can get into sub-elements) while the second returns Text.</p><div class="table-wrap"><table style="margin-left: 0.0px;" class="confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><thead><tr><th class="confluenceTh">Operator</th><th class="confluenceTh">Right Operand Type</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th><th class="confluenceTh">Example Result</th></tr></thead><tbody><tr><td class="confluenceTd">-&gt;</td><td class="confluenceTd">int</td><td class="confluenceTd">Get JSON array element (indexed from zero, negative integers count from the end)</td><td class="confluenceTd">'[{&quot;a&quot;:&quot;foo&quot;},{&quot;b&quot;:&quot;bar&quot;},{&quot;c&quot;:&quot;baz&quot;}]'::json-&gt;2</td><td class="confluenceTd">{&quot;c&quot;:&quot;baz&quot;}</td></tr><tr><td class="confluenceTd">-&gt;</td><td class="confluenceTd">text</td><td class="confluenceTd">Get JSON object field by key</td><td class="confluenceTd">'{&quot;a&quot;: {&quot;b&quot;:&quot;foo&quot;}}'::json-&gt;'a'</td><td class="confluenceTd">{&quot;b&quot;:&quot;foo&quot;}</td></tr><tr><td class="confluenceTd">-&gt;&gt;</td><td class="confluenceTd">int</td><td class="confluenceTd">Get JSON array element as text</td><td class="confluenceTd">'[1,2,3]'::json-&gt;&gt;2</td><td class="confluenceTd">3</td></tr><tr><td class="confluenceTd">-&gt;&gt;</td><td class="confluenceTd">text</td><td class="confluenceTd">Get JSON object field as text</td><td class="confluenceTd">'{&quot;a&quot;:1,&quot;b&quot;:2}'::json-&gt;&gt;'b'</td><td class="confluenceTd">2</td></tr><tr><td class="confluenceTd">#&gt;</td><td class="confluenceTd">text[]</td><td class="confluenceTd">Get JSON object at specified path</td><td class="confluenceTd">'{&quot;a&quot;: {&quot;b&quot;:{&quot;c&quot;: &quot;foo&quot;}}}'::json#&gt;'{a,b}'</td><td class="confluenceTd">{&quot;c&quot;: &quot;foo&quot;}</td></tr><tr><td class="confluenceTd">#&gt;&gt;</td><td class="confluenceTd">text[]</td><td class="confluenceTd">Get JSON object at specified path as text</td><td class="confluenceTd">'{&quot;a&quot;:[1,2,3],&quot;b&quot;:[4,5,6]}'::json#&gt;&gt;'{a,2}'</td><td class="confluenceTd">3</td></tr></tbody></table></div><p class="auto-cursor-target">See more on: <a class="external-link" href="https://www.postgresql.org/docs/9.6/static/functions-json.html" rel="nofollow">https://www.postgresql.org/docs/9.6/static/functions-json.html</a></p><p>Scripts to do some quick tests:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: false; theme: Confluence" data-theme="Confluence">create table json_test (id serial not null, value int, extra_values json);
+insert into json_test (value, extra_values) values (100, &#39;{&quot;date&quot;:&quot;2018-10-23T01:00:00Z&quot;,&quot;sensorID&quot;:1,&quot;value&quot;:10.0,&quot;desc&quot;:&quot;Test 1&quot;}&#39;);
+insert into json_test (value, extra_values) values (200, &#39;{&quot;date&quot;:&quot;2018-10-23T02:00:00Z&quot;,&quot;sensorID&quot;:2,&quot;value&quot;:20.0,&quot;desc&quot;:&quot;Test 2&quot;}&#39;);
+insert into json_test (value, extra_values) values (300, &#39;{&quot;date&quot;:&quot;2018-10-23T03:00:00Z&quot;,&quot;sensorID&quot;:3,&quot;value&quot;:30.0,&quot;desc&quot;:&quot;Test 3&quot;}&#39;);
+insert into json_test (value, extra_values) values (400, &#39;{&quot;date&quot;:&quot;2018-10-23T04:00:00Z&quot;,&quot;user&quot;:{&quot;name&quot;:&quot;John&quot;,&quot;age&quot;:30}}&#39;);
+
+select * from json_test;
+
+select value, extra_values-&gt;&#39;desc&#39; as description from json_test;
+select value, extra_values-&gt;&#39;value&#39; as description from json_test;
+select value, cast(extra_values-&gt;&gt;&#39;value&#39; as numeric) as description from json_test where cast(extra_values-&gt;&gt;&#39;value&#39; as numeric) = 10;
+select extra_values-&gt;&#39;user&#39;-&gt;&gt;&#39;name&#39; as user, extra_values-&gt;&#39;user&#39;-&gt;&gt;&#39;age&#39; as age from json_test where extra_values-&gt;&#39;user&#39; is not null;
+
+drop table json_test;</pre>
+</div></div>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:25</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

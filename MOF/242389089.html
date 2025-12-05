@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : How To: Setup a MineOperate Foundation Development Environment</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="FAQ_226755310.html">FAQ</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : How To: Setup a MineOperate Foundation Development Environment
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified by <span class='editor'> Usuario desconocido (wchan)</span> on sept 28, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="HowTo:SetupaMineOperateFoundationDevelopmentEnvironment-Repositories">Repositories</h2><p>You will need access to the following Repositories/Projects</p><p>Ensure you are able to connect the Bitbucket (MiPlan and Hexagon)</p><p>Foundation Apps are located on <a class="external-link" href="https://bitbucket.org/miplandev/workspace/projects/MAL" rel="nofollow">https://bitbucket.org/miplandev</a></p><p>You will also require access to the Hexagon Bitbucket (<a class="external-link" href="https://bitbucket.hexagonmining.com/" rel="nofollow">https://bitbucket.hexagonmining.com/</a>) and Bamboo (<a class="external-link" href="http://bamboo.miint.com.au/allPlans.action" rel="nofollow">bamboo.miint.com.au/allPlans.action</a>)</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Project/Repository</th><th colspan="1" class="confluenceTh">Description</th><th class="confluenceTh">URL</th><th colspan="1" class="confluenceTh">Comment</th></tr><tr><td colspan="1" class="confluenceTd">MiPlan Legacy</td><td colspan="1" class="confluenceTd">Contains source code for the Foundation Apps</td><td colspan="1" class="confluenceTd"><a class="external-link" href="https://bitbucket.org/miplandev/workspace/projects/MAL" rel="nofollow">https://bitbucket.org/miplandev/workspace/projects/MAL</a></td><td rowspan="3" style="text-align: center;" class="confluenceTd"><div class="content-wrapper"><p><br/></p></div>Contact IT to get access</td></tr><tr><td colspan="1" class="confluenceTd">MineEnterprise</td><td colspan="1" class="confluenceTd">Contains the source code for MineEnterprise</td><td colspan="1" class="confluenceTd"><a class="external-link" href="https://bitbucket.org/miplandev/workspace/projects/ME" rel="nofollow">https://bitbucket.org/miplandev/workspace/projects/ME</a></td></tr><tr><td colspan="1" class="confluenceTd">Live Health</td><td colspan="1" class="confluenceTd">Equipment Health Protocols</td><td colspan="1" class="confluenceTd"><a class="external-link" href="https://bitbucket.hexagonmining.com/projects/LH" rel="nofollow">https://bitbucket.hexagonmining.com/projects/LH</a></td></tr></tbody></table></div><p><br/></p><h2 id="HowTo:SetupaMineOperateFoundationDevelopmentEnvironment-SettingupanAndroidDevEnvironment">Setting up an Android Dev Environment</h2><ul><li>Install OpenJDK 8.<ul><li>Builds can be found here <a class="external-link" href="https://adoptopenjdk.net/" rel="nofollow">https://adoptopenjdk.net/</a>. Install the relevant builds for the operating system.</li><li>If installing on windows, the JDK binary path will need to be set in the JAVA_HOME environment variable.</li></ul></li><li>Install Android Studio<ul><li><a class="external-link" href="https://developer.android.com/studio" rel="nofollow">https://developer.android.com/studio</a></li><li>Using the SDK Manager, install SDK for at least Android 7, 8, 9,10 and 11.</li><li>use the SDK Manager to install Android SDK Tools, Platform-Tools and SDK Build Tools and the Android NDK tools</li><li>If installing on windows, the SDK path will needs to be set in ANDROID_HOME environment variables. the SDK\platform-tools and tools needs to be set in the PATH variables</li><li>If installing on windows, the NDK path will needs to be set in ANDROID_NDK_HOME environment variables. Considering the compatibility issue,  a legacy NDK version (ie 20.0.5594570) will needs to be downloaded using SDK Manager. </li><li>Optionally ensure that Android Emulator is also installed.</li></ul></li></ul><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389089/242389079.png" data-image-src="attachments/242389089/242389079.png" data-unresolved-comment-count="0" data-linked-resource-id="242389079" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-29_12-54-58.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389089" data-linked-resource-container-version="14" alt=""></span></p><p><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389089/242389080.png" data-image-src="attachments/242389089/242389080.png" data-unresolved-comment-count="0" data-linked-resource-id="242389080" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-29_12-56-52.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389089" data-linked-resource-container-version="14" alt=""></span></p><p><br/></p><h2 id="HowTo:SetupaMineOperateFoundationDevelopmentEnvironment-SettingupNodeEnvironment">Setting up Node Environment</h2><p>Foundation apps are essentially Node Application that use <a class="external-link" href="https://cordova.apache.org/docs/en/9.x/guide/overview/index.html" rel="nofollow">Cordova</a> to communicate and work in an Android environment. </p><ul><li>Install Node<ul><li>Install the LTS from <a class="external-link" href="https://nodejs.org/en/" rel="nofollow">https://nodejs.org/en/</a>. Which at the time of writing this doc is 14.17.1.</li><li>Optionally you could install NVM - <a class="external-link" href="https://github.com/nvm-sh/nvm" rel="nofollow">https://github.com/nvm-sh/nvm</a>.<ul><li>This allows an easy mechanism to switch different versions of Node.</li></ul></li></ul></li></ul><p><br/></p><h2 id="HowTo:SetupaMineOperateFoundationDevelopmentEnvironment-InstallMineEnterprise">Install Mine Enterprise</h2><p>Mine Enterprise is the back-end for the Foundation Apps.  There is already an <a href="https://confluence.hexagonmining.com/display/ETA/ETA+Dev+Onboarding" rel="nofollow">installation guide</a>  for setting up MineEnterprise.</p><ul><li>The apps require some basic configurations to already exist within MineEnterprise. <ul><li>For sake of convenience , use one of the existing backups from the already existing customers.</li><li>The list of customers and which apps they use is maintained by the <a href="https://confluence.hexagonmining.com/display/CCT/MineEnterprise+Release+Page" rel="nofollow">services team here</a>.<ul><li>If a more recent backup is required, or the existing backups don't work contact <a class="confluence-userlink user-mention" data-username="DUAC" href="https://confluence.hexagonmining.com/display/~DUAC" data-linked-resource-id="153753361" data-linked-resource-version="1" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">DUANE Chris</a>or <a class="confluence-userlink user-mention" data-username="alvs" href="https://confluence.hexagonmining.com/display/~alvs" data-linked-resource-id="228620781" data-linked-resource-version="1" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">ALVES Sergio</a></li></ul></li></ul></li></ul><p><br/></p><h2 id="HowTo:SetupaMineOperateFoundationDevelopmentEnvironment-SettingupCordovaEnvironment">Setting up Cordova Environment</h2><p>Starting version 4 all foundation apps list Cordova as a local dependency. However, to work with any previous versions of the apps Cordova will need to be installed globally. </p><p>Recommended version for Cordova is 7.1.0. To install Cordova globally.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: RDark" data-theme="RDark">&gt; npm i -g cordova@7.1.0</pre>
+</div></div><p><br/></p><h2 id="HowTo:SetupaMineOperateFoundationDevelopmentEnvironment-SettinguptheFoundationApps">Setting up the Foundation Apps</h2><p>Foundation Apps use <a class="external-link" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules" rel="nofollow">git submodules</a> for managing the Code base. When cloning the repository , ensure the submodules are also cloned.</p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: RDark" data-theme="RDark">&gt; git clone --recurse-submodules git@bitbucket.org:miplandev/mihaul.git</pre>
+</div></div><p>Or Alternatively, in case you forget to clone the submodules</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: RDark" data-theme="RDark">&gt; git clone git@bitbucket.org:miplandev/mihaul.git
+&gt; cd mihaul
+&gt; git submodule update --init --recursive</pre>
+</div></div><p><br/></p><h2 id="HowTo:SetupaMineOperateFoundationDevelopmentEnvironment-RunningtheFoundationAppsintheDevenvironment">Running the Foundation Apps in the Dev environment</h2><p>Connect either one of the Android Tablets via USB to the machine or start an Android Emulator using Android Studio.</p><p>You can test this by using <strong>adb. </strong>Once all the android SDK is installed, you should have access to it using the command line</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="125" src="attachments/242389089/242389140.png" data-image-src="attachments/242389089/242389140.png" data-unresolved-comment-count="0" data-linked-resource-id="242389140" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-29_14-36-8.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389089" data-linked-resource-container-version="14" alt=""></span></p><p><br/></p><p>After cloning the repository, cd in to the directory and then install all the dependencies</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: RDark" data-theme="RDark">&gt; cd mihaul
+&gt; npm i</pre>
+</div></div><p>Once all the dependencies are installed you should be able to deploy the apps to either the emulator or the connected Tablet</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: RDark" data-theme="RDark">&gt; npm run android</pre>
+</div></div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389089/242389079.png">image2021-6-29_12-54-58.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389089/242389080.png">image2021-6-29_12-56-52.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389089/242389140.png">image2021-6-29_14-36-8.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

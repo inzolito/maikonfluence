@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : Deploying Foundation Apps to Managed Play store</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="TDoc---Google-Play_242394308.html">TDoc - Google Play</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : Deploying Foundation Apps to Managed Play store
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified by <span class='editor'> TAN Lam Heng</span> on jul 03, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1764959168939 {padding: 0px;}
+div.rbtoc1764959168939 ul {margin-left: 0px;}
+div.rbtoc1764959168939 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1764959168939'>
+<ul class='toc-indentation'>
+<li><a href='#DeployingFoundationAppstoManagedPlaystore-BuildApp'>Build App</a></li>
+<li><a href='#DeployingFoundationAppstoManagedPlaystore-Background'>Background</a>
+<ul class='toc-indentation'>
+<li><a href='#DeployingFoundationAppstoManagedPlaystore-RelatedJIRAIssues'>Related JIRA Issues</a></li>
+</ul>
+</li>
+<li><a href='#DeployingFoundationAppstoManagedPlaystore-CreatingaPrivateApp'>Creating a Private App</a></li>
+<li><a href='#DeployingFoundationAppstoManagedPlaystore-UploadinganAPK'>Uploading an APK</a></li>
+<li><a href='#DeployingFoundationAppstoManagedPlaystore-ReleasingtheAppToaManagedPlayStore'>Releasing the App To a Managed PlayStore</a></li>
+<li><a href='#DeployingFoundationAppstoManagedPlaystore-References'>References</a></li>
+</ul>
+</div></p><h2 id="DeployingFoundationAppstoManagedPlaystore-BuildApp">Build App</h2><p>Building the app locally requires java 1.8 which has to be set in the path and can be run using &quot;npm run android --packageType=bundle&quot;. </p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347314426.png" data-image-src="attachments/242389970/347314426.png" data-unresolved-comment-count="0" data-linked-resource-id="347314426" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-1_13-20-28.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p>All apps are built for release in bamboo <a class="external-link" href="http://bamboo.miint.com.au/browse/MO" rel="nofollow">MineOperate: Project summary - Enterprise Team Bamboo (miint.com.au)</a></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347314421.png" data-image-src="attachments/242389970/347314421.png" data-unresolved-comment-count="0" data-linked-resource-id="347314421" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-1_13-14-14.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p>The version is named within the build for the apk. It will be set from the package.json from version 4.1 (circa 2023) onwards.</p><p>The package version sets the bundle version.</p><p>run android:release -- --password=${bamboo.keyPassword} --storePassword=${bamboo.keyPassword} --packageType=bundle</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347314422.png" data-image-src="attachments/242389970/347314422.png" data-unresolved-comment-count="0" data-linked-resource-id="347314422" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-1_13-15-23.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347314423.png" data-image-src="attachments/242389970/347314423.png" data-unresolved-comment-count="0" data-linked-resource-id="347314423" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-1_13-17-13.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p>At the end of the build you should have both an apk and an aab.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347315037.png" data-image-src="attachments/242389970/347315037.png" data-unresolved-comment-count="0" data-linked-resource-id="347315037" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-2_17-6-36.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p>Make sure you fill out the App Content</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347315039.png" data-image-src="attachments/242389970/347315039.png" data-unresolved-comment-count="0" data-linked-resource-id="347315039" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-2_17-8-41.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p>After filling out app content</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347315104.png" data-image-src="attachments/242389970/347315104.png" data-unresolved-comment-count="0" data-linked-resource-id="347315104" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-2_17-38-19.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p>Fill out testers</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347315110.png" data-image-src="attachments/242389970/347315110.png" data-unresolved-comment-count="0" data-linked-resource-id="347315110" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-2_17-45-43.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347315108.png" data-image-src="attachments/242389970/347315108.png" data-unresolved-comment-count="0" data-linked-resource-id="347315108" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-2_17-45-9.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="400" src="attachments/242389970/347315112.png" data-image-src="attachments/242389970/347315112.png" data-unresolved-comment-count="0" data-linked-resource-id="347315112" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-2_17-46-36.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p><a href="https://confluence.hexagonmining.com/pages/editpage.action?pageId=242389970" rel="nofollow">Deploying Foundation Apps to Managed Play store - Product: MineOperate Foundation - Hexagon's Mining division Confluence (hexagonmining.com)</a><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389970/347315529.png" data-image-src="attachments/242389970/347315529.png" data-unresolved-comment-count="0" data-linked-resource-id="347315529" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-2024-7-3_16-24-21.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="DeployingFoundationAppstoManagedPlaystore-Background">Background</h2><p>Few of the existing clients have encountered issues when attempting to deploy Foundation Apps to their own <a class="external-link" href="https://support.google.com/googleplay/work/answer/6138458?hl=en" rel="nofollow">managed Google PlayStore</a>.  Clients are unable to upload the apps to their managed PlayStore because of conflicting package name.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" draggable="false" alt="FMG_MiDrillAppError.PNG" height="150" src="https://jira.hexagonmining.com/secure/attachment/154041/FMG_MiDrillAppError.PNG" data-image-src="https://jira.hexagonmining.com/secure/attachment/154041/FMG_MiDrillAppError.PNG"></span></p><p><br/></p><p>Package names need to be unique, so multiple clients uploading the apps to their managed PlayStore leads to a conflict.</p><p><br/></p><h3 id="DeployingFoundationAppstoManagedPlaystore-RelatedJIRAIssues">Related JIRA Issues</h3><p>
+<span class="jira-issue lock-jira-issue ESUP-366"
+      data-jira-key="ESUP-366" >
+        <a class=issue-link" href="https://jira.hexagonmining.com/browse/ESUP-366?src=confmacro">ESUP-366</a>
+        <span class="oauth-msg"> -
+            <a class="static-oauth-init" href="https://confluence.hexagonmining.com/plugins/servlet/applinks/oauth/login-dance/authorize?applicationLinkID=ab53f6db-1037-3a9d-bb3c-d8ebd242d4b5">Autenticar</a> para ver datos del tique
+        </span>
+    </span>
+</p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="DeployingFoundationAppstoManagedPlaystore-CreatingaPrivateApp">Creating a Private App</h2><ul><li>Login to the <a class="external-link" href="https://play.google.com/console/u/0/developers/4646198293831974515/app-list" rel="nofollow">HXGN Google PlayStore</a>. Credentials can be found <a href="https://confluence.hexagonmining.com/pages/viewpage.action?pageId=242389892">here</a>.</li><li>On the Main Dashboard, click the CreateApp button</li><li><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389970/242389946.png" data-image-src="attachments/242389970/242389946.png" data-unresolved-comment-count="0" data-linked-resource-id="242389946" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-30_14-32-26.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></li><li>Complete the Form and click OK.<ul><li>This creates the app.</li><li>This app has not yet been released, and has no APK associated with it.</li><li><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389970/242389949.png" data-image-src="attachments/242389970/242389949.png" data-unresolved-comment-count="0" data-linked-resource-id="242389949" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-30_14-35-35.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></li></ul></li><li>Go the dashboard for the newly created App<ul><li>Go to <strong>Setup → advanced settings → Managed Google Play</strong></li><li>Turn it on and Save the changes.</li><li>This ensures that when the app is released to Production, it is not released to the public Google PlayStore.</li><li><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389970/242389950.png" data-image-src="attachments/242389970/242389950.png" data-unresolved-comment-count="0" data-linked-resource-id="242389950" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-30_14-40-53.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></li><li><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389970/242389951.png" data-image-src="attachments/242389970/242389951.png" data-unresolved-comment-count="0" data-linked-resource-id="242389951" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-30_14-41-32.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></li></ul></li></ul><p><br/></p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="DeployingFoundationAppstoManagedPlaystore-UploadinganAPK">Uploading an APK</h2><ul><li>Go the App dashboard</li><li>Select <strong>Production → Create Production Release</strong> <ul><li>Click on Manage App Signing<ul><li>Select <strong>Upload Key from Java KeyStore</strong></li><li>Follow the instruction and upload the generated zip file.</li><li>Click Continue</li><li>And then upload the APK for the App.</li></ul></li><li>If this is a private APP, then google should immediately verify that the APK is ready for deployment. </li></ul></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="DeployingFoundationAppstoManagedPlaystore-ReleasingtheAppToaManagedPlayStore">Releasing the App To a Managed PlayStore</h2><ul><li>Go the <strong style="letter-spacing: 0.0px;">Setup → advanced settings → Managed Google Play </strong>for the App<ul><li>Clients will need to provide the organisation ID.<ul><li>Clients can find their organisationID by logging into their Managed PlayStore going to admin settings</li></ul></li><li>Add the Provided OrganisationID to the list of Organisations.</li><li><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/242389970/242389975.png" data-image-src="attachments/242389970/242389975.png" data-unresolved-comment-count="0" data-linked-resource-id="242389975" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2021-6-30_15-22-8.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="242389970" data-linked-resource-container-version="12" alt=""></span></li><li>Based on current documentation, there is a cap on how many organisations can be added (currently it is 1000)</li><li>Click Save.</li></ul></li><li>Select <strong>Production → Create Production Release → Review Release → Release</strong><ul><li>This should deploy the app bundle to all the Listed organisations</li></ul></li></ul></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="DeployingFoundationAppstoManagedPlaystore-References">References</h2><ul><li><a class="external-link" href="https://support.google.com/googleplay/work/answer/6145139#zippy=%2Cregister-as-a-developer%2Cpublish-to-your-own-organization" rel="nofollow">https://support.google.com/googleplay/work/answer/6145139#zippy=%2Cregister-as-a-developer%2Cpublish-to-your-own-organization</a></li><li><a class="external-link" href="https://arsenb.wordpress.com/2020/07/01/how-to-publish-an-app-to-customers-managed-play-store-with-android-enterprise/" rel="nofollow">https://arsenb.wordpress.com/2020/07/01/how-to-publish-an-app-to-customers-managed-play-store-with-android-enterprise/</a></li></ul></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/242389946.png">image2021-6-30_14-32-26.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/242389949.png">image2021-6-30_14-35-35.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/242389950.png">image2021-6-30_14-40-53.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/242389951.png">image2021-6-30_14-41-32.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/242389975.png">image2021-6-30_15-22-8.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347314421.png">image-2024-7-1_13-14-14.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347314422.png">image-2024-7-1_13-15-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347314423.png">image-2024-7-1_13-17-13.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347314426.png">image-2024-7-1_13-20-28.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315037.png">image-2024-7-2_17-6-36.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315039.png">image-2024-7-2_17-8-41.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315104.png">image-2024-7-2_17-38-19.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315106.png">image-2024-7-2_17-40-33.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315108.png">image-2024-7-2_17-45-9.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315110.png">image-2024-7-2_17-45-43.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315112.png">image-2024-7-2_17-46-36.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/242389970/347315529.png">image-2024-7-3_16-24-21.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

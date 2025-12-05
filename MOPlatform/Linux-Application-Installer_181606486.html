@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HxGN MineOperate Platform : Linux Application Installer</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">HxGN MineOperate Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="HxGN-MineOperate-Platform-Home_181605958.html">HxGN MineOperate Platform Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_181605960.html">Technical Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Client-Applications-Management_181605965.html">Client Applications Management</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            HxGN MineOperate Platform : Linux Application Installer
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> NASCIMENTO Daniel</span>, last modified on ago 31, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><br/></p><h1 id="LinuxApplicationInstaller-Overview">Overview</h1><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This page is superseded by <a href="https://confluence.hexagonmining.com/display/TR/MASEP+TRM+-++Creating+app.sqfs+files+suitable+for+use+with+MASEP+installer">MASEP TRM - Creating app.sqfs files suitable for use with MASEP installer</a></p></div></div><p>This page outlines how we intend to implement the installer and updater for hexagon applications in embedded systems.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">The first project to adopt it will be the HxGN Asset Health but in future it tends to be defined as the standard tool.</div></div></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1764959136157 {padding: 0px;}
+div.rbtoc1764959136157 ul {margin-left: 0px;}
+div.rbtoc1764959136157 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1764959136157'>
+<ul class='toc-indentation'>
+<li><a href='#LinuxApplicationInstaller-Overview'>Overview</a></li>
+<li><a href='#LinuxApplicationInstaller-Requirements'>Requirements</a></li>
+<li><a href='#LinuxApplicationInstaller-HxGNapplicationpackageformat'>HxGN application package format</a>
+<ul class='toc-indentation'>
+<li><a href='#LinuxApplicationInstaller-Namingconvention'>Naming convention</a></li>
+</ul>
+</li>
+<li><a href='#LinuxApplicationInstaller-Usecases'>Use cases</a>
+<ul class='toc-indentation'>
+<li><a href='#LinuxApplicationInstaller-Bootstrapinstallation'>Bootstrap installation</a></li>
+<li><a href='#LinuxApplicationInstaller-Remoteupdate'>Remote update</a></li>
+<li><a href='#LinuxApplicationInstaller-Usbkeyinstallation'>Usbkey installation</a></li>
+</ul>
+</li>
+</ul>
+</div></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1 id="LinuxApplicationInstaller-Requirements">Requirements</h1><ul><li>Allow installation through usbkey</li><li>Allow installation during bootstrap</li><li>Be compatible with JAMS patch updates </li><li>Be able to install, update and remove applications and its set of dependencies</li></ul><h1 id="LinuxApplicationInstaller-HxGNapplicationpackageformat">HxGN application package format</h1><p><strong>Squashfs opkg package bundle</strong>: The remote installer will be able to install a list of packages provided by a opkg repository contained in a squashfs image for each architecture. The image must contain:</p><ul><li>A install.txt file containing a list of package that must be installed</li><li>A Package or Package.gz file containing the opkg repository info</li><li><a class="unresolved" href="#">1..N</a> ipk or deb packages</li><li><p><strong>Optional</strong>: </p><ul><li>pre-install - Run before packages be installed to prepare the enviroment (or backup anything) to receive the new packages</li><li>post-install - Run after packages be installed to fix the enviroment (or restore anything)</li></ul></li></ul><p><strong>JAMS patch updates backward compatibility bundle:</strong> The above squashfs image must be included inside a tar.gz file with:</p><ul><li>One squashfs image for each architecture </li><li>An install script </li></ul><h3 id="LinuxApplicationInstaller-Namingconvention">Naming convention</h3><p>The bundle of packages must follow this name rule:</p><ul><li>app-&lt;<em>HxGN Application name</em>&gt;_&lt;<em>architecture</em>&gt;_&lt;<em>version</em>&gt;.sqfs</li></ul><h1 id="LinuxApplicationInstaller-Usecases">Use cases</h1><h2 id="LinuxApplicationInstaller-Bootstrapinstallation">Bootstrap installation</h2><ul><li>The platform bootstrap will provide hooks to look for packages with squashfs bundle format and install them.<ul><li>In this step bundle should be installed in rootfs</li></ul></li></ul><h2 id="LinuxApplicationInstaller-Remoteupdate">Remote update</h2><ul><li>The installer will receive the squashfs bundle through one of the available download types <ul><li>In this step bundle can be installed in overlayfs</li></ul></li><li>For upgrades:<ul><li>The platform will provide a script that receiving a squashfs bundle format will now how to install it.</li></ul></li><li>For downgrades:<ul><li><strong>DEFINITION NEEDED</strong></li></ul></li></ul><h2 id="LinuxApplicationInstaller-Usbkeyinstallation">Usbkey installation</h2><ul><li>The platform will autorun a script to look for an squashfs bundle an apply it if needed<ul><li>In this step bundle should be installed in rootfs</li></ul></li></ul></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-208242415"></a>
+                                    <font class="smallfont"><p><a class="confluence-userlink user-mention" data-username="old" href="https://confluence.hexagonmining.com/display/~old" data-linked-resource-id="57934259" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">NASCIMENTO Daniel</a> , could you provide the necessary commands to execute the installer manually, when the automatic installer isn't ready to use ?</p><p><a class="confluence-userlink user-mention" data-username="NART" href="https://confluence.hexagonmining.com/display/~NART" data-linked-resource-id="139659250" data-linked-resource-version="2" data-linked-resource-type="userinfo" data-base-url="https://confluence.hexagonmining.com">QUEIROZ Arthur</a>, take a look</p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by CFAB at sept 18, 2019 09:13
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-208242452"></a>
+                                    <font class="smallfont"><p>To just install the bundle, run in a terminal:</p><pre>#&gt; /usr/sbin/mining_app_install app-&lt;bundle&gt;.sqfs</pre></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by old at sept 18, 2019 09:44
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:25</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

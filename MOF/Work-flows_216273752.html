@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : Work flows</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="TDoc---Dig_216270651.html">TDoc - Dig</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : Work flows
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (dask)</span>, last modified on ene 16, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Login WorkFlow</p><p><br/></p><p><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277088.png" data-image-src="attachments/216273752/216277088.png" data-unresolved-comment-count="0" data-linked-resource-id="216277088" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_10-33-35.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></p><ul><li>Operator: Populated using the MiDig specific PersonCategoryFilter module config</li><li>Equipment: Populated using the MiDig EquipmentTypeFilter module Config</li><li>Shift: Day/Night Shift</li><li>All Three fields are required<br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277090.png" data-image-src="attachments/216273752/216277090.png" data-unresolved-comment-count="0" data-linked-resource-id="216277090" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_10-39-26.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></li></ul><p><br/></p><p><br/></p><h3 id="Workflows-PreStarts">PreStarts</h3><p>Prestarts are configurable from Silverlight. </p><ul><li>EnablePreStart module config can be used to disable them. </li><li>AllowPreStartSkip can be used to make them mandatory</li></ul><p>Currently, Dig does not have any prestarts</p><h3 id="Workflows-EquipmentEngineHours">Equipment Engine Hours </h3><p>Configured from AllowEquipmentHoursSkip module config. Is a True/False value</p><p>Configured from the EquipmentHoursWriteBack Query in Silverlight</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277091.png" data-image-src="attachments/216273752/216277091.png" data-unresolved-comment-count="0" data-linked-resource-id="216277091" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_10-55-44.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></p><p><br/></p><h2 id="Workflows-CoreWorkFlow">Core WorkFlow</h2><ul><li>For the selected equipment type, if there are multiple Time Allocation Codes available, the user is prompted to make a selection.<ul><li>If there is only one, the app defaults to the Ready state for that Allocation Code.</li></ul></li></ul><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277092.png" data-image-src="attachments/216273752/216277092.png" data-unresolved-comment-count="0" data-linked-resource-id="216277092" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_10-58-17.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" draggable="false" height="250" src="attachments/216273752/216277093.png" data-image-src="attachments/216273752/216277093.png" data-unresolved-comment-count="0" data-linked-resource-id="216277093" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_11-0-36.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></p><p><br/></p><ul><li>StartSessionReasonCode (miDig) is used to configure the default time Allocation state. Provided there is only one Time Allocation Code for the equipment.<br/><br/></li></ul><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277095.png" data-image-src="attachments/216273752/216277095.png" data-unresolved-comment-count="0" data-linked-resource-id="216277095" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_11-25-52.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></p><p><br/></p><ul><li>Form 1 is a dynamic form, the fields are determined by the <strong>LoaderQuery</strong> Module config.</li><li>Any autocomplete's available is sourced from this query.<br/><br/></li></ul><h3 id="Workflows-BasicWorkFlow(ReadyState)">Basic WorkFlow (Ready State)</h3><ul><li>Populate the Source field. </li><li>Select an activity from the activity wheel (based on the value of the StartSessionReasonCode an activity might already be selected)<br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277097.png" data-image-src="attachments/216273752/216277097.png" data-unresolved-comment-count="0" data-linked-resource-id="216277097" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_11-43-3.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></li><li>Based on the source loctation Code, the rest of the fields are autopopulated.<ul><li>Cycling through the wheel, adds a new TimeAllocation activity.<ul><li>This gets persisted to the StagingTimeAllocations table.</li></ul><br/><br/></li></ul></li></ul><h3 id="Workflows-OtherStates">Other States</h3><ul><li>Selecting any of the other states prompts the user to specify the Time Allocation Code<br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277102.png" data-image-src="attachments/216273752/216277102.png" data-unresolved-comment-count="0" data-linked-resource-id="216277102" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_12-0-50.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></li><li>Additional information can be requested from the user, using the query specified in the <strong>StagingStateWriteback</strong> module config from MiTime<br/><br/><br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277103.png" data-image-src="attachments/216273752/216277103.png" data-unresolved-comment-count="0" data-linked-resource-id="216277103" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_12-9-45.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></li></ul><p><br/></p><p><br/></p><h2 id="Workflows-DownloadLocations">Download Locations</h2><ul><li>To Download new Locations, go to the download page<br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277105.png" data-image-src="attachments/216273752/216277105.png" data-unresolved-comment-count="0" data-linked-resource-id="216277105" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_12-13-55.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></li></ul><p><br/></p><ul><li>The Page groups the locations, using  the <strong>LoaderLocationsQuery </strong> module config.</li><li>Select the group header to download all locations under that group, or select individual location to download only the specific locations.<br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277107.png" data-image-src="attachments/216273752/216277107.png" data-unresolved-comment-count="0" data-linked-resource-id="216277107" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_12-25-14.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span><br/><br/></li><li>To search for a specific location, use the search bar to filter the list <br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277108.png" data-image-src="attachments/216273752/216277108.png" data-unresolved-comment-count="0" data-linked-resource-id="216277108" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_12-26-27.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span><br/><br/></li><li>A ReadOnly list of the all downloaded locations are visible if the download icon is clicked<br/><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/216273752/216277109.png" data-image-src="attachments/216273752/216277109.png" data-unresolved-comment-count="0" data-linked-resource-id="216277109" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2020-1-17_12-28-59.png" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/png" data-linked-resource-container-id="216273752" data-linked-resource-container-version="8" alt=""></span></li></ul><p><br/></p><p><br/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277088.png">image2020-1-17_10-33-35.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277090.png">image2020-1-17_10-39-26.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277091.png">image2020-1-17_10-55-44.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277092.png">image2020-1-17_10-58-17.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277093.png">image2020-1-17_11-0-36.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277095.png">image2020-1-17_11-25-52.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277097.png">image2020-1-17_11-43-3.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277102.png">image2020-1-17_12-0-50.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277103.png">image2020-1-17_12-9-45.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277104.png">image2020-1-17_12-13-25.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277105.png">image2020-1-17_12-13-55.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277106.png">image2020-1-17_12-24-40.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277107.png">image2020-1-17_12-25-14.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277108.png">image2020-1-17_12-26-27.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/216273752/216277109.png">image2020-1-17_12-28-59.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

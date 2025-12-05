@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate Foundation : TDoc - Haul Mass</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="211203146.html">Product: MineOperate Foundation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Technical-Documentation_216270643.html">Technical Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate Foundation : TDoc - Haul Mass
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Usuario desconocido (kins)</span>, last modified on jun 15, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="TDocHaulMass-MineEnterpriseHaulMassforMineOperateFoundation">MineEnterprise Haul Mass for MineOperate Foundation</h2><p>The following applies to clients using MineEnterprise especially with MineOperate Foundation apps, for the Modules and Analytics:</p><ul><li>Material Movement</li><li>Reconciliation</li><li>(Material) Inventory</li><li>Processing</li><li>Production</li></ul><h2 id="TDocHaulMass-Issue-ErrorMessage">Issue - Error Message </h2><p>An error message is displayed in the MineEnterprise 2.0 Configuration of material Source and Destination Dashboards in MineEnterprise.</p><blockquote><p>Error details Query metadata exception: None is not a supported Field Category setting.</p></blockquote><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="155" src="attachments/224007881/224007877.jpg" data-image-src="attachments/224007881/224007877.jpg" data-unresolved-comment-count="0" data-linked-resource-id="224007877" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="MineEnterprise_01HaulMass_Error_2020-06-16_9-27-11.jpg" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="224007881" data-linked-resource-container-version="2" alt=""></span></p><h2 id="TDocHaulMass-Conditions">Conditions</h2><p>Applies to:</p><ol><li>MineEnterprise 2020.05 (3.6.1)</li><li>MiiNT_990_Reporting.meta</li><li>MineOperate Foundation apps with payload and mass data</li><li>Sharperlight Query Builder configuration of</li></ol><ul><li>HaulMass, Material Movement data in Dashboards</li><li>May be required when creating dashboards with Time Allocation, Destination data</li></ul><p>May not be compatible with OP Fleet Analytics (OP Pro, Jigsaw, and third-party integrations). </p><h2 id="TDocHaulMass-Solution">Solution</h2><p>In the MineEnteprise 2.0 Config, go to Standard Configuration &gt; General &gt; Lookup Values</p><p>2. Add two rows (go to the top-right, click Add New)</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/></colgroup><tbody><tr><td class="confluenceTd"><p class="_mce_tagged_br"><strong>Table Code</strong></p></td><td class="confluenceTd"><p><strong>Field Code</strong></p></td><td class="confluenceTd"><p><strong>Value</strong></p></td><td class="confluenceTd"><p><strong>Active</strong></p></td></tr><tr><td class="confluenceTd"><p>RLookups</p></td><td class="confluenceTd"><p>PerHourReport</p></td><td class="confluenceTd"><p>Accumulated</p></td><td class="confluenceTd"><p>Yes</p></td></tr><tr><td class="confluenceTd"><p>RLookups</p></td><td class="confluenceTd"><p>PerHourReport</p></td><td class="confluenceTd"><p>Sub total</p></td><td class="confluenceTd"><p>Yes</p></td></tr></tbody></table></div><ul><li>Click Save</li></ul><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/224007881/224007876.jpg" data-image-src="attachments/224007881/224007876.jpg" data-unresolved-comment-count="0" data-linked-resource-id="224007876" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="MineEnterprise_02HaulMass_LookupValues_2020-06-16_9-27-11.jpg" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="224007881" data-linked-resource-container-version="2" alt=""></span></p><p>3. In Sharperlight &gt; Query Builder, bot to the \Haul\Mass table and HaulMass output field</p><p>4. Select the General tab</p><ul><li>5. Verify the Show Null Values is checked</li></ul><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" draggable="false" height="250" src="attachments/224007881/224007875.jpg" data-image-src="attachments/224007881/224007875.jpg" data-unresolved-comment-count="0" data-linked-resource-id="224007875" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="MineEnterprise_03HaulMass_ShowNullValues_2020-06-16_9-27-11.jpg" data-base-url="https://confluence.hexagonmining.com" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="224007881" data-linked-resource-container-version="2" alt=""></span></p><p>6. Complete the Query in Sharperlight</p><ul><li>Export the XML from Sharperlight Query Builder</li></ul><ul><li>Place the XML into the MineEnterprise Dashboard Query</li></ul><p><br/></p>
+                    </div>
+
+                                                            <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/224007881/224007875.jpg">MineEnterprise_03HaulMass_ShowNullValues_2020-06-16_9-27-11.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/224007881/224007876.jpg">MineEnterprise_02HaulMass_LookupValues_2020-06-16_9-27-11.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/224007881/224007877.jpg">MineEnterprise_01HaulMass_Error_2020-06-16_9-27-11.jpg</a> (image/jpeg)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:26</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

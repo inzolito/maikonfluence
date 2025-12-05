@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product: MineOperate OP Pro : 2025-05 Ero Copper</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Product: MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="MineOperate-OP-Pro_224018004.html">MineOperate OP Pro</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Product-Support_254971960.html">Product Support</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Product: MineOperate OP Pro : 2025-05 Ero Copper
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> RAJENDRAN Vanitha</span>, last modified on may 09, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="id-202505EroCopper-CoreLTEDHCPnotworkingproperlywithOpenVPN"><span style="color: rgb(23,43,77);">Core LTE DHCP not working properly with OpenVPN</span></h2><p style="text-align: left;"><strong>How should the system behave?</strong></p><p style="text-align: left;">When in a area with bad network signal, the core loses connection but when he connects again he can communicate to the server through OpenVPN without any problems.<br/>This happens when using WI-FI, WI-FI with DHCP, and LTE without DHCP.</p><p style="text-align: left;"><strong>How does the system behave?</strong></p><p style="text-align: left;">When using core with LTE and DHCP, after entering in a area with bad network signal the core loses connection. But when he connects again he can't communicate to the server through OpenVPN.<br/>It's necessary to manually restart the OpenVPN service to make him able to communicate with the server again.</p><p style="text-align: left;"><strong>How does this impact the end user?</strong></p><p style="text-align: left;">All the equipments in the site are experiencing this problem because they use LTE with DHCP.<br/>They lose connection and can't communicate with the server afterwards, making impossible for them receiving assignments and sending data to the server.</p><p style="text-align: left;"><strong>How to reproduce the issue? (If able to)</strong></p><p style="text-align: left;">1-Setup a core using LTE and DHCP connecting to a local network.<br/>2-Turn off the router and after a few minutes turn it on.<br/>3-Try communicating with the local server through the equipment.</p><p style="text-align: left;"><strong>What is the initial analysis?</strong></p><p style="text-align: left;">After the tests made by<span> </span><a class="external-link" href="https://jira.hexagonmining.com/secure/ViewProfile.jspa?name=JNEL" rel="nofollow" title="Follow link">JUNIOR Nelson</a><span> </span>, we were able to identify that when the equipment that is using LTE loses connection with the network during a few minutes, it keeps the OpenVPN tunnel active (tun0) but it can't communicate with the server.<br/>Even after reconnecting the LTE network, the issue persists.</p><p style="text-align: left;">This problem occurs because when the<span> </span><ins>core loses connection with the LTE network,</ins><span> </span>the tunnel should be reseted so the connection is reestabilished.</p><p style="text-align: left;">Nelson Junior made a workaround for this issue, creating and testing a script that watches the LTE connection and after the connection is lost and recovered,</p><p style="text-align: left;">it restarts the OpenVPN service so the tunnel can be recreated and the communication with the server is established .<br/>**</p><p style="text-align: left;"><strong>The solution is attached to this ticket.</strong><br/>This scripts run on crontab like the following example:<br/>@reboot sleep 45 &amp;&amp; /home/jigsaw/checkvpn start</p><p style="text-align: left;">Tickets: </p><ol class="aui-nav aui-nav-breadcrumbs" style="text-align: left;"><li><a class="external-link" data-issue-key="MOAE-759" href="https://jira.hexagonmining.com/browse/MOAE-759" rel="nofollow">MOAE-759</a></li><li><a class="external-link" data-issue-key="PLAT-6550" href="https://jira.hexagonmining.com/browse/PLAT-6550" rel="nofollow">PLAT-6550</a></li><li><a class="external-link" data-issue-key="PLAT-6520" href="https://jira.hexagonmining.com/browse/PLAT-6520" rel="nofollow">PLAT-6520</a></li></ol><div class="table-wrap"><table class="wrapped confluenceTable" data-snooker-col-series="numbers" data-snooker-locked-cols="0"><colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup><tbody><tr><th class="numberingColumn confluenceTh" contenteditable="false" data-mce-resize="false" scope="col"><br/></th><th scope="col" class="confluenceTh">Date</th><th scope="col" class="confluenceTh">Action</th><th scope="col" class="confluenceTh">Equipment updated</th><th scope="col" class="confluenceTh">SW Version</th><th scope="col" class="confluenceTh">Result</th><th scope="col" class="confluenceTh">Comments</th></tr><tr><td class="numberingColumn confluenceTd" contenteditable="false" data-mce-resize="false">1</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="numberingColumn confluenceTd" contenteditable="false" data-mce-resize="false">2</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="numberingColumn confluenceTd" contenteditable="false" data-mce-resize="false">3</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p style="text-align: left;"><br/></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on dic 05, 2025 11:11</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

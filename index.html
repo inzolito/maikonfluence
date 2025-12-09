@@ -1,102 +1,48 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maikfluence</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap');
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 20% 20%, #0a0a0a, #000);
-      color: #fff;
-      overflow-x: hidden;
-    }
-    h1 {
-      text-align: center;
-      font-weight: 200;
-      margin-top: 60px;
-      letter-spacing: 2px;
-      font-size: 3rem;
-    }
-    #container {
-      width: 90%;
-      max-width: 900px;
-      margin: 40px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.25s ease, background 0.25s ease;
-    }
-    .card:hover {
-      transform: translateY(-6px) scale(1.03);
-      background: rgba(255,255,255,0.15);
-    }
-    a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 400;
-      letter-spacing: 1px;
-    }
-    footer {
-      margin-top: 80px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #777;
-      padding-bottom: 40px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Archivos del repo</title>
 </head>
 <body>
-  <h1>Maikfluence</h1>
-  <div id="container"></div>
+  <h1>Listado automático de archivos</h1>
+  <ul id="file-list"></ul>
 
   <script>
-    async function listarCarpetas() {
-      try {
-        const response = await fetch('./');
-        const text = await response.text();
+    const owner = "inzolito";
+    const repo = "maikonfluence";
+    const branch = "main";
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        const links = [...doc.querySelectorAll('a')]
-          .map(a => a.getAttribute('href'))
-          .filter(h => h && h.endsWith('/') && h !== './' && h !== '../');
+    async function listDirectory(path = "") {
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    }
 
-        const cont = document.getElementById('container');
-        links.forEach(dir => {
-          const div = document.createElement('div');
-          div.className = 'card';
+    async function render(path = "", container) {
+      const files = await listDirectory(path);
 
-          const a = document.createElement('a');
-          a.href = dir;
-          a.textContent = dir.replace(/\/$/, '');
+      for (const file of files) {
+        const li = document.createElement("li");
 
-          div.appendChild(a);
-          cont.appendChild(div);
-        });
-      } catch (e) {
-        console.error('Error listando carpetas', e);
+        if (file.type === "dir") {
+          li.textContent = "📁 " + file.name;
+          const sublist = document.createElement("ul");
+          li.appendChild(sublist);
+          container.appendChild(li);
+          await render(file.path, sublist);
+        } else {
+          const a = document.createElement("a");
+          a.href = file.download_url;
+          a.textContent = "📄 " + file.name;
+          li.appendChild(a);
+          container.appendChild(li);
+        }
       }
     }
 
-    listarCarpetas();
+    render("", document.getElementById("file-list"));
   </script>
-
-  <footer>
-    Auto generado por un index futurista.
-  </footer>
 </body>
 </html>
-

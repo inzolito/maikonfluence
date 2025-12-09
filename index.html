@@ -1,125 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maikonfluence</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    background: #0a0a0a;
-    color: #f2f2f2;
-    text-align: center;
-  }
+  <!-- Tipografía fina -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
 
-  .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+  <!-- Animaciones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-  h1 {
-    font-size: 3rem;
-    margin: 0;
-    letter-spacing: 2px;
-  }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #eee;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
 
-  h2 {
-    font-weight: 300;
-    font-size: 1.2rem;
-    margin-top: 10px;
-    color: #cccccc;
-  }
+    h1 {
+      font-weight: 200;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
 
-  canvas {
-    display: block;
-  }
-</style>
+    p {
+      font-weight: 300;
+      opacity: 0.8;
+      margin-bottom: 25px;
+    }
+
+    .linea {
+      width: 120px;
+      height: 1px;
+      background: #fff;
+      margin: 20px auto;
+      animation: pulse 2.5s infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scaleX(0.7); opacity: 0.4; }
+      50% { transform: scaleX(1); opacity: 1; }
+    }
+
+    .links a {
+      display: block;
+      color: #9cf;
+      margin: 8px 0;
+      font-weight: 300;
+      text-decoration: none;
+      transition: opacity .3s;
+    }
+
+    .links a:hover {
+      opacity: .5;
+    }
+  </style>
 </head>
-
 <body>
 
-<canvas id="bg"></canvas>
+  <div class="contenedor animate__animated animate__fadeIn">
+    <h1>Directorio</h1>
+    <div class="linea"></div>
+    <p>Carpetas disponibles</p>
 
-<div class="content">
-  <h1>Maikonfluence</h1>
-  <h2>Repositorio de documentos y contenido</h2>
-</div>
-
-<script>
-  const canvas = document.getElementById("bg");
-  const ctx = canvas.getContext("2d");
-  let particles = [];
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resize);
-  resize();
-
-  class Particle {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.3;
-      this.vy = (Math.random() - 0.5) * 0.3;
-      this.size = 2;
-    }
-
-    move() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = "#ffffff";
-      ctx.fill();
-    }
-  }
-
-  function createParticles(count) {
-    particles = [];
-    for (let i = 0; i < count; i++) particles.push(new Particle());
-  }
-
-  function connectParticles() {
-    for (let a = 0; a < particles.length; a++) {
-      for (let b = a + 1; b < particles.length; b++) {
-        const dist = Math.hypot(
-          particles[a].x - particles[b].x,
-          particles[a].y - particles[b].y
-        );
-        if (dist < 120) {
-          ctx.strokeStyle = "rgba(255,255,255," + (1 - dist / 120) + ")";
-          ctx.lineWidth = 0.3;
-          ctx.beginPath();
-          ctx.moveTo(particles[a].x, particles[a].y);
-          ctx.lineTo(particles[b].x, particles[b].y);
-          ctx.stroke();
+    <div class="links">
+      <?php
+        foreach (scandir(".") as $item) {
+          if ($item[0] === ".") continue;   // ignorar . y ..
+          if (is_dir($item)) {
+            echo "<a href='$item/'>$item</a>";
+          }
         }
-      }
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.move(); p.draw(); });
-    connectParticles();
-    requestAnimationFrame(animate);
-  }
-
-  createParticles(120);
-  animate();
-</script>
+      ?>
+    </div>
+  </div>
 
 </body>
 </html>

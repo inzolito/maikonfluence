@@ -1,48 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Archivos del repo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maikonfluence</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-  <h1>Listado automático de archivos</h1>
-  <ul id="file-list"></ul>
-
-  <script>
-    const owner = "inzolito";
-    const repo = "maikonfluence";
-    const branch = "main";
-
-    async function listDirectory(path = "") {
-      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      return data;
-    }
-
-    async function render(path = "", container) {
-      const files = await listDirectory(path);
-
-      for (const file of files) {
-        const li = document.createElement("li");
-
-        if (file.type === "dir") {
-          li.textContent = "📁 " + file.name;
-          const sublist = document.createElement("ul");
-          li.appendChild(sublist);
-          container.appendChild(li);
-          await render(file.path, sublist);
-        } else {
-          const a = document.createElement("a");
-          a.href = file.download_url;
-          a.textContent = "📄 " + file.name;
-          li.appendChild(a);
-          container.appendChild(li);
-        }
-      }
-    }
-
-    render("", document.getElementById("file-list"));
-  </script>
+  <h1>Maikonfluence</h1>
+  <h2>Repositorio de documentos y contenido</h2>
 </body>
 </html>

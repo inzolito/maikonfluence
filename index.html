@@ -1,160 +1,147 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Maikolfluence</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directorio</title>
 
-<!-- Fuente elegante -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
 
-<style>
+  <style>
     body {
-        margin: 0;
-        padding: 0;
-        background: #000;
-        color: #fff;
-        font-family: 'Inter', sans-serif;
-        min-height: 100vh;
-        overflow-x: hidden;
+      margin: 0;
+      background: black;
+      color: #e4e4e4;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
     }
 
-    /* Canvas de constelaciones */
-    #bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
+    h1, h2 {
+      font-weight: 300;
+      text-align: center;
+      margin-top: 20px;
     }
 
-    h1 {
-        font-weight: 300;
-        margin-top: 60px;
-        text-align: center;
-        font-size: 3rem;
-        letter-spacing: 1px;
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      margin-top: 50px;
+      text-align: center;
     }
 
-    h2 {
-        text-align: center;
-        font-weight: 200;
-        opacity: 0.7;
-        margin-top: -10px;
-        margin-bottom: 40px;
+    a {
+      display: block;
+      padding: 10px;
+      color: #92c5ff;
+      font-size: 20px;
+      text-decoration: none;
+      transition: 0.2s;
     }
 
-    #lista {
-        max-width: 600px;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        padding: 20px;
+    a:hover {
+      color: white;
+      transform: scale(1.05);
     }
 
-    #lista a {
-        color: #7fb4ff;
-        text-decoration: none;
-        font-size: 1.3rem;
-        border: 1px solid #7fb4ff55;
-        padding: 10px 15px;
-        border-radius: 8px;
-        transition: 0.2s;
-        backdrop-filter: blur(5px);
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
-    #lista a:hover {
-        background: #7fb4ff22;
+    /* iframe oculto */
+    #scandir {
+      display: none;
+      visibility: hidden;
     }
-</style>
+
+  </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
+  <canvas id="constelaciones"></canvas>
 
-<h1>Maikolfluence</h1>
-<h2>Carpetas disponibles</h2>
+  <iframe id="scandir" src="./"></iframe>
 
-<div id="lista">Cargando...</div>
+  <div class="container">
+    <h1>Directorio</h1>
+    <h2>Carpetas disponibles</h2>
+    <div id="lista"></div>
+  </div>
 
-<!-- Fondo animado tipo constelaciones -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-particlesJS("bg", {
-  "particles": {
-    "number": { "value": 90 },
-    "size": { "value": 2 },
-    "color": { "value": "#7fb4ff" },
-    "line_linked": { "enable": true, "distance": 150, "color": "#7fb4ff", "opacity": 0.5 },
-    "move": { "speed": 1.2 }
-  },
-  "interactivity": {
-    "events": {
-      "onhover": { "enable": true, "mode": "grab" }
+  <script>
+    // Fondo animado
+    const canvas = document.getElementById("constelaciones");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-  }
-});
-</script>
+    resize();
+    window.onresize = resize;
 
-<!-- Script para detectar carpetas aunque el servidor entregue HTML feo -->
-<script>
-async function cargarCarpetas() {
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "Cargando...";
-
-  let texto = "";
-
-  try {
-    const resp = await fetch(".", { cache: "no-store" });
-    texto = await resp.text();
-  } catch (e) {
-    lista.innerHTML = "No pude leer el listado del servidor.";
-    return;
-  }
-
-  // Intentar parsear como HTML
-  let parser = new DOMParser();
-  let doc = parser.parseFromString(texto, "text/html");
-  let links = [...doc.querySelectorAll("a")];
-
-  if (links.length > 0) {
-    lista.innerHTML = "";
-    links.forEach(a => {
-      const nombre = a.textContent.trim();
-      if (nombre.endsWith("/") && nombre !== "../") {
-        const carpeta = nombre.replace("/", "");
-        lista.innerHTML += `<a href="${carpeta}/">${carpeta}</a>`;
-      }
-    });
-
-    if (lista.innerHTML.trim() !== "") return;
-  }
-
-  // Si HTML falló, intentar como texto plano
-  lista.innerHTML = "";
-  const lineas = texto.split("\n");
-
-  lineas.forEach(l => {
-    // detecta carpeta tipo "nombre/"
-    const match = l.match(/([A-Za-z0-9._-]+)\//);
-    if (match) {
-      const carpeta = match[1];
-      if (carpeta !== "." && carpeta !== "..") {
-        lista.innerHTML += `<a href="${carpeta}/">${carpeta}</a>`;
-      }
+    let particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3
+      });
     }
-  });
 
-  if (lista.innerHTML.trim() === "") {
-    lista.innerHTML = "No pude detectar carpetas en el listado.";
-  }
-}
+    function animar() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-cargarCarpetas();
-</script>
+        ctx.fillStyle = "#88aaff";
+        ctx.fillRect(p.x, p.y, 2, 2);
+
+        particles.forEach((p2, j) => {
+          if (idx !== j) {
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 120) {
+              ctx.strokeStyle = "rgba(120,150,255," + (1 - dist/120) + ")";
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        });
+      });
+      requestAnimationFrame(animar);
+    }
+    animar();
+
+    // Cargar carpetas usando iframe oculto
+    const iframe = document.getElementById("scandir");
+
+    iframe.onload = function () {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      const links = [...doc.querySelectorAll("a")];
+      const lista = document.getElementById("lista");
+
+      links.forEach(a => {
+        const txt = a.textContent.trim();
+        if (txt.endsWith("/")) {
+          if (txt === "../") return;
+          const name = txt.replace("/", "");
+          lista.innerHTML += `<a href="${name}/">${name}</a>`;
+        }
+      });
+    };
+  </script>
 
 </body>
 </html>

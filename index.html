@@ -1,31 +1,125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maikonfluence</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      margin: 0;
-      padding: 40px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #333;
-    }
-    h2 {
-      font-size: 1.2rem;
-      font-weight: normal;
-      color: #666;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maikonfluence</title>
+
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0a0a0a;
+    color: #f2f2f2;
+    text-align: center;
+  }
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #cccccc;
+  }
+
+  canvas {
+    display: block;
+  }
+</style>
 </head>
+
 <body>
+
+<canvas id="bg"></canvas>
+
+<div class="content">
   <h1>Maikonfluence</h1>
   <h2>Repositorio de documentos y contenido</h2>
+</div>
+
+<script>
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.size = 2;
+    }
+
+    move() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+    }
+  }
+
+  function createParticles(count) {
+    particles = [];
+    for (let i = 0; i < count; i++) particles.push(new Particle());
+  }
+
+  function connectParticles() {
+    for (let a = 0; a < particles.length; a++) {
+      for (let b = a + 1; b < particles.length; b++) {
+        const dist = Math.hypot(
+          particles[a].x - particles[b].x,
+          particles[a].y - particles[b].y
+        );
+        if (dist < 120) {
+          ctx.strokeStyle = "rgba(255,255,255," + (1 - dist / 120) + ")";
+          ctx.lineWidth = 0.3;
+          ctx.beginPath();
+          ctx.moveTo(particles[a].x, particles[a].y);
+          ctx.lineTo(particles[b].x, particles[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.move(); p.draw(); });
+    connectParticles();
+    requestAnimationFrame(animate);
+  }
+
+  createParticles(120);
+  animate();
+</script>
+
 </body>
 </html>

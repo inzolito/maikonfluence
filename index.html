@@ -3,87 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Directorio</title>
 
-  <!-- Tipografía fina -->
+  <!-- Fuente elegante -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
-
-  <!-- Animaciones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: #000;
-      color: #eee;
+      background: black;
+      color: #e4e4e4;
       font-family: 'Inter', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       overflow: hidden;
+    }
+
+    h1, h2 {
+      font-weight: 300;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      margin-top: 50px;
       text-align: center;
     }
 
-    h1 {
-      font-weight: 200;
-      font-size: 3rem;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-weight: 300;
-      opacity: 0.8;
-      margin-bottom: 25px;
-    }
-
-    .linea {
-      width: 120px;
-      height: 1px;
-      background: #fff;
-      margin: 20px auto;
-      animation: pulse 2.5s infinite;
-      opacity: 0.5;
-    }
-
-    @keyframes pulse {
-      0%,100% { transform: scaleX(0.7); opacity: 0.4; }
-      50% { transform: scaleX(1); opacity: 1; }
-    }
-
-    .links a {
+    a {
       display: block;
-      color: #9cf;
-      margin: 8px 0;
-      font-weight: 300;
+      padding: 10px;
+      color: #92c5ff;
+      font-size: 20px;
       text-decoration: none;
-      transition: opacity .3s;
+      transition: 0.2s;
     }
 
-    .links a:hover {
-      opacity: .5;
+    a:hover {
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* Fondo animado tipo constelaciones */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
   </style>
 </head>
+
 <body>
+  <canvas id="constelaciones"></canvas>
 
-  <div class="contenedor animate__animated animate__fadeIn">
+  <div class="container">
     <h1>Directorio</h1>
-    <div class="linea"></div>
-    <p>Carpetas disponibles</p>
-
-    <div class="links">
-      <?php
-        foreach (scandir(".") as $item) {
-          if ($item[0] === ".") continue;   // ignorar . y ..
-          if (is_dir($item)) {
-            echo "<a href='$item/'>$item</a>";
-          }
-        }
-      ?>
-    </div>
+    <h2>Carpetas disponibles</h2>
+    <div id="lista"></div>
   </div>
 
+  <script>
+    // Fondo animado de constelaciones
+    const canvas = document.getElementById("constelaciones");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3
+      });
+    }
+
+    function animar() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.fillStyle = "#88aaff";
+        ctx.fillRect(p.x, p.y, 2, 2);
+
+        particles.forEach((p2, j) => {
+          if (idx !== j) {
+            const dx = p.x + p.vx - p2.x;
+            const dy = p.y + p.vy - p2.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 120) {
+              ctx.strokeStyle = "rgba(120,150,255," + (1 - dist/120) + ")";
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        });
+      });
+
+      requestAnimationFrame(animar);
+    }
+    animar();
+
+    // Lista de carpetas por JS
+    async function cargarCarpetas() {
+      const resp = await fetch(".");
+      const html = await resp.text();
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+
+      const links = [...doc.querySelectorAll("a")];
+
+      links.forEach(a => {
+        const nombre = a.textContent;
+        if (nombre.endsWith("/")) {
+          if (nombre === "../") return; // ignora subir
+          const carpeta = nombre.replace("/", "");
+          lista.innerHTML += `<a href="${carpeta}/">${carpeta}</a>`;
+        }
+      });
+    }
+
+    cargarCarpetas();
+  </script>
 </body>
 </html>

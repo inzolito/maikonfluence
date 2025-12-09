@@ -1,127 +1,128 @@
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Directorio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maikolfluence</title>
 
-  <!-- Fuente elegante -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
 
-  <!-- Particles.js para constelaciones -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-  <style>
+<style>
     body {
-      margin: 0;
-      background: #000;
-      color: #e4e4e4;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
+        margin: 0;
+        background: #000;
+        color: #e4e4e4;
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
     }
 
-    #bg {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0; left: 0;
-      z-index: -1;
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
     }
 
-    h1 {
-      font-weight: 300;
-      text-align: center;
-      margin-top: 50px;
-      font-size: 3rem;
+    h1, h2 {
+        font-weight: 300;
+        text-align: center;
+        margin-top: 30px;
     }
 
-    h2 {
-      font-weight: 200;
-      text-align: center;
-      opacity: 0.7;
-      margin-top: -10px;
+    .container {
+        max-width: 600px;
+        margin: 80px auto;
+        text-align: center;
     }
 
-    #lista {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
+    .carpeta {
+        display: block;
+        padding: 12px;
+        font-size: 22px;
+        color: #8bb8ff;
+        text-decoration: none;
+        transition: 0.25s;
+        border-bottom: 1px solid #ffffff22;
     }
 
-    #lista a {
-      display: block;
-      color: #7fb4ff;
-      text-decoration: none;
-      font-size: 1.3rem;
-      border: 1px solid #7fb4ff55;
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      transition: 0.2s;
-      backdrop-filter: blur(3px);
+    .carpeta:hover {
+        color: #fff;
+        transform: scale(1.05);
     }
-
-    #lista a:hover {
-      background: #7fb4ff22;
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-<div id="bg"></div>
+<canvas id="constelaciones"></canvas>
 
-<h1>Directorio</h1>
-<h2>Carpetas disponibles</h2>
+<div class="container">
+    <h1>Maikolfluence</h1>
+    <h2>Carpetas disponibles</h2>
 
-<div id="lista">Cargando...</div>
+    <!-- LISTA DE CARPETAS MANUAL -->
+    <a class="carpeta" href="1OP4CSFP/">1OP4CSFP</a>
+    <a class="carpeta" href="ITOP/">ITOP</a>
+    <a class="carpeta" href="MMP1D/">MMP1D</a>
+    <a class="carpeta" href="MOF/">MOF</a>
+    <a class="carpeta" href="MOPlatform/">MOPlatform</a>
+    <a class="carpeta" href="OPL/">OPL</a>
+    <a class="carpeta" href="OPPRO/">OPPRO</a>
+    <a class="carpeta" href="OPPRO_folder1/">OPPRO_folder1</a>
+    <a class="carpeta" href="UM/">UM</a>
+</div>
 
 <script>
-// Constelaciones
-particlesJS("bg", {
-  particles: {
-    number: { value: 100 },
-    size: { value: 2 },
-    color: { value: "#7fb4ff" },
-    line_linked: { enable: true, distance: 150, color: "#7fb4ff" },
-    move: { speed: 1.1 }
-  }
-});
+const canvas = document.getElementById("constelaciones");
+const ctx = canvas.getContext("2d");
 
-// Listado rápido de carpetas sin backend
-async function cargarCarpetas() {
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "Cargando...";
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.onresize = resize;
 
-  let html = "";
-  try {
-    const resp = await fetch(".", { cache: "no-store" });
-    html = await resp.text();
-  } catch {
-    lista.innerHTML = "No se pudo leer el directorio.";
-    return;
-  }
-
-  // parsear como HTML
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  const anchors = [...doc.querySelectorAll("a")];
-
-  lista.innerHTML = "";
-
-  anchors.forEach(a => {
-    let name = a.textContent.trim();
-
-    if (name.endsWith("/") && name !== "../") {
-      const carpeta = name.replace("/", "");
-      lista.innerHTML += `<a href="${carpeta}/">${carpeta}</a>`;
-    }
+let particles = [];
+for (let i = 0; i < 110; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3
   });
-
-  if (lista.innerHTML.trim() === "") {
-    lista.innerHTML = "No hay carpetas visibles.";
-  }
 }
 
-cargarCarpetas();
+function animar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p, idx) => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.fillStyle = "#8bb8ff";
+    ctx.fillRect(p.x, p.y, 2, 2);
+
+    particles.forEach((p2, j) => {
+      if (idx !== j) {
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 140) {
+          ctx.strokeStyle = "rgba(139,184,255," + (1 - dist/140) + ")";
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    });
+  });
+  requestAnimationFrame(animar);
+}
+animar();
 </script>
 
 </body>
